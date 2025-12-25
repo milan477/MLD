@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Milan</title>
+    <link rel="stylesheet" href="styles/styles.css">
+    <link rel="stylesheet" href="styles/output.css">
+</head>
+<body>
+    <div class="horizontal-scroll-container" id="horizontalContainer">
+        <!-- Column 1: Home + About Me -->
+        <div class="vertical-column" data-column="0">
+            <section class="panel">
+                <div class="content">
+                    <h2 class="name">Milan Liessens Dujardin</h2>
+
+                    <p class="tagline">Machine Learning Engineer • Data Scientist • Musician</p>
+                    <div class="contact-links">
+                        <a href="mailto:milanliessensdujardin@gmail.com" class="contact-link">
+                            <img src="https://api.iconify.design/ic:baseline-email.svg" alt="Email">
+                        </a>
+                        <a href="https://www.linkedin.com/in/milan-liessens-dujardin/" class="contact-link" target="_blank">
+                            <img src="https://api.iconify.design/mdi:linkedin.svg" alt="LinkedIn">
+                        </a>
+                    </div>
+                    <div class="scroll-hints-container">
+                        <button class="scroll-hint text-blue-900" onclick="scrollToAbout()" style="opacity:0.9">About ↓</button>
+                        <button class="scroll-hint text-blue-900" onclick="scrollToProjects()" style="opacity:0.9">Projects →</button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="panel biography-section">
+                <div class="content">
+                    <!-- <h2 class="bio-title">About Me</h2> -->
+                    <p class="bio-text">
+                        I'm a Machine Learning Engineer and Data Scientist passionate about leveraging AI to solve challenging problems.
+                        My work spans from commercializing cutting-edge technologies at Lawrence Berkeley National Laboratory to developing
+                        innovative tools that enhance user experiences and creative processes. I am currently pursuing my M.Eng. in Electrical Engineering and Computer Science at UC Berkeley.
+                    </p>
+                    <p class="bio-text">
+
+                    </p>
+
+                    <div class="scroll-hints-container">
+                        <button class="scroll-hint" onclick="scrollToTop(0)">Top ↑</button>
+                    </div>
+                    <!-- <div class="scroll-hints-container">
+                        <button class="scroll-hint" onclick="scrollToSection(0,2)">Education ↑</button>
+                    </div> -->
+                </div>
+
+
+            </section>
+            <section class="panel biography-section">
+                <div class="content">
+
+                    <h2 class="bio-title">Education</h2>
+
+                    <div class="education-list">
+
+                    <div class="education-item">
+                        <div class="education-header">
+                        <h3 class="education-degree">M.Eng. in Electrical Engineering and Computer Science</h3>
+                        <span class="education-timespan">2025 – 2026</span>
+                        </div>
+
+                        <div class="education-subheader">
+                        <span class="education-university">University of California, Berkeley</span>
+                        <span class="education-location">Berkeley, CA</span>
+                        </div>
+
+                        <p class="education-description">
+                        Focus on machine learning, deep learning, natural language processing, computer vision, and human-AI interaction.
+                        </p>
+                    </div>
+
+                    <div class="education-item">
+                        <div class="education-header">
+                        <h3 class="education-degree">B.Sc. in Computer Science</h3>
+                        <span class="education-timespan">2020 – 2025</span>
+                        </div>
+
+                        <div class="education-subheader">
+                        <span class="education-university">University of Antwerp</span>
+                        <span class="education-location">Antwerp, Belgium</span>
+                        </div>
+                    </div>
+
+                    <div class="education-item">
+                        <div class="education-header">
+                        <h3 class="education-degree">M.A. in Music</h3>
+                        <span class="education-timespan">2022 – 2024</span>
+                        </div>
+
+                        <div class="education-subheader">
+                        <span class="education-university">Royal Conservatory of Antwerp</span>
+                        <span class="education-location">Antwerp, Belgium</span>
+                        </div>
+                    </div>
+
+                    <div class="education-item">
+                        <div class="education-header">
+                        <h3 class="education-degree">B.A. in Music</h3>
+                        <span class="education-timespan">2019 – 2022</span>
+                        </div>
+
+                        <div class="education-subheader">
+                        <span class="education-university">Royal Conservatory of Antwerp</span>
+                        <span class="education-location">Antwerp, Belgium</span>
+                        </div>
+                    </div>
+
+                    </div>
+                    <br />
+                    <div class="scroll-hints-container">
+                    <button class="scroll-hint" onclick="scrollToTop(0)">Top ↑</button>
+                    </div>
+
+                </div>
+                </section>
+        </div>
+
+        <!-- Column 2: Project 1 + Details -->
+        <div class="vertical-column" data-column="1">
+            <section class="panel project-panel bg-blue-900">
+                <div class="project-nav">
+                    <button class="nav-arrow p-100" onclick="navigateToColumn(0)">←</button>
+                </div>
+                <div class="content">
+                    <div class="project-number">01</div>
+                    <h2 class="project-title">Deep Tech Commercialization</h2>
+                    <p class="project-description">
+                        Developed commercialization strategies to bring innovative technologies developed at the Lawrence Berkeley National Laboratory to market.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">High-Performance Computing</span>
+                        <span class="tag">Market Analysis</span>
+                        <span class="tag">Innovation Management</span>
+                    </div>
+                    <div class="scroll-hints-container" style="margin-top: 2rem;">
+                        <button class="scroll-hint" onclick="scrollToDetails(1)">More Details ↓</button>
+                    </div>
+                </div>
+                <div class="project-nav">
+                    <button class="nav-arrow" onclick="navigateToColumn(2)">→</button>
+                </div>
+            </section>
+
+            <section class="panel project-panel bg-blue-800">
+                <div class="content">
+                    <h3 style="font-size: 2rem; margin-bottom: 1rem;">Project Details</h3>
+                    <p class="bio-text" style="opacity: 1; color: white;">
+                        This project focused on bridging the gap between cutting-edge research and commercial applications.
+                        Working with Berkeley Lab and the Innovation Lab at UC Berkeley, I developed go-to-market strategies
+                        and identified key industry partners.
+                    </p>
+                    <div class="scroll-hints-container" style="margin-top: 2rem;">
+                        <button class="scroll-hint" onclick="scrollToTop(1)">Back ↑</button>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Column 3: Project 2 + Details -->
+        <div class="vertical-column" data-column="2">
+            <section class="panel project-panel" style="background-color: #f3f4f6;">
+                <div class="project-nav">
+                    <button class="nav-arrow" style="color: black;" onclick="navigateToColumn(1)">←</button>
+                </div>
+                <div class="content" style="color: black;">
+                    <div class="project-number" style="color: black;">02</div>
+                    <h2 class="project-title text-blue-900">AI-Powered UX Research and Design</h2>
+                    <p class="project-description" style="color: black;">
+                        Developing AI to automate user experience research through simulations.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag border border-blue-900">Machine Learning</span>
+                        <span class="tag border border-blue-900">Human-Computer Interaction</span>
+                        <span class="tag border border-blue-900">User Simulations</span>
+                    </div>
+                    <div class="scroll-hints-container" style="margin-top: 2rem;">
+                        <button class="scroll-hint" style="color: black;" onclick="scrollToDetails(2)">More Details ↓</button>
+                    </div>
+                </div>
+                <div class="project-nav">
+                    <button class="nav-arrow" style="color: black;" onclick="navigateToColumn(3)">→</button>
+                </div>
+            </section>
+
+            <section class="panel" style="background-color: #e5e7eb;">
+                <div class="content">
+                    <h3 style="font-size: 2rem; margin-bottom: 1rem;">Project Details</h3>
+                    <p class="bio-text">
+                        Leveraging advanced AI models to simulate user behavior and automate the UX research process.
+                        This innovative approach significantly reduces time and resources needed for user testing.
+                    </p>
+                    <div class="scroll-hints-container" style="margin-top: 2rem;">
+                        <button class="scroll-hint" onclick="scrollToTop(2)">Back ↑</button>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Column 4: Project 3 + Details -->
+        <div class="vertical-column" data-column="3">
+            <section class="panel project-panel bg-gray-900">
+
+                <div class="project-nav">
+                    <button class="nav-arrow" onclick="navigateToColumn(2)">←</button>
+                </div>
+                <div class="content">
+                    <div>
+                        <div class="project-number">03</div>
+                    </div>
+                    <h2 class="project-title">Nov</h2>
+                    <p class="project-description">
+                        Developing a tool that supports musicians in their learning process and compositional work.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">Music</span>
+                        <span class="tag">Machine Learning</span>
+                        <span class="tag">Composition</span>
+                    </div>
+                    <div class="scroll-hints-container" style="margin-top: 2rem;">
+                        <button class="scroll-hint" onclick="scrollToDetails(3)">More Details ↓</button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="panel project-panel bg-gray-800">
+                <div class="content">
+                    <h3 style="font-size: 2rem; margin-bottom: 1rem;">Project Details</h3>
+                    <p class="bio-text" style="opacity: 1; color: white;">
+                        Nov combines music theory with machine learning to create an intelligent assistant for musicians.
+                        The tool helps with practice routines, composition suggestions, and musical analysis through advanced musical understanding and score-audio conversion.
+                    </p>
+                    <div class="scroll-hints-container" style="margin-top: 2rem;">
+                        <button class="scroll-hint" onclick="scrollToTop(3)">Back ↑</button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        const horizontalContainer = document.getElementById('horizontalContainer');
+        const columns = document.querySelectorAll('.vertical-column');
+
+        // Slower scroll with native smooth behavior
+        const scrollOptions = {
+            behavior: 'smooth',
+            block: 'start',
+            inline: 'start'
+        };
+
+        // Scroll helper functions
+        function scrollToAbout() {
+            columns[0].scrollTo({ top: window.innerHeight, behavior: 'smooth' });
+        }
+
+        function scrollToProjects() {
+            horizontalContainer.scrollTo({ left: window.innerWidth, behavior: 'smooth' });
+        }
+
+        function scrollToDetails(columnIndex) {
+            columns[columnIndex].scrollTo({ top: window.innerHeight, behavior: 'smooth' });
+        }
+
+        function scrollToSection(columnIndex, position) {
+            columns[columnIndex].scrollTo({ top: position, behavior: 'smooth' });
+        }
+
+        function scrollToTop(columnIndex) {
+            columns[columnIndex].scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function navigateToColumn(columnIndex) {
+            horizontalContainer.scrollTo({
+                left: columnIndex * window.innerWidth,
+                behavior: 'smooth'
+            });
+        }
+
+        // Lock horizontal scrolling when any column is scrolled down
+        columns.forEach((column, index) => {
+            column.addEventListener('scroll', () => {
+                if (column.scrollTop > 10) {
+                    // User has scrolled down in this column
+                    // Disable horizontal scrolling
+                    horizontalContainer.style.overflowX = 'hidden';
+
+                    // Store which column is active
+                    horizontalContainer.dataset.activeColumn = index;
+                } else {
+                    // User is at the top of this column
+                    // Check if we should re-enable horizontal scrolling
+                    const anyColumnScrolled = Array.from(columns).some(col => col.scrollTop > 10);
+                    if (!anyColumnScrolled) {
+                        horizontalContainer.style.overflowX = 'auto';
+                        delete horizontalContainer.dataset.activeColumn;
+                    }
+                }
+            });
+        });
+
+        // When user tries to scroll horizontally while locked, scroll back to active column
+        horizontalContainer.addEventListener('scroll', () => {
+            if (horizontalContainer.dataset.activeColumn !== undefined) {
+                const activeIndex = parseInt(horizontalContainer.dataset.activeColumn);
+                const targetScrollLeft = activeIndex * window.innerWidth;
+
+                if (Math.abs(horizontalContainer.scrollLeft - targetScrollLeft) > 10) {
+                    horizontalContainer.scrollLeft = targetScrollLeft;
+                }
+            }
+        });
+    </script>
+    <script>
+        lucide.createIcons();
+        </script>
+</body>
+</html>
