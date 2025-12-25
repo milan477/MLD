@@ -1,8 +1,4 @@
-# Milan Liessens Dujardin
-Welcome to my Personal Website
-
-## Quick Start
-Simply open `index.html` in your browser or serve it with any static file server:
+Open `index.html` in your browser or serve it with any static file server:
 
 ```bash
 # Using Python
