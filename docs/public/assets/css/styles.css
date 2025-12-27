@@ -35,6 +35,8 @@ body {
     scroll-snap-align: start;
     scroll-snap-type: y mandatory;
     scroll-behavior: smooth;
+
+    -webkit-overflow-scrolling: touch
 }
 
 .vertical-column::-webkit-scrollbar {
