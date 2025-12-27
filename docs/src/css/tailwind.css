@@ -1,0 +1,44 @@
+@import "tailwindcss";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .education-list {
+    @apply flex flex-col gap-8;
+  }
+
+  .education-item {
+    @apply pl-6;
+  }
+
+  .education-header {
+    @apply flex justify-between items-baseline gap-4;
+  }
+
+  .education-degree {
+    @apply font-light text-lg;
+  }
+
+  .education-timespan {
+    @apply text-sm opacity-60 whitespace-nowrap;
+  }
+
+  .education-subheader {
+    @apply flex justify-between text-sm opacity-70 mt-1;
+  }
+
+  .education-university {
+    @apply italic;
+  }
+
+  .education-location {
+    @apply whitespace-nowrap;
+  }
+
+  .education-description {
+    @apply mt-3 text-sm leading-relaxed opacity-80;
+  }
+
+}
