@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Milan</title>
-    <link rel="stylesheet" href="public/assets/css/output.css">
     <link rel="stylesheet" href="public/assets/css/styles.css">
+    <link rel="stylesheet" href="public/assets/css/structure.css">
 </head>
 <body>
     <div class="horizontal-scroll-container" id="horizontalContainer">
-
         <div class="vertical-column" data-column="0">
+
             <section class="panel">
                 <div class="content">
                     <h2 class="name">Milan <br />Liessens Dujardin</h2>
@@ -18,44 +18,38 @@
                     <p class="tagline">Machine Learning Engineer • Data Scientist • Musician</p>
                     <div class="contact-links">
                         <a href="mailto:milanliessensdujardin@gmail.com" class="contact-link">
-                            <img src="https://api.iconify.design/ic:baseline-email.svg" alt="Email">
+                            <img class="h-[8.5]" src="https://api.iconify.design/ic:baseline-email.svg" alt="Email">
                         </a>
                         <a href="https://www.linkedin.com/in/milan-liessens-dujardin/" class="contact-link" target="_blank">
-                            <img src="https://api.iconify.design/mdi:linkedin.svg" alt="LinkedIn">
+                            <img class="h-6" src="/public/assets/images/logos/Linkedin.png" alt="LinkedIn">
                         </a>
                     </div>
-                    <div class="scroll-hints-container">
-                        <button class="scroll-hint text-blue-900" onclick="scrollToAbout()" style="opacity:0.9">About ↓</button>
-                        <button class="scroll-hint text-blue-900" onclick="scrollToProjects()" style="opacity:0.9">Projects →</button>
+                    <div class="scroll-hints-container flex justify-between w-full">
+                        <button class="scroll-hint text-blue-900 !opacity-100 " onclick="scrollToSection(0,1)">About ↓</button>
+                        <button class="scroll-hint text-blue-900 !opacity-100" onclick="scrollToSection(1,0)">Projects →</button>
                     </div>
                 </div>
             </section>
 
             <section class="panel biography-section">
                 <div class="content">
-
+                    <h3 class="bio-title text-4xl mb-10">About Me</h2>
                     <p class="bio-text">
                         I'm a Machine Learning Engineer and Data Scientist passionate about leveraging AI to solve challenging problems.
                         My work spans from commercializing cutting-edge technologies at Lawrence Berkeley National Laboratory to developing
                         innovative tools that enhance user experiences and creative processes. I am currently pursuing my M.Eng. in Electrical Engineering and Computer Science at UC Berkeley.
                     </p>
-                    <p class="bio-text">
-
-                    </p>
-
                     <div class="scroll-hints-container justify-between flex">
-                        <button class="scroll-hint text-blue-900" style="opacity:0.9" onclick="scrollToSection(0,2)">Education ↓</button>
+                        <button class="scroll-hint text-blue-900 !opacity-100" onclick="scrollToSection(0,2)">Education ↓</button>
                         <button class="scroll-hint" onclick="scrollToTop(0)">Back ↑</button>
                     </div>
                 </div>
-
-
             </section>
 
             <section class="panel biography-section">
                 <div class="content">
 
-                    <h2 class="bio-title">Education</h2>
+                    <h2 class="bio-title text-4xl mb-10">Education</h2>
 
                     <div class="education-list">
 
@@ -123,10 +117,7 @@
 
         <!-- Column 2: Project 1 + Details -->
          <div class="vertical-column" data-column="1">
-            <section class="panel project-panel bg-blue-900">
-                <!-- <div class="project-nav">
-                    <button class="nav-arrow p-100" onclick="navigateToColumn(0)">←</button>
-                </div> -->
+            <section class="panel text-white bg-blue-900">
                 <div class="content max-w-3xl">
                     <div class="project-number">01</div>
                     <h2 class="project-title">Deep Tech Commercialization</h2>
@@ -138,19 +129,16 @@
                         <span class="tag">Market Analysis</span>
                         <span class="tag">Innovation Management</span>
                     </div>
-                    <div class="scroll-hints-container" style="margin-top: 2rem;">
-                        <button class="scroll-hint" onclick="scrollToDetails(1)">More Details ↓</button>
+                    <div class="scroll-hints-container mt-8">
+                        <button class="scroll-hint" onclick="scrollToSection(1,1)">More Details ↓</button>
                     </div>
                 </div>
-                <!-- <div class="project-nav">
-                    <button class="nav-arrow" onclick="navigateToColumn(2)">→</button>
-                </div> -->
             </section>
 
-            <section class="panel project-panel bg-blue-900">
+            <section class="panel text-white bg-blue-950">
                 <div class="content">
-                    <h3 style="font-size: 2rem; margin-bottom: 1rem;">Project Details</h3>
-                    <p class="bio-text" style="opacity: 1; color: white;">
+                    <h3 class="text-4xl mb-4">Project Details</h3>
+                    <p class="bio-text opacity-100">
                         This project focused on bridging the gap between cutting-edge research and commercial applications.
                         Working with Berkeley Lab and the Innovation Lab at UC Berkeley, I developed go-to-market strategies
                         and identified key industry partners.
@@ -159,7 +147,7 @@
                     <img src="/public/assets/contents/DTIL_screenshot.png" width="100%"></img>
 
 
-                    <div class="scroll-hints-container" style="margin-top: 2rem;">
+                    <div class="scroll-hints-container mt-8">
                         <button class="scroll-hint" onclick="scrollToTop(1)">Back ↑</button>
                     </div>
                 </div>
@@ -169,36 +157,32 @@
 
         <!-- Column 3: Project 2 + Details -->
         <div class="vertical-column" data-column="2">
-            <section class="panel project-panel bg-gray-200 text-black">
-
-                <div class="content max-w-3xl" style="color: black;">
-                    <div class="project-number" style="color: black;">02</div>
+            <section class="panel bg-gray-200 text-black">
+                <div class="content max-w-3xl">
+                    <div class="project-number">02</div>
                     <h2 class="project-title text-blue-900">AI-Powered UX Research and Design</h2>
-                    <p class="project-description" style="color: black;">
+                    <p class="project-description">
                         Developing AI to automate user experience research through simulations.
                     </p>
                     <div class="project-tags">
-                        <span class="tag border border-blue-900">Machine Learning</span>
-                        <span class="tag border border-blue-900">Human-Computer Interaction</span>
-                        <span class="tag border border-blue-900">User Simulations</span>
+                        <span class="tag border-blue-900">Machine Learning</span>
+                        <span class="tag border-blue-900">Human-Computer Interaction</span>
+                        <span class="tag border-blue-900">User Simulations</span>
                     </div>
-                    <div class="scroll-hints-container" style="margin-top: 2rem;">
-                        <button class="scroll-hint" style="color: black;" onclick="scrollToDetails(2)">More Details ↓</button>
+                    <div class="scroll-hints-container mt-8">
+                        <button class="scroll-hint" onclick="scrollToSection(2,1)">More Details ↓</button>
                     </div>
                 </div>
-                <!-- <div class="project-nav">
-                    <button class="nav-arrow" style="color: black;" onclick="navigateToColumn(3)">→</button>
-                </div> -->
             </section>
 
-            <section class="panel" style="background-color: #e5e7eb;">
+            <section class="panel bg-gray-100">
                 <div class="content">
-                    <h3 style="font-size: 2rem; margin-bottom: 1rem;">Project Details</h3>
+                    <h3 class="text-4xl mb-4">Project Details</h3>
                     <p class="bio-text">
                         Leveraging advanced AI models to simulate user behavior and automate the UX research process.
                         This innovative approach significantly reduces time and resources needed for user testing.
                     </p>
-                    <div class="scroll-hints-container" style="margin-top: 2rem;">
+                    <div class="scroll-hints-container mt-8">
                         <button class="scroll-hint" onclick="scrollToTop(2)">Back ↑</button>
                     </div>
                 </div>
@@ -207,11 +191,7 @@
 
         <!-- Column 4: Project 3 + Details -->
         <div class="vertical-column" data-column="3">
-            <section class="panel project-panel bg-gray-900">
-
-                <!-- <div class="project-nav">
-                    <button class="nav-arrow" onclick="navigateToColumn(2)">←</button>
-                </div> -->
+            <section class="panel text-white bg-gray-900">
                 <div class="content">
                     <div>
                         <div class="project-number">03</div>
@@ -225,23 +205,20 @@
                         <span class="tag">Machine Learning</span>
                         <span class="tag">Composition</span>
                     </div>
-                    <div class="scroll-hints-container" style="margin-top: 2rem;">
-                        <button class="scroll-hint" onclick="scrollToDetails(3)">More Details ↓</button>
+                    <div class="scroll-hints-container mt-8">
+                        <button class="scroll-hint" onclick="scrollToSection(3,1)">More Details ↓</button>
                     </div>
                 </div>
-                <!-- <div class="project-nav">
-                    <button style="color: black;">→</button>
-                </div> -->
             </section>
 
-            <section class="panel project-panel bg-gray-800">
+            <section class="panel text-white bg-gray-800">
                 <div class="content">
-                    <h3 style="font-size: 2rem; margin-bottom: 1rem;">Project Details</h3>
-                    <p class="bio-text" style="opacity: 1; color: white;">
+                    <h3 class="text-4xl mb-4">Project Details</h3>
+                    <p class="bio-text text-white">
                         Nov combines music theory with machine learning to create an intelligent assistant for musicians.
                         The tool helps with practice routines, composition suggestions, and musical analysis through advanced musical understanding and score-audio conversion.
                     </p>
-                    <div class="scroll-hints-container" style="margin-top: 2rem;">
+                    <div class="scroll-hints-container mt-8">
                         <button class="scroll-hint" onclick="scrollToTop(3)">Back ↑</button>
                     </div>
                 </div>
@@ -251,28 +228,28 @@
 
         <!-- Column 5: Project 4 + Details -->
         <div class="vertical-column" data-column="4">
-            <section class="panel project-panel bg-gray-200 text-black">
+            <section class="panel bg-gray-200 text-black">
 
-                <div class="content max-w-3xl text-black">
-                    <div class="project-number text-black">04</div>
+                <div class="content max-w-3xl">
+                    <div class="project-number">04</div>
                     <h2 class="project-title">Works</h2>
-                    <p class="project-description text-black">
+                    <p class="project-description">
                         I have made several compositions and recordings as a solo artist and in collaboration with others.
                     </p>
                     <div class="project-tags">
-                        <span class="tag border text-blue-900">Classical Music</span>
-                        <span class="tag border text-blue-900">Modular Synthesizers</span>
-                        <span class="tag border text-blue-900">Experimental Music</span>
+                        <span class="tag text-blue-900">Classical Music</span>
+                        <span class="tag text-blue-900">Modular Synthesizers</span>
+                        <span class="tag text-blue-900">Experimental Music</span>
                     </div>
-                    <div class="scroll-hints-container" style="margin-top: 2rem;">
-                        <button class="scroll-hint" style="color: black;" onclick="scrollToDetails(4)">Listen & Watch ↓</button>
+                    <div class="scroll-hints-container mt-8">
+                        <button class="scroll-hint"  onclick="scrollToSection(4,1)">Listen & Watch ↓</button>
                     </div>
                 </div>
             </section>
 
-            <section class="panel" style="background-color: #e5e7eb;">
+            <section class="panel bg-gray-100">
                 <div class="content">
-                    <h3 style="font-size: 2rem; margin-bottom: 1rem;">Works</h3>
+                    <h3 class="text-4xl mb-4">Works</h3>
                     <p class="bio-text">
                         This piece was created solely using sounds from modular synthesizers and edited in Logic Pro X.
                     </p>
@@ -285,7 +262,7 @@
                     </div>
                     <br />
                     <p class="bio-text">
-                        A waltz.
+                        The waltz of a donkey.
                     </p>
 
                     <div class="w-full max-w-xl mx-auto p-4 border border-gray-300 rounded-lg bg-white/70 backdrop-blur mb-10">
@@ -303,7 +280,7 @@
                     <iframe width="100%" height="100%" src="https://www.youtube.com/embed/Qst7jj5yofo?si=IJl5hEVzbpdoG4rL" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                     </div>
 
-                    <div class="scroll-hints-container" style="margin-top: 2rem;">
+                    <div class="scroll-hints-container mt-8">
                         <button class="scroll-hint" onclick="scrollToTop(4)">Back ↑</button>
                     </div>
                 </div>
@@ -311,31 +288,15 @@
         </div>
     </div>
 
-
-
     <script>
         const horizontalContainer = document.getElementById('horizontalContainer');
         const columns = document.querySelectorAll('.vertical-column');
 
-        // Slower scroll with native smooth behavior
         const scrollOptions = {
             behavior: 'smooth',
             block: 'start',
             inline: 'start'
         };
-
-        // Scroll helper functions
-        function scrollToAbout() {
-            columns[0].scrollTo({ top: window.innerHeight, behavior: 'smooth' });
-        }
-
-        function scrollToProjects() {
-            horizontalContainer.scrollTo({ left: window.innerWidth, behavior: 'smooth' });
-        }
-
-        function scrollToDetails(columnIndex) {
-            columns[columnIndex].scrollTo({ top: window.innerHeight, behavior: 'smooth' });
-        }
 
         function scrollToSection(columnIndex, position) {
             columns[columnIndex].scrollTo({ top: position * window.innerHeight, behavior: 'smooth' });
