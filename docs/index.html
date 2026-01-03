@@ -26,7 +26,7 @@
                     </div>
                     <div class="scroll-hints-container flex justify-between w-full">
                         <button class="scroll-hint text-blue-900 !opacity-100 " onclick="scrollToSection(0,1)">About ↓</button>
-                        <button class="scroll-hint text-blue-900 !opacity-100" onclick="scrollToSection(1,0)">Projects →</button>
+                        <button class="scroll-hint text-blue-900 !opacity-100" onclick="scrollToProjects">Projects →</button>
                     </div>
                 </div>
             </section>
@@ -304,6 +304,10 @@
 
         function scrollToTop(columnIndex) {
             columns[columnIndex].scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function scrollToProjects() {
+            horizontalContainer.scrollTo({ left: window.innerWidth, behavior: 'smooth' });
         }
 
         function navigateToColumn(columnIndex) {
