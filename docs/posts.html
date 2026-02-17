@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Posts - Milan</title>
+    <link rel="stylesheet" href="public/assets/css/styles.css">
+    <link rel="stylesheet" href="public/assets/css/structure.css">
+
+    <link rel="icon" href="/public/assets/images/logos/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/public/assets/images/logos/favicon-32x32.png" sizes="32x32" type="image/png">
+    <link rel="icon" href="/public/assets/images/logos/favicon-16x16.png" sizes="16x16" type="image/png">
+    <link rel="apple-touch-icon" href="/public/assets/images/logos/apple-touch-icon.png">
+
+    <meta name="description" content="Blog posts by Milan Liessens Dujardin">
+    <meta name="keywords" content="Milan Liessens Dujardin, Blog, Posts, Machine Learning, AI, Music">
+    <meta name="author" content="Milan Liessens Dujardin">
+</head>
+<body class="bg-black text-white">
+    <div class="horizontal-scroll-container" style="overflow-x:hidden;">
+        <div class="vertical-column" id="postsColumn">
+            <section id="top" class="panel text-white bg-gray-900">
+                <div class="content max-w-3xl">
+                    <div>
+                        <div class="project-number">01</div>
+                    </div>
+                    <h2 class="project-title">Audio-Language Models</h2>
+                    <p class="project-description">
+                        Do they really listen?
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">ALMs</span>
+                        <span class="tag">Musical Understanding</span>
+                    </div>
+                    <div class="scroll-hints-container mt-8">
+                        <a class="scroll-hint" href="index.html">← Home</a>
+                        <button class="scroll-hint" onclick="document.getElementById('postsColumn').scrollTo({top: window.innerHeight, behavior: 'smooth'})">Read More ↓</button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="panel text-white bg-gray-800">
+                <div class="content">
+                    <h3 class="text-4xl mb-4">ALMs</h3>
+                    <p class="bio-text text-white">
+                        Recent advances in Audio-Language Models have boosted performance across musical understanding benchmarks for long-form music fragments. By leveraging previous work in Music Information Retrieval, researchers have found ways to address the data scarcity issue of music-text pairs: LLMs synthesize a combination of outputs from multiple MIR models, existing metadata, and contextual knowledge into richer captions. This raises the question: to what extent does this approach provide the model with true music intelligence? Is the model aware of the content and intentions of the music, i.e., the artistic image, or does it just pretend to be? Is there a risk that GPT-generated or GPT-enhanced captions introduce hallucinations in the training data, which then leads to a drift in performance? Similar to the debate about whether models are able to reason, this one is about: do ALMs really listen?
+                    </p>
+                    <p class="bio-text text-white mt-4">
+                        Posted: Monday, February 16, 2026.
+                    </p>
+                    <div class="scroll-hints-container mt-8">
+                        <button class="scroll-hint" onclick="document.getElementById('postsColumn').scrollTo({top: 0, behavior: 'smooth'})">Back ↑</button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</body>
+</html>
