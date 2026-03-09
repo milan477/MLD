@@ -17,9 +17,11 @@
     <meta name="author" content="Milan Liessens Dujardin">
 </head>
 <body class="bg-black text-white">
-    <div class="horizontal-scroll-container" style="overflow-x:hidden;">
-        <div class="vertical-column" id="postsColumn">
-            <section id="top" class="panel text-white bg-gray-900">
+    <div class="horizontal-scroll-container" id="horizontalContainer">
+
+        <!-- Column 0: Post 1 (ALMs) -->
+        <div class="vertical-column" data-column="0">
+            <section class="panel text-white bg-gray-900">
                 <div class="content max-w-3xl">
                     <div>
                         <div class="project-number">01</div>
@@ -34,7 +36,8 @@
                     </div>
                     <div class="scroll-hints-container mt-8">
                         <a class="scroll-hint" href="index.html">← Home</a>
-                        <button class="scroll-hint" onclick="document.getElementById('postsColumn').scrollTo({top: window.innerHeight, behavior: 'smooth'})">Read More ↓</button>
+                        <button class="scroll-hint" onclick="scrollToSection(0,1)">Read More ↓</button>
+                        <button class="scroll-hint" onclick="navigateToColumn(1)">Next →</button>
                     </div>
                 </div>
             </section>
@@ -49,11 +52,111 @@
                         Posted: Monday, February 16, 2026.
                     </p>
                     <div class="scroll-hints-container mt-8">
-                        <button class="scroll-hint" onclick="document.getElementById('postsColumn').scrollTo({top: 0, behavior: 'smooth'})">Back ↑</button>
+                        <button class="scroll-hint" onclick="scrollToTop(0)">Back ↑</button>
                     </div>
                 </div>
             </section>
         </div>
+
+        <!-- Column 1: Post 2 (Conference Notes) -->
+        <div class="vertical-column" data-column="1">
+            <section class="panel text-white bg-gray-900">
+                <div class="content max-w-3xl">
+                    <div>
+                        <div class="project-number">02</div>
+                    </div>
+                    <h2 class="project-title">Clouds, Streams, and Ground (Truths)</h2>
+                    <p class="project-description">
+                        Conference notes from UC Berkeley, March 7-8.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">Conference</span>
+                        <span class="tag">Music Ecosystems</span>
+                    </div>
+                    <div class="scroll-hints-container mt-8">
+                        <a class="scroll-hint" href="index.html">← Home</a>
+                        <button class="scroll-hint" onclick="scrollToSection(1,1)">Read More ↓</button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="panel text-white bg-gray-800">
+                <div class="content">
+                    <h3 class="text-4xl mb-4">Conference Notes</h3>
+                    <p class="bio-text text-white">
+                        I recently attended the Clouds, Streams, and Ground (Truths): Developing Methods for Studying Music Ecosystems conference on March 7-8 at UC Berkeley. The event highlighted cutting-edge topics in the field of music, featuring talks on:
+                    </p>
+                    <ul class="bio-text text-white list-disc ml-6 mt-4">
+                        <li><strong>Human-AI Co-improvisation:</strong> exploring the use of a physical, joint medium of interaction</li>
+                        <li><strong>Algorithmic Curation:</strong> Generating interpretable music playlists by navigating a musician's social networks.</li>
+                        <li><strong>Copyright Law:</strong> Navigating the complex legal challenges surrounding AI-assisted artworks (is a 600-prompt artwork copyrightable?).</li>
+                        <li><strong>Media Evolution:</strong> Analyzing the trend in which the once-sole transmitter of music ("vapor") has become "frozen" when</li>
+                        <li><strong>Human-Algorithm Interaction:</strong> Developing novel methodologies to capture how humans interact with algorithmic agency.</li>
+                    </ul>
+                    <p class="bio-text text-white mt-4">
+                        Posted: Monday, March 9, 2026.
+                    </p>
+                    <div class="scroll-hints-container mt-8">
+                        <button class="scroll-hint" onclick="scrollToTop(1)">Back ↑</button>
+                    </div>
+                </div>
+            </section>
+        </div>
+
     </div>
+
+    <script>
+        const horizontalContainer = document.getElementById('horizontalContainer');
+        const columns = document.querySelectorAll('.vertical-column');
+
+        const scrollOptions = {
+            behavior: 'smooth',
+            block: 'start',
+            inline: 'start'
+        };
+
+        function scrollToSection(columnIndex, position) {
+            columns[columnIndex].scrollTo({ top: position * window.innerHeight, behavior: 'smooth' });
+        }
+
+        function scrollToTop(columnIndex) {
+            columns[columnIndex].scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function navigateToColumn(columnIndex) {
+            horizontalContainer.scrollTo({
+                left: columnIndex * window.innerWidth,
+                behavior: 'smooth'
+            });
+        }
+
+        // Lock horizontal scrolling when any column is scrolled down
+        columns.forEach((column, index) => {
+            column.addEventListener('scroll', () => {
+                if (column.scrollTop > 10) {
+                    horizontalContainer.style.overflowX = 'hidden';
+                    horizontalContainer.dataset.activeColumn = index;
+                } else {
+                    const anyColumnScrolled = Array.from(columns).some(col => col.scrollTop > 10);
+                    if (!anyColumnScrolled) {
+                        horizontalContainer.style.overflowX = 'auto';
+                        delete horizontalContainer.dataset.activeColumn;
+                    }
+                }
+            });
+        });
+
+        // When user tries to scroll horizontally while locked, scroll back to active column
+        horizontalContainer.addEventListener('scroll', () => {
+            if (horizontalContainer.dataset.activeColumn !== undefined) {
+                const activeIndex = parseInt(horizontalContainer.dataset.activeColumn);
+                const targetScrollLeft = activeIndex * window.innerWidth;
+
+                if (Math.abs(horizontalContainer.scrollLeft - targetScrollLeft) > 10) {
+                    horizontalContainer.scrollLeft = targetScrollLeft;
+                }
+            }
+        });
+    </script>
 </body>
 </html>
