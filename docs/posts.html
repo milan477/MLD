@@ -76,6 +76,7 @@
                     <div class="scroll-hints-container mt-8">
                         <button class="scroll-hint" onclick="navigateToColumn(0)">← Previous</button>
                         <button class="scroll-hint" onclick="scrollToSection(1,1)">Read More ↓</button>
+                        <button class="scroll-hint" onclick="navigateToColumn(2)">Next →</button>
                     </div>
                 </div>
             </section>
@@ -98,6 +99,58 @@
                     </p>
                     <div class="scroll-hints-container mt-8">
                         <button class="scroll-hint" onclick="scrollToTop(1)">Back ↑</button>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Column 2: Post 3 (Generative UIs) -->
+        <div class="vertical-column" data-column="2">
+            <section class="panel text-white bg-gray-900">
+                <div class="content max-w-3xl">
+                    <div>
+                        <div class="project-number">03</div>
+                    </div>
+                    <h2 class="project-title">Generative UIs</h2>
+                    <p class="project-description">
+                        Thoughts on dynamic controls, adaptation, and what still feels missing.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">UI</span>
+                        <span class="tag">Generative AI</span>
+                    </div>
+                    <div class="scroll-hints-container mt-8">
+                        <button class="scroll-hint" onclick="navigateToColumn(1)">← Previous</button>
+                        <button class="scroll-hint" onclick="scrollToSection(2,1)">Read More ↓</button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="panel text-white bg-gray-800">
+                <div class="content">
+                    <h3 class="text-4xl mb-4">A Reflection on Generative UIs</h3>
+                    <p class="bio-text text-white">
+                        My first reaction to many generative UI ideas is: how is this different from vibe-coding a plot or graph? Visualizing data through code is already something many models can do. What feels new is adding a layer on top of natural-language instructions with interface controls like sliders, drop-down menus, and input boxes, where prompt refinement becomes the core interaction.
+                    </p>
+                    <p class="bio-text text-white mt-4">
+                        It does seem more efficient in some cases, especially when users are asked to try many small changes like legend placement or axis label orientation. But I think those comparisons should be taken with a grain of salt, because these are exactly the kinds of edits that widget-based interfaces are designed to make easy.
+                    </p>
+                    <p class="bio-text text-white mt-4">
+                        Given the relatively deterministic outputs of this kind of system, compared to diffusion models, and the predictability of instructions like "show the legend at 45 degrees," I wonder how much added value dynamic controls provide over vibe-coding. To me, the bigger value in visualization editing is exploring fundamentally different views of the same data, or reacting to goals like "I want the graph to convey X." A compelling direction is turning those high-level goals into smart controls that can increase or decrease aspects of X.
+                    </p>
+
+                    <h3 class="text-4xl mt-10 mb-4">Beyond Responsive Design</h3>
+                    <p class="bio-text text-white">
+                        The idea that every application should adapt to any device in a way that is specifically designed for the user feels like a meaningful path toward the future of interfaces. Adapting layout to device constraints already feels mostly solved: browsers and apps resize and reflow content well.
+                    </p>
+                    <p class="bio-text text-white mt-4">
+                        What still feels underdeveloped is adapting to each person's preferred way of interacting with an interface. Outside recommendation systems and content personalization, interfaces themselves rarely reshape around users in real time. I wish my phone or computer would support me in daily tasks with the right controls and UI patterns exactly when I need them. For me, that is the real promise of generative UIs.
+                    </p>
+                    <p class="bio-text text-white mt-4">
+                        Posted: Friday, April 10, 2026.
+                    </p>
+                    <div class="scroll-hints-container mt-8">
+                        <button class="scroll-hint" onclick="scrollToTop(2)">Back ↑</button>
                     </div>
                 </div>
             </section>
