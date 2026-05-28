@@ -162,7 +162,8 @@
                         Collaborators: Ayushman Dey, Laia Coronas Sala, Jasper Ryan, Jeremy Vale, and Mitchell Lee.
                     </p>
 
-                    <div class="scroll-hints-container mt-8">
+                    <div class="scroll-hints-container mt-8 flex justify-between w-full items-center">
+                        <button class="scroll-hint" onclick="navigateToColumn(0)">Home ←</button>
                         <button class="scroll-hint" onclick="scrollToTop(1)">Back ↑</button>
                     </div>
                 </div>
@@ -246,9 +247,9 @@
                         We introduce <strong>MuNo-LM</strong> (Music Notation for Language Models), a text-based representation that unifies score-level information — harmony, phrasing, dynamics, voicing, articulation — with time-aligned audio-perceptual features, in a format that is both expressive and directly comprehensible by LLMs. Building on this representation, we propose an automatic caption generation pipeline that translates aligned score-performance data into time-grounded and musically informed auditory analyses and question-answer pairs. We assess output quality and temporal grounding via inter-annotator agreement, confirming that MuNo-LM QA pairs constitute reliable supervision, paving the way to fine-grained music understanding in ALMs.
                     </p>
 
-                    <p class="bio-text text-white mt-4">
-                        Demo: <a href="https://milan477.github.io/MuNo-LM-demo" target="_blank" class="underline">milan477.github.io/MuNo-LM-demo</a>
-                    </p>
+                    <div class="mt-4">
+                        <a href="https://milan477.github.io/MuNo-LM-demo" target="_blank" class="inline-block px-4 py-2 border border-white text-white text-sm rounded-full hover:bg-white hover:text-gray-900 transition-colors no-underline">Demo →</a>
+                    </div>
                     <div class="scroll-hints-container mt-8">
                         <button class="scroll-hint" onclick="scrollToTop(3)">Back ↑</button>
                     </div>
@@ -529,8 +530,8 @@
                     </p>
 
 
-                    <div class="w-full flex justify-center items-center">
-                    <img src="/public/assets/contents/SUMIRE_project_screenshot.png" width="50%"></img>
+                    <div class="flex justify-center mt-4 mb-4">
+                        <img src="/public/assets/contents/SUMIRE_project_screenshot.png" class="w-1/2 mx-auto block"></img>
                     </div>
                     <p class="bio-text">
                         Key findings from interviews and the product discovery process include
