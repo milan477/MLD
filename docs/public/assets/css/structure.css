@@ -91,3 +91,52 @@
 .status-dot {
     animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
+
+.nav-3col {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    gap: 0;
+}
+
+.nav-3col > *:nth-child(2) {
+    text-align: center;
+}
+
+.nav-3col > *:nth-child(3) {
+    text-align: right;
+}
+
+.project-img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 1rem auto;
+}
+
+.project-img-sm {
+    display: block;
+    max-width: 280px;
+    width: 100%;
+    height: auto;
+    margin: 1.5rem auto;
+}
+
+.demo-link {
+    display: inline-block;
+    padding: 0.45rem 1.2rem;
+    border: 1px solid currentColor;
+    border-radius: 9999px;
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    opacity: 0.75;
+    transition: opacity 0.2s, background-color 0.2s, color 0.2s;
+    margin-top: 0.75rem;
+}
+
+.demo-link:hover {
+    opacity: 1;
+    background-color: white;
+    color: #111;
+}

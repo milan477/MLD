@@ -3,632 +3,817 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Milan</title>
-    <link rel="stylesheet" href="public/assets/css/styles.css">
-    <link rel="stylesheet" href="public/assets/css/structure.css">
-
+    <title>Milan Liessens Dujardin</title>
     <link rel="icon" href="/public/assets/images/logos/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/public/assets/images/logos/favicon-32x32.png" sizes="32x32" type="image/png">
     <link rel="icon" href="/public/assets/images/logos/favicon-16x16.png" sizes="16x16" type="image/png">
     <link rel="apple-touch-icon" href="/public/assets/images/logos/apple-touch-icon.png">
-
-    <meta name="description" content="Milan Liessens Dujardin - Machine Learning Engineer and Music/AI Researcher. Working on audio-language models, music understanding, pitch evaluation benchmarks, text-guided audio effect refinement, and collaborative AI design systems.">
-    <meta name="keywords" content="Milan Liessens Dujardin, Machine Learning Engineer, Music AI Researcher, Audio-Language Models, MuNo-LM, PitchBench, InstructFX2FX, C-K Git, Music Understanding, Pitch Perception, ALM Evaluation, Audio Effects, Collaborative Design, C-K Theory, Deep Tech Commercialization, Musician">
+    <meta name="description" content="Milan Liessens Dujardin - AI researcher and musician specializing in multimodal representations, automated data and supervision generation, and empirical model evaluation.">
     <meta name="author" content="Milan Liessens Dujardin">
+    <style>
+        :root {
+            --bg-0: #000002;
+            --bg-1: #01030a;
+            --bg-2: #030612;
+            --text: #fff;
+            --muted: #fff;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html, body { height: 100%; overflow: hidden; }
+        body {
+            background:
+                radial-gradient(ellipse 70% 40% at 50% 108%, var(--bg-2) 0%, transparent 70%),
+                radial-gradient(ellipse 120% 90% at 50% 0%, var(--bg-1) 0%, var(--bg-0) 100%);
+            background-color: var(--bg-0);
+            color: var(--text);
+            font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
 
+        header {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 30;
+            display: flex; justify-content: space-between; align-items: flex-start;
+            padding: 22px 28px; pointer-events: none;
+        }
+        header > * { pointer-events: auto; }
+        #who { position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; text-align: center; padding: 10px 16px 14px; pointer-events: none; }
+        body.is-catalog #who { background: linear-gradient(transparent, rgba(0, 0, 2, .96) 60%); }
+        .name { font-size: .78rem; font-weight: 600; letter-spacing: .06em; line-height: 1.25; color: #fff; }
+        .tagline { font-size: .68rem; color: var(--muted); margin-top: 2px; letter-spacing: .06em; }
+        nav { display: flex; gap: 20px; align-items: center; font-size: .85rem; }
+        nav a, nav button { color: var(--muted); text-decoration: none; background: none; border: 0; cursor: pointer; font: inherit; transition: color .2s; }
+        nav a:hover, nav button:hover { color: #fff; }
+        nav img { height: 18px; filter: invert(1) brightness(.7); vertical-align: middle; }
+        nav a:hover img { filter: invert(1) brightness(1); }
 
+        /* ---------- stage: context above, bar in the middle, answer below ---------- */
+        #stage { position: fixed; inset: 84px 0 56px 0; z-index: 10; overflow: hidden; --bar: 62px; --gap: 92px; }   /* --gap: space between the bar and the text above / the suggestions below */
+        #stage > * { position: absolute; left: 50%; transform: translateX(-50%); }
+
+        #below {
+            top: calc(50% + var(--bar) / 2 + var(--gap)); width: min(1040px, calc(100% - 28px));
+            max-height: calc(50% - var(--bar) / 2 - var(--gap)); overflow-y: auto; scrollbar-width: none;
+        }
+        #below::-webkit-scrollbar { display: none; }
+        #context { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; padding: 22px 6px 20px; }
+        #contextLabel {
+            width: 100%; text-align: center; font-size: .68rem; letter-spacing: .22em; text-transform: uppercase;
+            color: #8d97b5; margin-bottom: 2px;
+        }
+        #answer:empty { display: none; }
+
+        .card {
+            position: relative; width: 236px; border-radius: 20px; overflow: hidden; cursor: pointer;
+            background: radial-gradient(ellipse 120% 90% at 50% 100%, rgba(255, 255, 255, .07), rgba(255, 255, 255, .02));
+            box-shadow: 0 0 40px rgba(255, 255, 255, .06), 0 12px 40px rgba(0, 0, 0, .35);
+            opacity: 0; transform: translateY(-14px) scale(.97);
+            animation: cardIn .6s cubic-bezier(.2, .8, .25, 1) forwards; animation-delay: calc(var(--i) * 110ms);
+            transition: box-shadow .25s, background .25s;
+            outline: none;
+        }
+        @keyframes cardIn { to { opacity: 1; transform: none; } }
+        .card:hover, .card:focus-visible { box-shadow: 0 0 56px rgba(255, 255, 255, .16), 0 12px 40px rgba(0, 0, 0, .4); background: radial-gradient(ellipse 120% 90% at 50% 100%, rgba(255, 255, 255, .12), rgba(255, 255, 255, .04)); }
+        .card .thumb { height: 92px; background-size: cover; background-position: center top; mask-image: linear-gradient(to bottom, #000 40%, transparent); -webkit-mask-image: linear-gradient(to bottom, #000 40%, transparent); opacity: .9; }
+        .card .body { padding: 14px 16px 16px; }
+        .card.has-thumb .body { margin-top: -26px; position: relative; }
+        .card .kind { font-size: .62rem; letter-spacing: .18em; text-transform: uppercase; color: #8d97b5; margin-bottom: 5px; }
+        .card h3 { font-size: .98rem; font-weight: 600; color: #fff; margin-bottom: 7px; text-shadow: 0 0 18px rgba(255, 255, 255, .45); }
+        .card p { font-size: .82rem; line-height: 1.55; color: #c6cce2; display: -webkit-box; -webkit-line-clamp: 5; -webkit-box-orient: vertical; overflow: hidden; }
+        mark { background: none; color: #fff; text-shadow: 0 0 10px rgba(255, 255, 255, .9), 0 0 24px rgba(255, 255, 255, .5); font-weight: 600; }
+
+        /* ---------- the bar, held only by light ---------- */
+        #field { top: 50%; width: min(760px, calc(100% - 40px)); transform: translate(-50%, -50%) !important; --charge: 0; }
+        #glow { position: absolute; inset: -40px -70px; pointer-events: none; transition: opacity .5s; opacity: calc(.72 + var(--charge) * .28); }
+        #glow i { position: absolute; border-radius: 50%; mix-blend-mode: screen; filter: blur(34px); transition: opacity .4s; }
+        #glow .g1 { left: 6%;  top: 8%;  width: 52%; height: 84%; background: radial-gradient(circle, rgba(255, 246, 238, .95), transparent 70%); animation: sway1 11s ease-in-out infinite; }
+        #glow .g2 { right: 2%; top: 4%;  width: 50%; height: 90%; background: radial-gradient(circle, rgba(255, 190, 214, .8), transparent 70%); animation: sway2 13s ease-in-out infinite; }
+        #glow .g3 { left: 26%; top: -6%; width: 46%; height: 92%; background: radial-gradient(circle, rgba(184, 196, 255, .85), transparent 70%); animation: sway3 15s ease-in-out infinite; }
+        #glow .g4 { left: 30%; top: 22%; width: 44%; height: 86%; background: radial-gradient(circle, rgba(168, 236, 228, .6), transparent 70%); animation: sway1 17s ease-in-out infinite reverse; }
+        @keyframes sway1 { 50% { transform: translate(8%, -8%) scale(1.1); } }
+        @keyframes sway2 { 50% { transform: translate(-9%, 7%) scale(.93); } }
+        @keyframes sway3 { 50% { transform: translate(6%, 10%) scale(1.07); } }
+        #field.busy #glow i { animation-duration: 3s; }
+        #bar {
+            position: relative; display: flex; align-items: center; gap: 10px;
+            height: var(--bar); padding: 0 12px 0 28px; border-radius: 999px;
+            background: rgba(1, 2, 8, .9);
+        }
+        #q { flex: 1; min-width: 0; background: none; border: 0; outline: 0; color: #fff; font: inherit; font-size: 1.02rem; caret-color: #fff; }
+        #q::placeholder { color: rgba(255, 255, 255, .7); }
+        #send {
+            width: 40px; height: 40px; border-radius: 50%; border: 0; cursor: pointer; color: #fff; font-size: 1.05rem;
+            background: rgba(255, 255, 255, .08); transition: background .2s, box-shadow .2s; flex-shrink: 0;
+        }
+        #send:hover { background: rgba(255, 255, 255, .2); box-shadow: 0 0 22px rgba(255, 255, 255, .35); }
+
+        #chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 9px; }
+        #chips button { animation: chipIn .6s ease backwards; animation-delay: calc(var(--n) * 60ms); }
+        @keyframes chipIn { from { opacity: 0; transform: translateY(8px); } }
+        #chips button {
+            background: rgba(255, 255, 255, .05); border: 0; color: #c3c9de; font: inherit; font-size: .8rem;
+            padding: 7px 14px; border-radius: 999px; cursor: pointer; white-space: nowrap; transition: background .2s, color .2s, box-shadow .2s;
+        }
+        #chips button:hover { background: rgba(255, 255, 255, .13); color: #fff; box-shadow: 0 0 20px rgba(255, 255, 255, .2); }
+
+        /* ---------- conversation: newest turn is full, older turns fold into keywords ---------- */
+        #answer { bottom: calc(50% + var(--bar) / 2 + var(--gap)); width: min(760px, calc(100% - 40px)); max-height: calc(50% - var(--bar) / 2 - var(--gap)); overflow-y: auto;
+            text-align: center; padding: 8px 8px 0; display: flex; flex-direction: column; align-items: stretch; scrollbar-width: none;
+            -webkit-mask-image: linear-gradient(transparent, #000 36px); mask-image: linear-gradient(transparent, #000 36px); }
+        #answer::-webkit-scrollbar { display: none; }
+        #answer > :first-child { margin-top: auto; }
+        .turn { padding: 4px 0 14px; cursor: default; }
+        .turn:last-child { padding-bottom: 0; }
+        .turn.old { cursor: pointer; }
+        .turn .q { --muted: #8d97b5; display: block; width: 100%; background: none; border: 0; font: inherit; cursor: inherit; text-align: center;
+            font-size: .75rem; letter-spacing: .12em; color: var(--muted); padding: 4px 0 8px; transition: color .4s, letter-spacing .6s; }
+        .turn.old .q { color: #6c7699; letter-spacing: .06em; }
+        .turn.old:hover .q { color: #c8cfe6; }
+        .turn.hold .fold.a { display: none; }                       /* a new exchange shows its question first; the answer is let in after */
+        .turn.old .fold.a { display: none; }                       /* the layout snaps; JS animates the change (FLIP) */
+        .turn:not(.old) .fold.k { display: none; }
+        .turn .text { font-size: 1.06rem; line-height: 1.7; color: #fff; text-shadow: 0 0 20px rgba(255, 255, 255, .28), 0 0 50px rgba(255, 255, 255, .12); padding: 2px 4px; }
+        .turn .text.wait { color: var(--muted); animation: pulse 1.2s ease-in-out infinite; }
+        @keyframes pulse { 50% { opacity: .35; } }
+        .turn .text span { display: inline-block; white-space: pre-wrap; }
+        .turn .text a { color: #fff; text-decoration: underline; text-decoration-color: rgba(255, 255, 255, .45); text-underline-offset: 3px; text-shadow: 0 0 14px rgba(255, 255, 255, .75); cursor: pointer; }
+        .turn .text a:hover { text-decoration-color: #fff; }
+        /* the one-sentence summary a folded turn leaves behind */
+        .sum { font-size: .95rem; line-height: 1.6; color: #fff; padding: 2px 10px 4px; }
+        .sum span { display: inline-block; white-space: pre-wrap; }
+        .sum span.kwd { color: #fff; }
+
+        /* ---------- catalog ---------- */
+        #catalog {
+            position: fixed; inset: 0; z-index: 28; overflow-y: auto; padding: 96px 28px 84px;
+            background: radial-gradient(ellipse 80% 50% at 50% 0%, var(--bg-2), var(--bg-0) 70%);
+            opacity: 0; visibility: hidden; transition: opacity .45s ease, visibility .45s;
+            scrollbar-width: thin; scrollbar-color: rgba(255, 255, 255, .2) transparent;
+        }
+        body.is-catalog #catalog { opacity: 1; visibility: visible; }
+        body.is-catalog header { background: linear-gradient(rgba(0, 0, 2, .96) 55%, transparent); }
+        nav button.on { color: #fff; text-shadow: 0 0 14px rgba(255, 255, 255, .6); }
+        #catalog h2.sec { font-size: .72rem; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: #8d97b5; margin: 48px 0 0; padding-bottom: 12px; border-bottom: 1px solid rgba(255, 255, 255, .16); }
+        #catalog h2.sec:first-child { margin-top: 0; }
+        #collage { max-width: 920px; margin: 0 auto; }
+        .tile {
+            display: grid; grid-template-columns: 40px minmax(0, 1fr) 132px; gap: 0 24px; align-items: start;
+            padding: 24px 10px; border-bottom: 1px solid rgba(255, 255, 255, .09); cursor: pointer; outline: none;
+            opacity: 0; animation: tileIn .5s ease forwards; animation-delay: calc(var(--i) * 30ms); transition: background .2s;
+        }
+        @keyframes tileIn { to { opacity: 1; } }
+        .tile:hover, .tile:focus-visible { background: rgba(255, 255, 255, .035); }
+        .tile .num { color: #6c7699; font-size: .78rem; letter-spacing: .06em; font-variant-numeric: tabular-nums; padding-top: 5px; }
+        .tile h3 { font-size: 1.12rem; font-weight: 600; color: #fff; line-height: 1.3; }
+        .tile:hover h3 { text-decoration: underline; text-decoration-color: rgba(255, 255, 255, .4); text-underline-offset: 4px; }
+        .tile p { margin-top: 7px; font-size: .9rem; line-height: 1.6; color: #fff; max-width: 62ch; }
+        .tile .tags { display: flex; flex-wrap: wrap; gap: 4px 0; margin-top: 11px; font-size: .74rem; color: #8d97b5; }
+        .tile .tags span + span::before { content: "·"; margin: 0 9px; color: #565f7f; }
+        .tile .thumb { width: 132px; height: 86px; border-radius: 6px; background-size: cover; background-position: center top; border: 1px solid rgba(255, 255, 255, .12); }
+        @media (max-width: 760px) {
+            #catalog { padding: 80px 16px 70px; }
+            .tile { grid-template-columns: 30px minmax(0, 1fr); gap: 0 12px; padding: 20px 4px; }
+            .tile .thumb { display: none; }
+        }
+
+        /* ---------- detail box ---------- */
+        #box {
+            position: fixed; left: 50%; top: 50%; z-index: 40;
+            width: min(760px, 92vw); height: min(74vh, 660px);
+            transform: translate(-50%, -46%) scale(.96);
+            border-radius: 24px; opacity: 0; pointer-events: none;
+            background: rgba(1, 2, 8, .96);
+            box-shadow: 0 30px 90px rgba(0, 0, 0, .6), 0 0 120px rgba(255, 255, 255, .08);
+            overflow: hidden; transition: opacity .45s ease, transform .55s cubic-bezier(.2, .8, .25, 1);
+        }
+        #box::before { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 45%; pointer-events: none; background: radial-gradient(ellipse 60% 100% at 50% 130%, rgba(255, 255, 255, .12), transparent 70%); }
+        #box.open { opacity: 1; transform: translate(-50%, -50%) scale(1); pointer-events: auto; }
+        #box .scroll { position: absolute; inset: 0; overflow-y: auto; padding: 36px 40px 44px; scrollbar-width: thin; scrollbar-color: rgba(255, 255, 255, .25) transparent; }
+        #close { position: absolute; top: 14px; right: 16px; z-index: 2; width: 34px; height: 34px; border-radius: 50%; background: rgba(255, 255, 255, .06); border: 0; color: var(--text); font-size: 1rem; cursor: pointer; transition: background .2s; }
+        #close:hover { background: rgba(255, 255, 255, .16); }
+        #veil { position: fixed; inset: 0; z-index: 35; background: rgba(0, 0, 2, .6); opacity: 0; pointer-events: none; transition: opacity .4s; }
+        #veil.open { opacity: 1; pointer-events: auto; }
+        .scroll h2 { font-size: 1.9rem; font-weight: 600; color: #fff; text-shadow: 0 0 22px rgba(255, 255, 255, .55), 0 0 60px rgba(255, 255, 255, .25); margin-bottom: 10px; padding-right: 36px; }
+        .scroll .lede { color: #fff; font-size: 1.02rem; line-height: 1.6; margin-bottom: 16px; }
+        .scroll .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+        .scroll .tag { font-size: .72rem; letter-spacing: .06em; padding: 4px 11px; border-radius: 999px; background: rgba(255, 255, 255, .07); color: var(--text); }
+        .scroll p, .scroll li { color: var(--text); font-size: .98rem; line-height: 1.75; margin-bottom: 15px; text-shadow: 0 0 18px rgba(255, 255, 255, .2); }
+        .scroll a { color: #fff; text-shadow: 0 0 12px rgba(255, 255, 255, .6); text-decoration-color: rgba(255, 255, 255, .5); }
+        .scroll img { max-width: 100%; border-radius: 12px; margin: 6px 0 18px; box-shadow: 0 0 40px rgba(255, 255, 255, .1); }
+        .scroll iframe { width: 100%; border: 0; border-radius: 12px; margin: 6px 0 18px; }
+        .scroll iframe[src*="youtube"] { aspect-ratio: 16 / 9; height: auto; }
+        .scroll iframe[src$=".pdf"] { height: 520px; background: #fff; }
+        .scroll audio { width: 100%; margin: 2px 0 22px; filter: invert(.9) brightness(.9); }
+        .scroll .demo-link { display: inline-block; margin: 4px 0 14px; }
+        .scroll h4 { color: #fff; font-size: 1.15rem; text-shadow: 0 0 16px rgba(255, 255, 255, .5); margin: 24px 0 8px; }
+        .scroll h3 { color: #fff; font-size: 1.05rem; text-shadow: 0 0 16px rgba(255, 255, 255, .5); margin: 22px 0 6px; }
+        .scroll .education-item { margin-bottom: 18px; }
+        .scroll .education-header { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+        .scroll .education-degree { margin: 0; }
+        .scroll .education-timespan, .scroll .education-subheader { color: var(--muted); font-size: .85rem; display: flex; gap: 12px; flex-wrap: wrap; }
+
+        @media (max-width: 640px) {
+            header { padding: 16px; }
+            nav { gap: 14px; font-size: .78rem; }
+            #stage { inset: 64px 0 50px 0; --bar: 56px; --gap: 72px; }
+            #chips button:nth-child(n+4) { display: none; }
+            .card { width: calc(50% - 8px); }
+            .card p { -webkit-line-clamp: 4; font-size: .78rem; }
+            #bar { padding-left: 22px; }
+            #glow { inset: -28px -24px; }
+            #box .scroll { padding: 28px 22px 32px; }
+            .scroll h2 { font-size: 1.5rem; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            #glow i { animation: none; }
+            .card, .turn .text span, .kw { animation-duration: .01s; animation-delay: 0s; transition-duration: .01s; }
+        }
+    </style>
 </head>
 <body>
-    <div class="horizontal-scroll-container" id="horizontalContainer">
-        <div class="vertical-column" data-column="0">
 
-            <section class="panel">
-                <div class="content">
-                    <h2 class="name">Milan <br />Liessens Dujardin</h2>
-                    <p class="tagline">Machine Learning Engineer • Music/AI & Design Researcher • Musician</p>
-                    <div class="contact-links">
-                        <a href="mailto:milanliessensdujardin@gmail.com" class="contact-link">
-                            <img class="h-[8.5]" src="https://api.iconify.design/ic:baseline-email.svg" alt="Email">
-                        </a>
-                        <a href="https://www.linkedin.com/in/milan-liessens-dujardin/" class="contact-link" target="_blank">
-                            <img class="h-6" src="/public/assets/images/logos/LinkedIn.png" alt="LinkedIn">
-                        </a>
+    <header>
+        <nav>
+            <button type="button" id="catalogBtn" aria-expanded="false">Projects</button>
+        </nav>
+        <nav>
+            <a href="mailto:milanliessensdujardin@gmail.com" aria-label="Email"><img src="https://api.iconify.design/ic:baseline-email.svg" alt="Email"></a>
+            <a href="https://www.linkedin.com/in/milan-liessens-dujardin/" target="_blank" rel="noopener" aria-label="LinkedIn"><img src="/public/assets/images/logos/LinkedIn.png" alt="LinkedIn"></a>
+        </nav>
+    </header>
+    <footer id="who">
+        <h1 class="name">Milan Liessens Dujardin</h1>
+        <p class="tagline">AI Researcher · Musician</p>
+    </footer>
 
-                    </div>
-                    <div class="scroll-hints-container flex justify-between w-full">
-                        <button class="scroll-hint text-blue-900 !opacity-100 " onclick="scrollToSection(0,1)">About ↓</button>
-                        <a href="posts.html" class="scroll-hint text-blue-900 !opacity-100 no-underline">Posts</a>
-                        <button class="scroll-hint text-blue-900 !opacity-100" onclick="scrollToProjects()">Projects →</button>
-                    </div>
-                </div>
-            </section>
+    <main id="stage">
+        <div id="answer" aria-live="polite"></div>
+        <form id="field" autocomplete="off">
+            <div id="glow" aria-hidden="true"><i class="g1"></i><i class="g2"></i><i class="g3"></i><i class="g4"></i></div>
+            <div id="bar">
+                <input id="q" type="text" placeholder="Ask me anything: projects, research, music…" aria-label="Ask a question" autofocus>
+                <button id="send" type="submit" aria-label="Ask">↑</button>
+            </div>
+        </form>
 
-            <section class="panel biography-section">
-                <div class="content">
-                    <h3 class="bio-title text-4xl mb-10">About Me</h2>
-                    <p class="bio-text">
-                        I'm passionate about the intersection of music, machine learning, human simulation, design interfaces, and human-AI co-creation.
-                        My current work focuses on post-training ALMs for musical understanding and reasoning, and controlling audio effects from natural language for music post-production. I am also doing research on simulating user behavior for UI testing, as well as how LLMs can help designers reach better design outcomes through supported ideation following the C-K Design Theory.
-                        My background spans from commercializing cutting-edge technologies at Lawrence Berkeley National Laboratory to machine learning engineering and research in music & AI.
-                        Currently, I am pursuing my <a href="https://funginstitute.berkeley.edu/people/milan-liessens-dujardin/" target="_blank">M.Eng. in Electrical Engineering and Computer Science at UC Berkeley.</a>.
-                    </p>
-
-                    <div class="scroll-hints-container justify-between flex">
-                        <button class="scroll-hint text-blue-900 !opacity-100" onclick="scrollToSection(0,2)">Education ↓</button>
-                        <button class="scroll-hint" onclick="scrollToTop(0)">Back ↑</button>
-                    </div>
-                </div>
-            </section>
-
-            <section class="panel biography-section">
-                <div class="content">
-
-                    <h2 class="bio-title text-4xl mb-10">Education</h2>
-
-                    <div class="education-list">
-
-                    <div class="education-item">
-                        <div class="education-header">
-                        <h3 class="education-degree">M.Eng. in Electrical Engineering and Computer Science</h3>
-                        <span class="education-timespan">2025 – 2026</span>
-                        </div>
-
-                        <div class="education-subheader">
-                        <span class="education-university">University of California, Berkeley</span>
-                        <span class="education-location">Berkeley, CA</span>
-                        </div>
-
-                        <p class="education-description">
-                        Focus on machine learning, natural language processing, music-AI, and human-AI interaction.
-
-                        </p>
-                    </div>
-
-                    <div class="education-item">
-                        <div class="education-header">
-                        <h3 class="education-degree">B.Sc. in Computer Science</h3>
-                        <span class="education-timespan">2020 – 2025</span>
-                        </div>
-
-                        <div class="education-subheader">
-                        <span class="education-university">University of Antwerp</span>
-                        <span class="education-location">Antwerp, Belgium</span>
-                        </div>
-                    </div>
-
-                    <div class="education-item">
-                        <div class="education-header">
-                        <h3 class="education-degree">M.A. in Music</h3>
-                        <span class="education-timespan">2022 – 2024</span>
-                        </div>
-
-                        <div class="education-subheader">
-                        <span class="education-university"><a href="https://www.gva.be/regio/antwerpen/regio-antwerpen/antwerpen/jonge-internationale-leerlingen-volgen-muziekstage-in-de-singel-de-eerste-keer-dat-we-buiten-china-zijn/37411087.html" target="_blank">Royal Conservatory of Antwerp</a></span>
-                        <span class="education-location">Antwerp, Belgium</span>
-                        </div>
-                    </div>
-
-                    <div class="education-item">
-                        <div class="education-header">
-                        <h3 class="education-degree">B.A. in Music</h3>
-                        <span class="education-timespan">2019 – 2022</span>
-                        </div>
-
-                        <div class="education-subheader">
-                        <span class="education-university">Royal Conservatory of Antwerp</span>
-                        <span class="education-location">Antwerp, Belgium</span>
-                        </div>
-                    </div>
-
-                    </div>
-                    <br />
-                    <div class="scroll-hints-container justify-end flex items-center w-full">
-                        <button class="scroll-hint" onclick="scrollToSection(0,1)">Back ↑</button>
-                        <button class="scroll-hint" onclick="scrollToTop(0)">Top ↑</button>
-                    </div>
-                </div>
-                </section>
+        <div id="below">
+            <div id="chips"></div>
+            <div id="contextWrap" aria-live="polite"><div id="context"></div></div>
         </div>
+    </main>
 
-        <!-- Column 2: Project 1 + Details -->
-         <div class="vertical-column" data-column="1">
-            <section class="panel text-white bg-blue-900">
-                <div class="content max-w-3xl">
-                    <div class="project-number">01</div>
-                    <h2 class="project-title">Deep Tech Commercialization</h2>
-                    <p class="project-description">
-                        Developed commercialization strategies to bring innovative technologies from Lawrence Berkeley National Laboratory to market.
-                    </p>
-                    <div class="project-tags">
-                        <span class="tag">High-Performance Computing</span>
-                        <span class="tag">Market Analysis</span>
-                        <span class="tag">Innovation Management</span>
-                    </div>
-                    <div class="scroll-hints-container mt-8 flex justify-between w-full items-center">
-                        <button class="scroll-hint" onclick="navigateToColumn(0)">Home ←</button>
-                        <button class="scroll-hint" onclick="scrollToSection(1,1)">Details ↓</button>
-                        <button class="scroll-hint" onclick="navigateToColumn(2)">Next →</button>
-                    </div>
-                </div>
-            </section>
+    <section id="catalog" aria-label="Projects and explorations"><div id="collage"></div></section>
 
-            <section class="panel text-white bg-blue-950">
-                <div class="content">
-                    <h3 class="text-4xl mb-4">Project Details</h3>
-                    <p class="bio-text opacity-100">
-                        This project focused on bridging the gap between cutting-edge research in high-performance computing from Lawrence Berkeley National Laboratory and commercial applications.
-                        I conducted extensive market research, patent analysis, and competitive landscape assessments to identify opportunities for superconducting, neuromorphic computers.
-                    </p>
-                    <img src="/public/assets/contents/DTIL_project_screenshot.png" width="100%"></img>
-                    <p class="bio-text opacity-100 p-4">
-                        Collaborators: Ayushman Dey, Laia Coronas Sala, Jasper Ryan, Jeremy Vale, and Mitchell Lee.
-                    </p>
-
-                    <div class="scroll-hints-container mt-8">
-                        <button class="scroll-hint" onclick="scrollToTop(1)">Back ↑</button>
-                    </div>
-                </div>
-            </section>
-        </div>
-
-
-        <!-- Column 3: Project 2 - C-K Git -->
-        <div class="vertical-column" data-column="2">
-            <section class="panel bg-gray-200 text-black">
-                <div class="content max-w-3xl">
-                    <div class="project-number">02</div>
-                    <h2 class="project-title text-blue-900">C-K Git</h2>
-                    <p class="project-description">
-                        A collaborative design reasoning system inspired by C-K Theory and Git workflows, supporting structured AI-assisted ideation.
-                    </p>
-                    <div class="project-tags">
-                        <span class="tag border-blue-900">Collaborative AI</span>
-                        <span class="tag border-blue-900">C-K Design Theory</span>
-                        <span class="tag border-blue-900">LLMs</span>
-                    </div>
-                    <div class="scroll-hints-container mt-8 flex justify-between w-full items-center">
-                        <button class="scroll-hint" onclick="navigateToColumn(1)">← Previous</button>
-                        <button class="scroll-hint" onclick="scrollToSection(2,1)">Details ↓</button>
-                        <button class="scroll-hint" onclick="navigateToColumn(3)">Next →</button>
-                    </div>
-                </div>
-            </section>
-
-            <section class="panel bg-gray-100">
-                <div class="content">
-                    <h3 class="text-4xl mb-4">Project Details</h3>
-                    <p class="bio-text">
-                        This project explores how artificial intelligence can support collaborative design within functions and areas of engineering and design during the early stages of innovation. While large language models (LLMs) are effective at generating ideas, most current AI tools function as isolated conversational systems that do not preserve reasoning, connect ideas to supporting knowledge, or support collaboration between multiple contributors.
-                    </p>
-                    <p class="bio-text">
-                        To address this gap, we developed C-K Git, a collaborative design reasoning system inspired by Concept–Knowledge (C-K) Theory and version-control workflows such as Git. C-K Theory distinguishes between concept space, which contains emerging and uncertain ideas, and knowledge space, which contains validated information and assumptions. Design progresses through interaction between these spaces, allowing ideas to evolve through reasoning and refinement.
-                    </p>
-                    <p class="bio-text">
-                        C-K Git provides a structured workspace where users can explore concepts, connect them to knowledge, and collaborate through branching and merging workflows. Designers can independently develop ideas and later merge their work into a shared concept space while preserving ownership and reasoning history. Rather than replacing human creativity, the system supports transparent collaboration by making design reasoning visible and traceable within product, user experience, or engineering design.
-                    </p>
-                    <iframe
-                        src="/public/assets/contents/C-K_Git_Report.pdf"
-                        width="100%"
-                        height="800px">
-                    </iframe>
-                    <div class="scroll-hints-container mt-8 flex justify-between w-full items-center">
-                        <button class="scroll-hint" onclick="scrollToTop(2)">Back ↑</button>
-                    </div>
-                </div>
-            </section>
-        </div>
-
-        <!-- Column 4: Project 3 - MuNo-LM -->
-        <div class="vertical-column" data-column="3">
-            <section class="panel text-white bg-gray-900">
-                <div class="content">
-                    <div>
-                        <div class="project-number">03</div>
-                    </div>
-                    <h2 class="project-title">MuNo-LM</h2>
-                    <p class="project-description">
-                        Music Notation for Language Models — a time-grounded representation enabling fine-grained music understanding in audio-language models.
-                    </p>
-                    <div class="project-tags">
-                        <span class="tag">Music Understanding</span>
-                        <span class="tag">Audio-Language Models</span>
-                        <span class="tag">Caption Generation</span>
-                    </div>
-                    <div class="scroll-hints-container mt-8 flex justify-between w-full items-center">
-                        <button class="scroll-hint" onclick="navigateToColumn(2)">← Previous</button>
-                        <button class="scroll-hint" onclick="scrollToSection(3,1)">Details ↓</button>
-                        <button class="scroll-hint" onclick="navigateToColumn(4)">Next →</button>
-                    </div>
-                </div>
-            </section>
-
-            <section class="panel text-white bg-gray-800">
-                <div class="content">
-                    <h3 class="text-4xl mb-4">Project Details</h3>
-                    <p class="bio-text text-white">
-                        Music understanding from audio requires jointly perceiving <em>what</em> is played (content) and <em>how</em> it is played (performance), grounded in time. Yet existing audio-language model training pipelines rely on LLM-synthesized captions and metadata that are typically coarse and weakly time-grounded, limiting their ability to capture fine-grained musical content and performance detail.
-                    </p>
-                    <p class="bio-text text-white">
-                        We introduce <strong>MuNo-LM</strong> (Music Notation for Language Models), a text-based representation that unifies score-level information — harmony, phrasing, dynamics, voicing, articulation — with time-aligned audio-perceptual features, in a format that is both expressive and directly comprehensible by LLMs. Building on this representation, we propose an automatic caption generation pipeline that translates aligned score-performance data into time-grounded and musically informed auditory analyses and question-answer pairs. We assess output quality and temporal grounding via inter-annotator agreement, confirming that MuNo-LM QA pairs constitute reliable supervision, paving the way to fine-grained music understanding in ALMs.
-                    </p>
-
-                    <div class="mt-4">
-                        <a href="https://milan477.github.io/MuNo-LM-demo" target="_blank" class="inline-block px-4 py-2 border border-white text-white text-sm rounded-full hover:bg-white hover:text-gray-900 transition-colors no-underline">Demo →</a>
-                    </div>
-                    <div class="scroll-hints-container mt-8">
-                        <button class="scroll-hint" onclick="scrollToTop(3)">Back ↑</button>
-                    </div>
-                </div>
-
-            </section>
-        </div>
-
-        <!-- Column 5: Project 4 - PitchBench -->
-        <div class="vertical-column" data-column="4">
-            <section class="panel bg-gray-200 text-black">
-                <div class="content max-w-3xl">
-                    <div class="project-number">04</div>
-                    <h2 class="project-title text-blue-900">PitchBench</h2>
-                    <p class="project-description">
-                        A systematic evaluation suite measuring pitch hearing in audio-language models across instruments, acoustic conditions, and response formats.
-                    </p>
-                    <div class="project-tags">
-                        <span class="tag border-blue-900">ALM Evaluation</span>
-                        <span class="tag border-blue-900">Pitch Perception</span>
-                        <span class="tag border-blue-900">Benchmarking</span>
-                    </div>
-                    <div class="scroll-hints-container mt-8 flex justify-between w-full items-center">
-                        <button class="scroll-hint" onclick="navigateToColumn(3)">← Previous</button>
-                        <button class="scroll-hint" onclick="scrollToSection(4,1)">Details ↓</button>
-                        <button class="scroll-hint" onclick="navigateToColumn(5)">Next →</button>
-                    </div>
-                </div>
-            </section>
-
-            <section class="panel bg-gray-100">
-                <div class="content">
-                    <h3 class="text-4xl mb-4">Project Details</h3>
-                    <p class="bio-text">
-                        Audio-language models (ALMs) are increasingly used in real-world applications that require understanding music — from music tutoring and transcription to captioning, recommendation systems, and music production. This makes reliable musical perception a critical prerequisite: if a model cannot accurately hear the structure of sound, it cannot be trusted to reason about, teach, transcribe, or act on audio in the real world. Yet existing benchmarks rarely assess one of the most fundamental musical abilities underlying such perception: pitch hearing.
-                    </p>
-                    <p class="bio-text">
-                        We introduce <strong>PitchBench</strong>, an evaluation suite that systematically measures pitch hearing in ALMs. PitchBench comprises 28 experiments spanning absolute and relative pitch perception within sequences and chords, while varying loudness, note duration, sound source, time stretching, background noise, and other acoustic conditions. Tasks range from identifying individual pitches in isolation to tracking a melodic line within a four-part musical texture.
-                    </p>
-                    <p class="bio-text">
-                        Evaluating frontier ALMs, we find that pitch hearing remains highly unreliable: models perform consistently poorly across settings, with accuracy varying sharply by sound source, note duration, and notation format. Current ALMs do not yet possess stable pitch perception, even for controlled synthetic and instrumental stimuli. Alongside the benchmark, we release PitchBench as a Python package containing the evaluation data and data generation tools to support future work on pitch-aware audio-language modeling.
-                    </p>
-                    <img src="/public/assets/contents/confusion_matrix.png" width="100%" class="mt-4 mb-2"></img>
-                    <p class="bio-text">
-                        The confusion matrix above illustrates the performance of frontier ALMs on pitch perception (experiment A1). In this controlled setting (unprocessed 5-second pitch only at the beginning of the audio clip), some models perform well (90% accuracy), whereas others struggle to consistently identify pitches.
-                    </p>
-                    <div class="scroll-hints-container mt-8">
-                        <button class="scroll-hint" onclick="scrollToTop(4)">Back ↑</button>
-                    </div>
-                </div>
-            </section>
-        </div>
-
-        <!-- Column 6: Project 5 - InstructFX2FX -->
-        <div class="vertical-column" data-column="5">
-            <section class="panel text-white bg-gray-900">
-                <div class="content">
-                    <div>
-                        <div class="project-number">05</div>
-                    </div>
-                    <h2 class="project-title">InstructFX2FX</h2>
-                    <p class="project-description">
-                        Multi-turn, text-guided audio effect refinement via a hybrid LLM and CLAP-optimization architecture.
-                    </p>
-                    <div class="project-tags">
-                        <span class="tag">Audio Effects</span>
-                        <span class="tag">CLAP Optimization</span>
-                        <span class="tag">Music Production</span>
-                    </div>
-                    <div class="scroll-hints-container mt-8 flex justify-between w-full items-center">
-                        <button class="scroll-hint" onclick="navigateToColumn(4)">← Previous</button>
-                        <button class="scroll-hint" onclick="scrollToSection(5,1)">Details ↓</button>
-                        <button class="scroll-hint" onclick="navigateToColumn(6)">Next →</button>
-                    </div>
-                </div>
-            </section>
-
-            <section class="panel text-white bg-gray-800">
-                <div class="content">
-                    <h3 class="text-4xl mb-4">Project Details</h3>
-                    <p class="bio-text text-white">
-                        Existing text-to-preset systems are largely single-shot: given one textual descriptor, they generate one preset. Real audio engineering, however, is sequential — engineers iteratively refine an existing effect chain through successive instructions. This setting raises a stateful problem: given the current parameter state and a sequence of instructions, how can a system update the sound while preserving and refining the current state?
-                    </p>
-                    <p class="bio-text text-white">
-                        <em>InstructFX2FX</em> addresses this problem with a hybrid language-model and CLAP-optimization architecture. An LLM acts as a high-level planner, selecting effects, ordering the signal chain, and proposing initial parameters — motivated by recent evidence that LLM-based initialization outperforms CLAP optimization from random initialization. CLAP-guided optimization then refines those parameters perceptually, providing a more stable and reproducible refinement mechanism than LLM-only reprompting.
-                    </p>
-                    <div class="scroll-hints-container mt-8">
-                        <button class="scroll-hint" onclick="scrollToTop(5)">Back ↑</button>
-                    </div>
-                </div>
-            </section>
-        </div>
-
-        <!-- Column 7: Project 6 - epic-MAIL -->
-        <div class="vertical-column" data-column="6">
-            <section class="panel bg-gray-200 text-black">
-
-                <div class="content max-w-3xl">
-                    <div class="project-number">06</div>
-                    <h2 class="project-title text-blue-900">epic-MAIL</h2>
-                    <p class="project-description">
-                        An email client with AI-powered features to help users manage and respond to their emails more efficiently.
-                    </p>
-                    <div class="project-tags">
-                        <span class="tag border-blue-900">React</span>
-                        <span class="tag border-blue-900">JavaScript</span>
-                        <span class="tag border-blue-900">AI</span>
-                    </div>
-                    <div class="scroll-hints-container mt-8 flex justify-between w-full items-center">
-                        <button class="scroll-hint" onclick="navigateToColumn(5)">← Previous</button>
-                        <button class="scroll-hint" onclick="scrollToSection(6,1)">Details ↓</button>
-                        <button class="scroll-hint" onclick="navigateToColumn(7)">Next →</button>
-                    </div>
-                </div>
-            </section>
-
-            <section class="panel bg-gray-100">
-                <div class="content">
-                    <h3 class="text-4xl mb-4">Project Details</h3>
-                    <p class="bio-text">
-                        Existing email clients are often inefficient and just don't have the features users (I) want. This project aims to turn exasperating-MAIL into epic-MAIL (the real reason why they put an 'e' in front of 'mail').
-                    </p>
-
-                    <img src="/public/assets/contents/EPICMAIL_project_screenshot.png" width="100%"></img>
-
-                    <div class="scroll-hints-container mt-8">
-                        <button class="scroll-hint" onclick="scrollToTop(6)">Back ↑</button>
-                    </div>
-                </div>
-            </section>
-        </div>
-
-        <!-- Column 8: Project 7 - Works -->
-        <div class="vertical-column" data-column="7">
-            <section class="panel bg-gray-100 text-black">
-
-                <div class="content max-w-3xl">
-                    <div class="project-number text-blue-900">07</div>
-                    <h2 class="project-title">Works</h2>
-                    <p class="project-description">
-                        I sometimes improvise or compose. I have also collaborated with talented artists doing cool stuff.
-                    </p>
-                    <div class="project-tags">
-                        <span class="tag text-blue-900">Classical Music</span>
-                        <span class="tag text-blue-900">Modular Synthesizers</span>
-                        <span class="tag text-blue-900">Experimental Music</span>
-                    </div>
-                    <div class="scroll-hints-container mt-8 flex justify-between w-full items-center">
-                        <button class="scroll-hint" onclick="navigateToColumn(6)">← Previous</button>
-                        <button class="scroll-hint" onclick="scrollToSection(7,1)">Listen & Watch ↓</button>
-                        <button class="scroll-hint" onclick="navigateToColumn(8)">Next →</button>
-                    </div>
-                </div>
-            </section>
-
-            <section class="panel bg-gray-200">
-                <div class="content">
-                    <h3 class="text-4xl mb-4">Works</h3>
-                    <p class="bio-text">
-                        This piece was created using sounds from a modular synthesizer and was edited in Logic Pro X.
-                    </p>
-
-                    <div class="w-full max-w-xl mx-auto p-4 border border-gray-300 rounded-lg bg-white/70 backdrop-blur">
-                    <audio controls class="w-full">
-                        <source src="/public/assets/audio/MilanLiessensDujardin_synth.wav" type="audio/wav">
-                        Your browser does not support the audio element.
-                    </audio>
-                    </div>
-                    <br />
-                    <p class="bio-text">
-                        A peek inside the donkey's mind.
-                    </p>
-
-                    <div class="w-full max-w-xl mx-auto p-4 border border-gray-300 rounded-lg bg-white/70 backdrop-blur mb-10">
-                    <audio controls class="w-full">
-                        <source src="/public/assets/audio/MilanLiessensDujardin_carte_blanche.mp3" type="audio/mpeg">
-                        Your browser does not support the audio element.
-                    </audio>
-                    </div>
-
-                    <p class="bio-text">
-                        An improvisation in 7/8.
-                    </p>
-
-                    <div class="w-full max-w-xl mx-auto p-4 border border-gray-300 rounded-lg bg-white/70 backdrop-blur mb-10">
-                    <audio controls class="w-full">
-                        <source src="/public/assets/audio/MilanLiessensDujardin_expressionistic_prelude.m4a" type="audio/mp4">
-                        Your browser does not support the audio element.
-                    </audio>
-                    </div>
-
-
-                    <br />
-                    <p class="bio-text">
-                        'Stripped' was created in collaboration with Zita de Aguirre y Otegui, Illa De Preter, and Adrián Henríquez.
-                    </p>
-
-                    <div class="aspect-video max-w-xl mx-auto">
-                    <iframe width="100%" height="100%" src="https://www.youtube.com/embed/Qst7jj5yofo?si=IJl5hEVzbpdoG4rL" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                    </div>
-
-                    <div class="scroll-hints-container mt-8">
-                        <button class="scroll-hint" onclick="scrollToTop(7)">Back ↑</button>
-                    </div>
-                </div>
-            </section>
-        </div>
-
-        <!-- Column 9: Project 8 - Seeing Through the Chaos -->
-        <div class="vertical-column" data-column="8">
-            <section class="panel text-white bg-gray-900">
-                <div class="content">
-                    <div>
-                        <div class="project-number">08</div>
-                    </div>
-                    <h2 class="project-title">Seeing Through the Chaos</h2>
-                    <p class="project-description">
-                        Automated Disaster Assessment from Satellite Imagery.
-                    </p>
-                    <div class="project-tags">
-                        <span class="tag">Computer Vision</span>
-                        <span class="tag">CNNs</span>
-                        <span class="tag">DINOv2</span>
-                    </div>
-                    <div class="scroll-hints-container mt-8 flex justify-between w-full items-center">
-                        <button class="scroll-hint" onclick="navigateToColumn(7)">← Previous</button>
-                        <button class="scroll-hint" onclick="scrollToSection(8,1)">Details ↓</button>
-                        <button class="scroll-hint" onclick="navigateToColumn(9)">Next →</button>
-                    </div>
-                </div>
-            </section>
-
-            <section class="panel text-white bg-gray-800">
-                <div class="content">
-                    <h3 class="text-4xl mb-4">Project Details</h3>
-                    <p class="bio-text text-white">
-                        We present a systematic analytical framework for classifying disaster types and assessing damage levels
-                        in satellite imagery under severe data scarcity and extreme class imbalance. Our methodology extracts signal
-                        from noisy, limited data through three interdependent components: (1) structure-preserving artifact correction
-                        (mirroring-based occlusion handling) that outperforms naive imputation and generalizes across model families;
-                        (2) exploratory data analysis guiding feature engineering to identify generalizable discriminative features based
-                        on color distributions and structural patterns; and (3) task-aware model selection comparing classical and deep
-                        learning approaches under realistic constraints.
-                    </p>
-
-                    <iframe
-                        src="/public/assets/contents/DS_project_report.pdf"
-                        width="100%"
-                        height="800px">
-                    </iframe>
-
-                    <div class="scroll-hints-container mt-8">
-                        <button class="scroll-hint" onclick="scrollToTop(8)">Back ↑</button>
-                    </div>
-                </div>
-
-            </section>
-        </div>
-
-        <!-- Column 10: Project 9 - SUMIRE -->
-        <div class="vertical-column" data-column="9">
-            <section class="panel bg-gray-200 text-black">
-
-                <div class="content max-w-3xl">
-                    <div class="project-number">09</div>
-                    <h2 class="project-title text-blue-900">SUMIRE</h2>
-                    <p class="project-description">
-                        A low-friction, intelligent meal and workout tracking application.
-                    </p>
-                    <div class="project-tags">
-                        <span class="tag border-blue-900">Customer Discovery</span>
-                        <span class="tag border-blue-900">Product Management</span>
-                        <span class="tag border-blue-900">User Testing</span>
-                    </div>
-                    <div class="scroll-hints-container mt-8 flex justify-between w-full items-center">
-                        <button class="scroll-hint" onclick="navigateToColumn(8)">← Previous</button>
-                        <button class="scroll-hint" onclick="scrollToSection(9,1)">Details ↓</button>
-                    </div>
-                </div>
-            </section>
-
-            <section class="panel bg-gray-100">
-                <div class="content">
-                    <h3 class="text-4xl mb-4">Project Details</h3>
-                    <p class="bio-text">
-                        Vibe-coded a prototype for SUMIRE, an app designed to simplify meal and workout tracking using AI.
-                        Conducted 4 extensive customer discovery interviews to validate/reject my hypotheses and refine the product concept and features.
-                        My prototype is under construction <a href="https://sumire.bolt.host">here</a>. Feel free to try it out: just upload a photo of your meal. SUMIRE means violet in Japanese.
-                    </p>
-
-
-                    <div class="flex justify-center mt-4 mb-4">
-                        <img src="/public/assets/contents/SUMIRE_project_screenshot.png" class="w-1/2 mx-auto block"></img>
-                    </div>
-                    <p class="bio-text">
-                        Key findings from interviews and the product discovery process include
-                        (1) Looking for a problem to the solution limits thinking outside the box.
-                        (2) Product discovery is about finding commonalities in what people image the product to be.
-                        (3) Fast logging attracts users; accuracy and comprehensiveness retain users.
-                        (4) Fundamentally, users want to establish a lasting, healthy relationship with food and exercise.
-                    </p>
-
-                    <div class="scroll-hints-container mt-8">
-                        <button class="scroll-hint" onclick="scrollToTop(9)">Back ↑</button>
-                    </div>
-                </div>
-            </section>
-        </div>
-
-
+    <div id="veil"></div>
+    <div id="box" role="dialog" aria-label="Details">
+        <button id="close" type="button" aria-label="Close">✕</button>
+        <div class="scroll" id="content"></div>
     </div>
 
+    <script src="public/assets/js/projects.js?v=99060710"></script>
+    <script src="public/assets/js/config.js"></script>
+    <script src="public/assets/js/cached-answers.js?v=99060710"></script>
     <script>
-        const horizontalContainer = document.getElementById('horizontalContainer');
-        const columns = document.querySelectorAll('.vertical-column');
+    (() => {
+        const $ = (s) => document.querySelector(s);
+        const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
+        const esc = (s) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 
-        const scrollOptions = {
-            behavior: 'smooth',
-            block: 'start',
-            inline: 'start'
+
+        /* =========================================================
+           Knowledge base: everything on the site, cut into chunks
+           ========================================================= */
+        const parse = (html) => new DOMParser().parseFromString(`<body>${html}</body>`, 'text/html').body;
+        const clean = (t) => t.replace(/\s+/g, ' ').trim();
+        const sentences = (t) => {
+            const out = []; let cur = '';
+            clean(t).split(' ').forEach((w) => {
+                cur += (cur ? ' ' : '') + w;
+                // sentence ends at . ! ? unless it is an abbreviation like "M.Eng." or a lone initial
+                if (/[.!?]["”)]?$/.test(w) && !/^(?:[A-Za-z]{1,4}\.){2,}$/.test(w) && !/^[A-Z]\.$/.test(w) && !/^(?:e\.g|i\.e|vs|etc|Dr|Mr|Ms)\.$/i.test(w)) { out.push(cur); cur = ''; }
+            });
+            if (cur) out.push(cur);
+            return out;
         };
 
-        function scrollToSection(columnIndex, position) {
-            columns[columnIndex].scrollTo({ top: position * window.innerHeight, behavior: 'smooth' });
-        }
+        const sources = {};   // id -> { id, kind, title, image, tags, project }
+        const chunks = [];    // { src, text, tags, idx }
 
-        function scrollToTop(columnIndex) {
-            columns[columnIndex].scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        function scrollToProjects() {
-            horizontalContainer.scrollTo({ left: window.innerWidth, behavior: 'smooth' });
-        }
-
-        function navigateToColumn(columnIndex) {
-            horizontalContainer.scrollTo({
-                left: columnIndex * window.innerWidth,
-                behavior: 'smooth'
+        const entries = [
+            ...window.PROJECTS.map((p, i) => ({ p, id: 'p' + i, kind: 'Project', extra: '' })),
+            ...(window.EXPLORATIONS || []).map((p, i) => ({ p, id: 'exploration' + i, kind: 'Exploration', extra: ' exploration prototype' })),
+            ...(window.ADDITIONAL_WORK || []).map((p, i) => ({ p, id: 'work' + i, kind: 'Other work', extra: ' music earlier work' })),
+            ...(window.POSTS || []).map((p, i) => ({ p, id: 'post' + i, kind: 'Post', extra: ' post blog article thoughts wrote written' }))
+        ];
+        entries.forEach(({ p, id, kind, extra }) => {
+            sources[id] = { id, kind, title: p.title, image: p.image, tags: p.tags, project: p };
+            chunks.push({ src: id, text: p.desc, tags: p.tags.join(' ') + extra });
+            let buf = '';
+            p.body.forEach((h) => {
+                const el = parse(h).firstElementChild; if (!el) return;
+                if (!['P', 'UL', 'OL', 'A'].includes(el.tagName)) return;
+                el.querySelectorAll('a[href^="http"]').forEach((l) => l.append(` (${l.getAttribute('href')})`));
+                if (el.tagName === 'A' && /^http/.test(el.getAttribute('href') || '')) el.append(` (${el.getAttribute('href')})`);
+                const t = clean(el.textContent); if (!t) return;
+                buf = buf ? buf + ' ' + t : t;
+                if (buf.length >= 140) { chunks.push({ src: id, text: buf, tags: '' }); buf = ''; }
             });
-        }
-
-        // Lock horizontal scrolling when any column is scrolled down
-        columns.forEach((column, index) => {
-            column.addEventListener('scroll', () => {
-                if (column.scrollTop > 10) {
-                    // User has scrolled down in this column
-                    // Disable horizontal scrolling
-                    horizontalContainer.style.overflowX = 'hidden';
-
-                    // Store which column is active
-                    horizontalContainer.dataset.activeColumn = index;
-                } else {
-                    // User is at the top of this column
-                    // Check if we should re-enable horizontal scrolling
-                    const anyColumnScrolled = Array.from(columns).some(col => col.scrollTop > 10);
-                    if (!anyColumnScrolled) {
-                        horizontalContainer.style.overflowX = 'auto';
-                        delete horizontalContainer.dataset.activeColumn;
-                    }
-                }
-            });
+            if (buf) chunks.push({ src: id, text: buf, tags: '' });
         });
 
-        // When user tries to scroll horizontally while locked, scroll back to active column
-        horizontalContainer.addEventListener('scroll', () => {
-            if (horizontalContainer.dataset.activeColumn !== undefined) {
-                const activeIndex = parseInt(horizontalContainer.dataset.activeColumn);
-                const targetScrollLeft = activeIndex * window.innerWidth;
+        const ab = parse(window.ABOUT.bio), eb = parse(window.ABOUT.edu);
+        sources.about = { id: 'about', kind: 'About', title: 'About me', image: null, tags: [], about: true };
+        chunks.push({ src: 'about', text: 'I am Milan Liessens Dujardin, an AI researcher and musician.', tags: 'who bio about me yourself' });
+        const bioS = sentences(ab.textContent);
+        for (let i = 0; i < bioS.length; i += 2) chunks.push({ src: 'about', text: bioS.slice(i, i + 2).join(' '), tags: '' });
+        eb.querySelectorAll('.education-item').forEach((it, i) => {
+            const g = (s) => clean(it.querySelector(s)?.textContent || '');
+            const id = 'edu' + i;
+            const deg = g('.education-degree');
+            sources[id] = { id, kind: 'Education', title: deg, image: null, tags: [], about: true };
+            const uni = g('.education-university'), loc = g('.education-location'), time = g('.education-timespan'), desc = g('.education-description');
+            chunks.push({ src: id, text: [deg, uni, loc, time, desc].filter(Boolean).join('. ').replace(/\.+(\s|$)/g, '.$1'),
+                say: `${deg} at ${uni} (${time.replace(/\s*–\s*/, '–')})${desc ? '. ' + desc : '.'}`.replace(/\.+$/, '.'),
+                tags: 'education study studied degree university school graduate' });
+        });
+        sources.contact = { id: 'contact', kind: 'Contact', title: 'Get in touch', image: null, tags: [], contact: true };
+        chunks.push({ src: 'contact', text: 'You can reach me by email at milanliessensdujardin@gmail.com or on LinkedIn at linkedin.com/in/milan-liessens-dujardin. My code lives on GitHub (milan477).', tags: 'contact email mail reach linkedin github hire message' });
 
-                if (Math.abs(horizontalContainer.scrollLeft - targetScrollLeft) > 10) {
-                    horizontalContainer.scrollLeft = targetScrollLeft;
-                }
+        /* ---------- tokenising / BM25 ---------- */
+        const STOP = new Set('milan liessens dujardin a an and are as at be been but by can could did do does for from had has have how i if in into is it its me my of on or our so tell than that the their them then there these they this to us was we were what when where which who whom why will with would you your about know please also any some more most very just like get got give gave'.split(' '));
+        const stem = (w) => {
+            w = w.toLowerCase().replace(/'s$/, '');
+            if (w.length > 5 && w.endsWith('ies')) return w.slice(0, -3) + 'y';
+            if (w.length > 5 && w.endsWith('ing')) return w.slice(0, -3);
+            if (w.length > 4 && w.endsWith('ed')) return w.slice(0, -2);
+            if (w.length > 4 && w.endsWith('es')) return w.slice(0, -2);
+            if (w.length > 3 && w.endsWith('s') && !w.endsWith('ss')) return w.slice(0, -1);
+            return w;
+        };
+        const toks = (t) => (t.toLowerCase().match(/[a-z0-9À-ɏ]+(?:'s)?/g) || []).filter((w) => !STOP.has(w)).map(stem);
+
+        const SYN = {
+            education: 'study degree university school graduate student bachelor master berkeley antwerp conservatory',
+            study: 'education degree university school', studied: 'education degree university', school: 'education university degree', degree: 'education university',
+            college: 'education university', university: 'education degree', graduate: 'education degree',
+            contact: 'email linkedin github mail reach', email: 'contact mail', reach: 'contact email linkedin', hire: 'contact email', linkedin: 'contact',
+            post: 'blog article thoughts wrote', blog: 'post article', wrote: 'post blog article', write: 'post blog article', article: 'post blog', thought: 'post reflection', opinion: 'post reflection thoughts', read: 'post article',
+            music: 'musician audio composition improvise synthesizer works classical', musician: 'music piano', song: 'music works listen', listen: 'music works audio', play: 'music improvise',
+            hobby: 'music works improvise compose', compose: 'music works', piano: 'music classical',
+            research: 'benchmark evaluation model paper', paper: 'research benchmark', publication: 'research benchmark',
+            work: 'project research experience engineer commercialization', job: 'experience engineer work', career: 'experience engineer', experience: 'work engineer lawrence',
+            ai: 'machine learning model llm', ml: 'machine learning model', llm: 'language model', model: 'language llm alm',
+            who: 'about ai researcher musician background', yourself: 'about ai researcher musician', bio: 'about ai researcher musician', background: 'about education experience',
+            live: 'berkeley antwerp location', where: 'berkeley antwerp location', current: 'currently berkeley', now: 'currently berkeley',
+            app: 'application product sumire epic-mail', product: 'sumire app', design: 'c-k design ideation', startup: 'commercialization product',
+            code: 'github', demo: 'demo link', skill: 'machine learning python react', tool: 'react python clap'
+        };
+        const synTerms = (qt, raw) => { const out = new Set(); [...qt, ...raw].forEach((t) => (SYN[t] || '').split(' ').filter(Boolean).forEach((s) => { const k = stem(s); if (!qt.includes(k)) out.add(k); })); return [...out]; };
+
+        const tfOf = (ch) => {
+            const m = new Map(), add = (list, w) => list.forEach((t) => m.set(t, (m.get(t) || 0) + w));
+            add(toks(sources[ch.src].title), 3); add(toks(ch.tags), 2); add(toks(ch.text), 1);
+            return m;
+        };
+        chunks.forEach((c, i) => { c.i = i; c.tf = tfOf(c); c.len = [...c.tf.values()].reduce((a, b) => a + b, 0); });
+        const N = chunks.length, avg = chunks.reduce((a, c) => a + c.len, 0) / N;
+        const df = new Map(); chunks.forEach((c) => c.tf.forEach((_, t) => df.set(t, (df.get(t) || 0) + 1)));
+        const idf = (t) => Math.log(1 + (N - (df.get(t) || 0) + .5) / ((df.get(t) || 0) + .5));
+        const norm = (s) => s.toLowerCase().replace(/[^a-z0-9]/g, '');
+
+        function retrieve(q) {
+            const qt = [...new Set(toks(q))], raw = (q.toLowerCase().match(/[a-z0-9]+/g) || []), ex = synTerms(qt, raw), qn = norm(q);
+            // projects named in the question
+            const named = Object.values(sources).filter((s) => s.project && (qn.includes(norm(s.title)) || (norm(s.title).length > 5 && qn.includes(norm(s.title).slice(0, 5)) && qt.some((t) => norm(s.title).startsWith(t.slice(0, 5))))));
+            const scored = chunks.map((c) => {
+                let sc = 0;
+                const f = (t, w) => { const tf = c.tf.get(t); if (tf) sc += w * idf(t) * (tf * 2.2) / (tf + 1.2 * (.4 + .6 * c.len / avg)); };
+                qt.forEach((t) => f(t, 1)); ex.forEach((t) => f(t, .55));
+                if (named.some((s) => s.id === c.src)) sc += 100 - c.i * .001;
+                return { c, sc };
+            }).filter((x) => x.sc > 0).sort((a, b) => b.sc - a.sc);
+            return { qt, ex, named, scored };
+        }
+
+        /* ---------- UI ---------- */
+        const stage = $('#stage'), ctxWrap = $('#contextWrap'), ctx = $('#context'), ans = $('#answer'), input = $('#q'), field = $('#field');
+        // a pool of suggestions; five random ones show at a time, and asked ones drop out
+        const POOL = ['What are you working on?', 'Tell me about PitchBench', 'What did you study?', 'Do you make music?', 'How can I contact you?',
+            'What is MuNo-SP?', 'What is MusicTwins?', 'Tell me about MuSP-Bench', 'What is InstructFX2FX?', 'Tell me about C-K Git', 'Can AI read music?',
+            'What did you do at Berkeley Lab?', 'How do you generate musical supervision?', 'How do you evaluate multimodal models?', 'Which projects use language models?', 'Tell me about yourself', 'What is Storm?', 'What is epic-MAIL?', 'What is SUMIRE?'];
+        window.__mldPool = POOL;
+        const chipsEl = $('#chips');
+        function renderChips() {
+            const asked = new Set(turns.map((t) => cacheKey(t.q)));
+            const pool = POOL.filter((q) => !asked.has(cacheKey(q)));
+            for (let i = pool.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [pool[i], pool[j]] = [pool[j], pool[i]]; }
+            chipsEl.innerHTML = pool.slice(0, 5).map((q, n) => `<button type="button" style="--n:${n}">${esc(q)}</button>`).join('');
+        }
+        chipsEl.addEventListener('click', (e) => { const b = e.target.closest('button'); if (b) ask(b.textContent); });
+        input.addEventListener('focus', () => field.style.setProperty('--charge', .5));
+        input.addEventListener('blur', () => field.style.setProperty('--charge', 0));
+        input.addEventListener('input', () => field.style.setProperty('--charge', input.value ? .9 : .5));
+
+        const hl = (text, stems) => esc(text).replace(/[A-Za-z0-9À-ɏ]+/g, (w) => stems.has(stem(w)) && !STOP.has(w.toLowerCase()) ? `<mark>${w}</mark>` : w);
+        function snippet(c, stems) {
+            if (c.say) return c.say;
+            const ss = sentences(c.text);
+            if (ss.length <= 2) return ss.join(' ');
+            const sc = ss.map((s, i) => ({ s, i, n: toks(s).filter((t) => stems.has(t)).length }));
+            const best = sc.slice().sort((a, b) => b.n - a.n || a.i - b.i).slice(0, 2).sort((a, b) => a.i - b.i);
+            return best.map((b) => b.s).join(' ');
+        }
+
+        const groupBySource = (picks) => {
+            const m = new Map();
+            picks.forEach((x) => { if (!m.has(x.c.src)) m.set(x.c.src, { src: x.c.src, chunks: [] }); m.get(x.c.src).chunks.push(x.c); });
+            return [...m.values()];
+        };
+        /* ---------- answer cache: repeated questions (e.g. the suggestions) never hit the API twice ---------- */
+        // version changes whenever the site's text changes, which invalidates every stored answer
+        const kbVersion = (() => { let h = 5381; for (const ch of JSON.stringify([window.PROJECTS, window.EXPLORATIONS || [], window.ADDITIONAL_WORK || [], window.ABOUT, window.POSTS || [], 'resume-prompt-v3'])) h = ((h << 5) + h + ch.charCodeAt(0)) | 0; return String(h >>> 0); })();
+        const cacheKey = (q) => q.toLowerCase().replace(/[^a-z0-9À-ɏ ]+/g, ' ').replace(/\s+/g, ' ').trim();
+        const LS = 'mld-answers';
+        const readLocal = () => { try { const o = JSON.parse(localStorage.getItem(LS) || '{}'); return o.v === kbVersion ? o.a || {} : {}; } catch { return {}; } };
+        const asEntry = (e) => (!e ? null : typeof e === 'string' ? { t: e, k: [] } : e);
+        const cacheGet = (k) => {
+            const sta = window.CACHED_ANSWERS;                      // pre-generated answers shipped with the site
+            return asEntry(readLocal()[k]) || asEntry(sta && sta.v === kbVersion && sta.a[k]);
+        };
+        const cachePut = (k, entry) => {
+            try {
+                const a = readLocal(); a[k] = entry;
+                const keys = Object.keys(a); if (keys.length > 60) delete a[keys[0]];
+                localStorage.setItem(LS, JSON.stringify({ v: kbVersion, a }));
+            } catch {}
+        };
+        window.__mldCache = { kbVersion, cacheKey };               // used by the pre-generation script
+
+        /* ---------- making emails / links in answers clickable ---------- */
+        const linkWord = (w, prev = '') => {
+            const m = /^(.*?)([.,;:!?)\]]*)$/.exec(w), core = m[1], tail = m[2];
+            let href = '';
+            if (/^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i.test(core)) href = 'mailto:' + core;
+            else if (/^https?:\/\/\S+$/i.test(core)) href = core;
+            else if (/^(?:www\.)?[a-z0-9-]+(?:\.[a-z0-9-]+)*\.(?:com|io|org|net|be|edu|github\.io)(?:\/\S*)?$/i.test(core)) href = 'https://' + core;
+            else if (/^milan477$/i.test(core)) href = 'https://github.com/milan477';
+            return href ? `<a href="${esc(href)}"${href.startsWith('mailto:') ? '' : ' target="_blank" rel="noopener"'}>${esc(core)}</a>${esc(tail)}` : esc(w);
+        };
+        const wordsHTML = (text, animate = true) => {
+            const ws = text.split(' ');
+            return ws.map((w, i) => `<span style="--w:${animate ? i : 0}">${linkWord(w, ws[i - 1] || '')}</span>`).join(' ');
+        };
+
+        /* ---------- conversation ---------- */
+        const turns = [];
+        let focus = -1;
+        const MAXTURNS = 12;
+
+        function makeTurn(q) {
+            const el = document.createElement('div');
+            el.className = 'turn hold';
+            el.innerHTML = `<button type="button" class="q" title="Show this exchange"></button>
+                <div class="fold a"><div class="fi"><div class="text wait">…</div></div></div>
+                <div class="fold k"><div class="fi"><div class="sum"></div></div></div>`;
+            el.querySelector('.q').textContent = q;
+            return el;
+        }
+        /* ---------- folding / opening turns: the layout changes at once, then the motion is replayed (FLIP) with the Web Animations API ---------- */
+        const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const TIME = { out: 420, glide: 700, in: 520 };   // ms
+        let active = [];
+        const run = (el, kf, opt) => { const a = el.animate(kf, opt); active.push(a); return a; };
+        function cancelActive() {
+            active.forEach((a) => { try { a.cancel(); } catch {} }); active = [];
+        }
+        let seq = 0;
+        // when the open answer folds away its title would sink; bottom padding holds it at the same height until newer text takes the space
+        let keep = null;
+        const contentH = () => { const a = turns[0], b = turns[turns.length - 1]; return a ? b.el.offsetTop + b.el.offsetHeight - a.el.offsetTop : 0; };
+        const startKeep = (S) => { if (S > 1) { ans.style.paddingBottom = S + 'px'; keep = { S, base: contentH() }; } else clearKeep(); };
+        const settleKeep = () => { if (!keep) return; const pad = Math.max(0, keep.S - (contentH() - keep.base)); ans.style.paddingBottom = pad ? pad + 'px' : ''; if (!pad) keep = null; };
+        const clearKeep = () => { keep = null; ans.style.paddingBottom = ''; };
+
+        // Changing which exchange is open happens in strict order so text never overlaps:
+        //   1. what is on screen fades away where it stands   2. the layout closes up / opens out   3. the new text fades in
+        async function setFocus(i, add) {
+            const my = ++seq;
+            cancelActive();
+            const before = turns.slice();
+            const none = !add && i === -1;                           // i === -1: just fold everything, show nothing new yet
+            const target = add || none ? null : before[clamp(i, 0, before.length - 1)];
+            const folding = before.filter((t) => !t.el.classList.contains('old') && t !== target);
+            const opening = target && target.el.classList.contains('old') ? target : null;
+
+            if (!reduceMotion) {                                     // 1. fade out in place (the layout has not moved yet)
+                const fades = [];
+                folding.forEach((t) => { if (t.done) fades.push(run(t.el.querySelector('.text'), [{ opacity: 1 }, { opacity: 0 }], { duration: TIME.out, easing: 'ease', fill: 'forwards' })); });
+                if (opening && opening.done) fades.push(run(opening.el.querySelector('.sum'), [{ opacity: 1 }, { opacity: 0 }], { duration: TIME.out, easing: 'ease', fill: 'forwards' }));
+                if (fades.length) { await Promise.allSettled(fades.map((a) => a.finished)); if (my !== seq) return; }
             }
+
+            cancelActive();
+            const first = new Map(before.map((t) => [t, t.el.getBoundingClientRect()]));
+            // 2. the layout jumps to its final state ...
+            if (add) add();
+            focus = add ? turns.length - 1 : none ? -1 : turns.indexOf(target);
+            turns.forEach((t, j) => t.el.classList.toggle('old', j !== focus));
+            if (none) { const last = before[before.length - 1], f0 = last && first.get(last); if (f0 && folding.includes(last)) startKeep(last.el.getBoundingClientRect().top - f0.top); else clearKeep(); }
+            else if (add) settleKeep();
+            else clearKeep();
+            const ft = turns[focus];
+            ctx.innerHTML = (ft && ft.cardsHTML) || '';              // the context behind this exchange
+            ctxWrap.classList.toggle('show', !!(ft && ft.cardsHTML));
+            ctxWrap.scrollTop = 0;
+            if (!ft || focus === turns.length - 1) ans.scrollTop = ans.scrollHeight;
+            else { const r = ft.el.getBoundingClientRect(), c = ans.getBoundingClientRect(); if (r.top < c.top) ans.scrollTop -= c.top - r.top; else if (r.bottom > c.bottom) ans.scrollTop += r.bottom - c.bottom; }
+            if (reduceMotion) return;
+
+            // ... and everything glides from where it was to where it is
+            turns.forEach((t) => {
+                const f = first.get(t), l = t.el.getBoundingClientRect();
+                if (!f) { run(t.el, [{ opacity: 0, transform: 'translateY(16px)' }, { opacity: 1, transform: 'none' }], { duration: TIME.in + 200, easing: 'cubic-bezier(.2, .8, .2, 1)' }); return; }
+                const dy = f.top - l.top;
+                if (Math.abs(dy) > 1) run(t.el, [{ transform: `translateY(${dy}px)` }, { transform: 'none' }], { duration: TIME.glide, easing: 'cubic-bezier(.25, .8, .25, 1)' });
+            });
+            // 3. only once the space has closed up does the new text fade in
+            const fadeIn = (el) => run(el, [{ opacity: 0 }, { opacity: 1 }], { duration: TIME.in, delay: TIME.glide - 150, easing: 'ease-in-out', fill: 'backwards' });
+            folding.forEach((t) => { if (t.done) fadeIn(t.el.querySelector('.sum')); });
+            if (opening && opening.done) fadeIn(opening.el.querySelector('.text'));
+            await Promise.allSettled(active.map((a) => a.finished));
+        }
+
+        // find where each keyword sits in a text (whole phrase first, then its most distinctive word)
+        const flat = (w) => w.toLowerCase().replace(/[^a-z0-9\u00c0-\u024f-]/g, '').split('-').filter(Boolean).map(stem);
+        function locate(text, keys) {
+            const sub = []; text.split(' ').forEach((w, wi) => flat(w).forEach((x) => sub.push({ x, wi })));
+            const used = new Set();
+            return keys.map((k) => {
+                const kt = k.split(/[\s-]+/).map((w) => stem(w.toLowerCase().replace(/[^a-z0-9\u00c0-\u024f]/g, ''))).filter(Boolean);
+                if (!kt.length) return [];
+                for (let i = 0; i + kt.length <= sub.length; i++) {
+                    if (kt.every((x, j) => sub[i + j].x === x && !used.has(sub[i + j].wi))) { const ws = [...new Set(kt.map((_, j) => sub[i + j].wi))]; ws.forEach((w) => used.add(w)); return ws; }
+                }
+                for (const x of kt.filter((x) => x.length > 2 && !STOP.has(x)).sort((a, b) => b.length - a.length)) {
+                    const m = sub.find((u) => u.x === x && !used.has(u.wi));
+                    if (m) { used.add(m.wi); return [m.wi]; }
+                }
+                return [];
+            });
+        }
+        function locateKeywords(t) {
+            t.hits = locate(t.text, t.keys); t.sumHits = locate(t.sum, t.keys);
+            const full = t.el.querySelectorAll('.text > span'), sum = t.el.querySelectorAll('.sum > span');
+            t.sumHits.forEach((ws, ki) => { if (t.hits[ki].length) ws.forEach((w) => sum[w] && sum[w].classList.add('kwd')); });
+        }
+
+        // older exchanges open only when clicked; scrolling just scrolls
+        ans.addEventListener('click', (e) => {
+            if (e.target.closest('a')) return;
+            const el = e.target.closest('.turn'); if (!el) return;
+            const i = turns.findIndex((t) => t.el === el);
+            if (i >= 0 && i !== focus) setFocus(i);
         });
+
+        // the answer is let in once the question line has settled: the space opens, older lines glide up, the words fade in
+        function release(t) {
+            const first = new Map(turns.map((x) => [x, x.el.getBoundingClientRect()]));
+            t.el.classList.remove('hold');
+            settleKeep();
+            ans.scrollTop = ans.scrollHeight;
+            if (!reduceMotion) turns.forEach((x) => {
+                const f = first.get(x), dy = f.top - x.el.getBoundingClientRect().top;
+                if (x !== t && Math.abs(dy) > 1) run(x.el, [{ transform: `translateY(${dy}px)` }, { transform: 'none' }], { duration: TIME.glide, easing: 'cubic-bezier(.25, .8, .25, 1)' });
+            });
+            if (t.done && !t.streamed) reveal(t);
+        }
+        const reveal = (t) => { t.reveal = false; [...t.el.querySelectorAll('.text > span')].forEach((w, n) => w.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 800, delay: n * 26, fill: 'backwards' })); };
+        let chain = Promise.resolve();
+        // keep the newest exchange in view while it grows
+        const pinBottom = (t) => { settleKeep(); if (turns[focus] === t && focus === turns.length - 1) ans.scrollTop = ans.scrollHeight; };
+
+        function ask(question) {
+            question = question.trim(); if (!question) return;
+            toggleCatalog(false);
+            input.value = ''; input.blur();
+            document.body.classList.add('asked');
+            field.classList.add('busy'); field.style.setProperty('--charge', 1);
+            const t = { q: question, text: '', keys: [], picks: [], cardsHTML: '', done: false, el: makeTurn(question) };
+            // first the open answer folds away, and only then does the new exchange appear
+            chain = chain.then(async () => {
+                if (turns.some((x) => !x.el.classList.contains('old'))) await setFocus(-1);
+                await setFocus(null, () => { turns.push(t); ans.appendChild(t.el); while (turns.length > MAXTURNS) { turns.shift().el.remove(); } });   // the question line arrives
+                release(t);                                                                                                                       // then the answer
+            });
+            renderChips();
+            setTimeout(() => { field.classList.remove('busy'); field.style.setProperty('--charge', 0); respond(t); }, 450);
+        }
+
+        // choose which pieces of the site answer this question
+        function select(r, greet) {
+            const stems = new Set([...r.qt, ...r.ex]), picks = [], top = r.scored[0];
+            if (!greet && top && (r.named.length || top.sc > 1.1)) {
+                const cutoff = r.named.length ? 0 : top.sc * .42, perSrc = {}, max = 4;
+                r.named.slice(0, max).forEach((n) => { const x = r.scored.find((y) => y.c.src === n.id); if (x) { perSrc[n.id] = 1; picks.push(x); } });
+                for (const x of r.scored) {
+                    if (picks.includes(x)) continue;
+                    if (r.named.length && !r.named.some((n) => n.id === x.c.src)) continue;   // a named project: show only that
+                    if (x.sc < cutoff && picks.length) break;
+                    const lim = r.named.some((s) => s.id === x.c.src) ? 3 : 2;
+                    if ((perSrc[x.c.src] || 0) >= lim) continue;
+                    if (!perSrc[x.c.src] && Object.keys(perSrc).length >= max) continue;
+                    perSrc[x.c.src] = (perSrc[x.c.src] || 0) + 1; picks.push(x);
+                    if (picks.length >= 6) break;
+                }
+                if (r.named.length) picks.sort((a, b) => a.c.i - b.c.i);   // overview first
+            }
+            return { picks, stems };
+        }
+        function localAnswer(picks, stems) {
+            const cand = [], whole = (k) => ['Education', 'Contact'].includes(sources[k].kind);
+            if (picks.every((x) => sources[x.c.src].kind === 'Education')) picks.sort((a, b) => a.c.i - b.c.i);
+            const eduOnly = picks.every((x) => sources[x.c.src].kind === 'Education');
+            picks.slice(0, eduOnly ? 4 : 3).forEach((x, pi) => (whole(x.c.src) ? [x.c.say || x.c.text] : sentences(x.c.text)).forEach((s, si) => {
+                const n = toks(s).filter((t) => stems.has(t)).length;
+                cand.push({ s, n: n + (pi === 0 ? .5 : 0) - si * .05, pi, si });
+            }));
+            return cand.sort((a, b) => b.n - a.n).slice(0, eduOnly ? 4 : 3).sort((a, b) => a.pi - b.pi || a.si - b.si).map((c) => c.s).join(' ');
+        }
+        const firstSentence = (text) => {
+            let x = sentences(text)[0] || text;
+            if (x.length > 150) { x = x.slice(0, 150); x = x.slice(0, x.lastIndexOf(' ')).replace(/[,;:\s]+$/, '') + '…'; }
+            return x;
+        };
+        // keywords for answers that didn't come from the model: titles / question words that the summary actually contains
+        function fallbackKeys(t) {
+            const hay = t.sum.toLowerCase(), out = [];
+            groupBySource(t.picks).forEach((g) => { const ti = sources[g.src].title; if (hay.includes(ti.toLowerCase())) out.push(ti); });
+            (t.q.match(/[A-Za-z0-9\u00c0-\u024f-]+/g) || []).forEach((w) => { if (!STOP.has(w.toLowerCase()) && w.length > 3 && hay.includes(w.toLowerCase()) && !out.some((o) => o.toLowerCase().includes(w.toLowerCase()))) out.push(w); });
+            return out.slice(0, 3);
+        }
+
+        function respond(t) {
+            const q = t.q, prev = [...turns].reverse().find((x) => x !== t && x.done);
+            const greet = /^\s*(hi|hello|hey|yo|hallo|good (morning|evening|afternoon))\b[\s!.?]*$/i.test(q);
+            let r = retrieve(q), sel = select(r, greet), augmented = false;
+            if (!sel.picks.length && !greet && prev) {      // a follow-up like "tell me more": borrow the previous exchange's topic
+                const r2 = retrieve([...prev.keys, prev.sum || '', ...(prev.picks.length ? groupBySource(prev.picks).map((g) => sources[g.src].title) : []), q].join(' '));
+                const s2 = select(r2, false);
+                if (s2.picks.length) { r = r2; sel = s2; augmented = true; }
+            }
+            const { picks, stems } = sel;
+            t.picks = picks;
+
+            let local;
+            if (greet) local = "Hi! I can tell you about my projects, research, studies and music. Try one of the questions below, or ask your own.";
+            else if (!picks.length) local = "I don't have anything on that. I can talk about my projects, research, studies, music and how to get in touch.";
+            else local = localAnswer(picks, stems);
+
+            // context cards: one per source, never repeated
+            if (picks.length) {
+                const cards = groupBySource(picks).map((g) => ({ c: g.chunks[0] }));
+                t.cardsHTML = cards.map((x, i) => {
+                    const s = sources[x.c.src], thumb = !!s.image;
+                    return `<div class="card${thumb ? ' has-thumb' : ''}" style="--i:${i}" tabindex="0" role="button" data-src="${s.id}" aria-label="Open ${esc(s.title)}">
+                        ${thumb ? `<div class="thumb" style="background-image:url('${s.image}')"></div>` : ''}
+                        <div class="body"><div class="kind">${s.kind}</div><h3>${esc(s.title)}</h3><p>${hl(snippet(x.c, stems), stems)}</p></div></div>`;
+                }).join('');
+                if (t.el.isConnected && turns[focus] === t) { ctx.innerHTML = t.cardsHTML; ctxWrap.classList.add('show'); }
+            }
+
+            const useAI = !!window.CHAT_API && picks.length && !greet;
+            const key = cacheKey(q), hit = useAI && !augmented && cacheGet(key);
+            if (hit) finish(t, hit.t, hit.k, false, hit.s);                       // asked before: instant, no API call
+            else if (useAI) streamAnswer(t, local, key, !augmented);
+            else finish(t, local, null);
+        }
+
+        // write the final answer, its one-sentence summary and keywords into the turn
+        function finish(t, text, keys, settled, summary) {
+            t.text = text; t.sum = (summary && summary.trim()) || firstSentence(text); t.done = true;
+            t.keys = (keys && keys.length ? keys : fallbackKeys(t)).slice(0, 4);
+            const tx = t.el.querySelector('.text');
+            tx.classList.remove('wait');
+            tx.innerHTML = wordsHTML(text, false);
+            t.streamed = !!settled;
+            if (!settled && !reduceMotion && !t.el.classList.contains('hold')) reveal(t);
+            t.el.querySelector('.sum').innerHTML = t.sum.split(' ').map((w, i) => `<span style="--w:${i}">${esc(w)}</span>`).join(' ');
+            locateKeywords(t);
+            pinBottom(t);
+        }
+
+        /* ---------- OpenRouter (through the worker) ---------- */
+        // the model ends its reply with "SUMMARY: ..." and "KEYWORDS: a | b"; split them off the answer
+        const MS = /\n?[ \t]*SUMMARY[ \t]*:/i, MK = /\n?[ \t]*KEYWORDS[ \t]*:/i;
+        function parseOut(got, final) {
+            const ms = MS.exec(got), mk = MK.exec(got);
+            const cutAt = Math.min(...[ms, mk].filter(Boolean).map((m) => m.index));
+            if (isFinite(cutAt)) {
+                const sumEnd = ms ? (mk && mk.index > ms.index ? mk.index : got.length) : 0;
+                return {
+                    text: got.slice(0, cutAt).trim(),
+                    summary: ms ? got.slice(ms.index + ms[0].length, sumEnd).replace(/\s+/g, ' ').trim() : '',
+                    keys: final && mk ? got.slice(mk.index + mk[0].length).split(/[|\n]/).map((x) => x.replace(/[.\s]+$/, '').trim()).filter((x) => x && x.length < 32).slice(0, 4) : []
+                };
+            }
+            let text = got;                                           // hide a half-typed marker while streaming
+            const nl = got.lastIndexOf('\n');
+            if (nl >= 0) { const tail = got.slice(nl + 1).toUpperCase(); if (tail && ('SUMMARY:'.startsWith(tail) || 'KEYWORDS:'.startsWith(tail))) text = got.slice(0, nl); }
+            return { text: text.trimEnd(), summary: '', keys: [] };
+        }
+        async function streamAnswer(t, fallbackText, key, cacheable) {
+            const el = t.el.querySelector('.text');
+            const hist = turns.filter((x) => x !== t && x.done && x.text).slice(-3).map((x) => ({ q: x.q, a: x.text.slice(0, 700) }));
+            let got = '';
+            try {
+                const res = await fetch(window.CHAT_API, {
+                    method: 'POST', headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        question: t.q, history: hist,
+                        context: groupBySource(t.picks).map((g) => ({ title: sources[g.src].title, text: chunks.filter((c) => c.src === g.src).map((c) => c.say || c.text).join('\n').slice(0, 3800) }))
+                    })
+                });
+                if (!res.ok || !res.body) throw new Error('bad status ' + res.status);
+                const rd = res.body.getReader(), dec = new TextDecoder(); let buf = '';
+                for (;;) {
+                    const { done, value } = await rd.read(); if (done) break;
+                    buf += dec.decode(value, { stream: true });
+                    const lines = buf.split('\n'); buf = lines.pop();
+                    for (const ln of lines) {
+                        if (!ln.startsWith('data:')) continue;
+                        const d = ln.slice(5).trim(); if (!d || d === '[DONE]') continue;
+                        try { got += JSON.parse(d).choices?.[0]?.delta?.content || ''; } catch {}
+                    }
+                    const shown = parseOut(got, false).text.trimStart();
+                    if (shown) { el.classList.remove('wait'); el.innerHTML = shown.split(' ').map((w, i, a) => linkWord(w, a[i - 1] || '')).join(' '); pinBottom(t); }
+                }
+                const fin = parseOut(got, true);
+                if (!fin.text) throw new Error('empty');
+                finish(t, fin.text, fin.keys, true, /[.!?…]$/.test(fin.summary) ? fin.summary : '');
+                if (cacheable && fin.summary && /[.!?…]$/.test(fin.summary) && fin.keys.length) cachePut(key, { t: fin.text, s: t.sum, k: t.keys });   // only complete replies are kept
+            } catch (err) {
+                if (!got.trim()) finish(t, fallbackText, null);       // worker down / not configured: quote the page instead
+                else { const fin = parseOut(got, true); finish(t, fin.text || fallbackText, fin.keys, true, fin.summary); }
+            }
+        }
+        field.addEventListener('submit', (e) => { e.preventDefault(); ask(input.value); });
+
+        /* ---------- detail box ---------- */
+        const box = $('#box'), veil = $('#veil'), content = $('#content');
+        function openSource(id) {
+            const s = sources[id]; if (!s) return;
+            if (s.project) {
+                const p = s.project;
+                content.innerHTML = `<h2>${esc(p.title)}</h2><p class="lede">${esc(p.desc)}</p><div class="tags">${p.tags.map((t) => `<span class="tag">${esc(t)}</span>`).join('')}</div>${p.body.join('')}`;
+            } else if (s.contact) {
+                content.innerHTML = `<h2>Get in touch</h2><p><a href="mailto:milanliessensdujardin@gmail.com">milanliessensdujardin@gmail.com</a></p><p><a href="https://www.linkedin.com/in/milan-liessens-dujardin/">LinkedIn</a> · <a href="https://github.com/milan477">GitHub</a></p>`;
+            } else {
+                content.innerHTML = `<h2>About me</h2><div>${window.ABOUT.bio}</div><h3>Education</h3>${window.ABOUT.edu}`;
+            }
+            content.querySelectorAll('a[href^="http"]').forEach((a) => { a.target = '_blank'; a.rel = 'noopener'; });
+            content.scrollTop = 0;
+            box.classList.add('open'); veil.classList.add('open');
+        }
+        function closeBox() { box.classList.remove('open'); veil.classList.remove('open'); setTimeout(() => { if (!box.classList.contains('open')) content.innerHTML = ''; }, 500); }
+        ctx.addEventListener('click', (e) => { const c = e.target.closest('.card'); if (c) openSource(c.dataset.src); });
+        ctx.addEventListener('keydown', (e) => { if ((e.key === 'Enter' || e.key === ' ') && e.target.classList.contains('card')) { e.preventDefault(); openSource(e.target.dataset.src); } });
+        $('#close').addEventListener('click', closeBox); veil.addEventListener('click', closeBox);
+        addEventListener('keydown', (e) => { if (e.key === 'Escape') { if (box.classList.contains('open')) closeBox(); else toggleCatalog(false); } });
+
+
+        /* ---------- catalog: every project and post, collaged ---------- */
+        const TINTS = ['255,190,214', '184,196,255', '168,236,228', '255,225,190'];
+        (function buildCatalog() {
+            const col = $('#collage');
+            // short text for sources that aren't projects/posts (About, education, contact)
+            const blurb = (id) => { const cs = chunks.filter((c) => c.src === id); return (cs[id === 'about' ? 1 : 0] || cs[0]).say || (cs[id === 'about' ? 1 : 0] || cs[0]).text; };
+            const sec = (t) => `<h2 class="sec">${t}</h2>`;
+            const tile = (id, i, k) => {
+                const s = sources[id], p = s.project || { desc: blurb(id) }, tags = (s.tags || []).slice(0, 4);
+                return `<div class="tile" tabindex="0" role="button" data-src="${id}" aria-label="Open ${esc(s.title)}" style="--i:${i}">
+                    <span class="num">${String(k + 1).padStart(2, '0')}</span>
+                    <div><h3>${esc(s.title)}</h3><p>${esc(p.desc)}</p>${tags.length ? `<div class="tags">${tags.map((t) => `<span>${esc(t)}</span>`).join('')}</div>` : ''}</div>
+                    ${s.image ? `<div class="thumb" style="background-image:url('${s.image}')"></div>` : '<div></div>'}</div>`;
+            };
+            const ids = (prefix) => Object.keys(sources).filter((k) => k.startsWith(prefix) && sources[k].project && (prefix === 'p' ? !k.startsWith('post') : true));
+            let n = 0;
+            const list = (arr) => arr.map((id, k) => tile(id, n++, k)).join('');
+            col.innerHTML = sec('Projects') + list(ids('p')) + sec('Explorations') + list(ids('exploration'));
+        })();
+        const catBtn = $('#catalogBtn');
+        function toggleCatalog(on) {
+            on = on ?? !document.body.classList.contains('is-catalog');
+            document.body.classList.toggle('is-catalog', on);
+            catBtn.classList.toggle('on', on); catBtn.setAttribute('aria-expanded', on);
+            if (on) $('#catalog').scrollTop = 0;
+        }
+        catBtn.addEventListener('click', () => toggleCatalog());
+        $('#collage').addEventListener('click', (e) => { const t = e.target.closest('.tile'); if (t) openSource(t.dataset.src); });
+        $('#collage').addEventListener('keydown', (e) => { if ((e.key === 'Enter' || e.key === ' ') && e.target.classList.contains('tile')) { e.preventDefault(); openSource(e.target.dataset.src); } });
+
+        renderChips();
+        const qp = new URLSearchParams(location.search).get('q');
+        if (qp) setTimeout(() => ask(qp), 300);
+    })();
     </script>
 </body>
 </html>

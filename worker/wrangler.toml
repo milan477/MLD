@@ -1,0 +1,8 @@
+name = "mld-chat"
+main = "worker.js"
+compatibility_date = "2025-01-01"
+
+[vars]
+# Any OpenRouter model id, e.g. a fast/cheap one. "openrouter/auto" lets OpenRouter pick.
+MODEL = "openrouter/auto"
+ALLOWED_ORIGINS = "https://www.milanliessensdujardin.com,https://milanliessensdujardin.com,http://localhost:8765"
