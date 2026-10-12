@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-labelledby="title">
+  <title id="title">Pink, lavender, and teal light on black</title>
+  <defs>
+    <radialGradient id="pink"><stop stop-color="#ffbed6" stop-opacity=".95"/><stop offset=".42" stop-color="#ffbed6" stop-opacity=".65"/><stop offset="1" stop-color="#ffbed6" stop-opacity="0"/></radialGradient>
+    <radialGradient id="lavender"><stop stop-color="#b8c4ff" stop-opacity=".95"/><stop offset=".42" stop-color="#b8c4ff" stop-opacity=".65"/><stop offset="1" stop-color="#b8c4ff" stop-opacity="0"/></radialGradient>
+    <radialGradient id="teal"><stop stop-color="#a8ece4" stop-opacity=".9"/><stop offset=".42" stop-color="#a8ece4" stop-opacity=".6"/><stop offset="1" stop-color="#a8ece4" stop-opacity="0"/></radialGradient>
+    <filter id="blur" x="-40%" y="-80%" width="180%" height="260%"><feGaussianBlur stdDeviation="18"/></filter>
+  </defs>
+  <rect width="512" height="512" fill="#000000"/>
+  <g filter="url(#blur)">
+    <ellipse cx="185" cy="260" rx="155" ry="95" transform="rotate(-18 185 260)" fill="url(#pink)"/>
+    <ellipse cx="315" cy="232" rx="155" ry="95" transform="rotate(18 315 232)" fill="url(#lavender)"/>
+    <ellipse cx="279" cy="286" rx="147" ry="83" transform="rotate(-12 279 286)" fill="url(#teal)"/>
+  </g>
+</svg>

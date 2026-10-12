@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Milan Liessens Dujardin</title>
-    <link rel="icon" href="/public/assets/images/logos/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="/public/assets/images/logos/favicon-32x32.png" sizes="32x32" type="image/png">
-    <link rel="icon" href="/public/assets/images/logos/favicon-16x16.png" sizes="16x16" type="image/png">
-    <link rel="apple-touch-icon" href="/public/assets/images/logos/apple-touch-icon.png">
+    <link rel="icon" href="/public/assets/images/logos/mld-logo.svg?v=glow-colors-2" type="image/svg+xml">
+    <link rel="icon" href="/public/assets/images/logos/favicon.ico?v=glow-colors-2" type="image/x-icon">
+    <link rel="icon" href="/public/assets/images/logos/favicon-32x32.png?v=glow-colors-2" sizes="32x32" type="image/png">
+    <link rel="icon" href="/public/assets/images/logos/favicon-16x16.png?v=glow-colors-2" sizes="16x16" type="image/png">
+    <link rel="apple-touch-icon" href="/public/assets/images/logos/apple-touch-icon.png?v=glow-colors-2">
     <meta name="description" content="Milan Liessens Dujardin - AI researcher and musician specializing in multimodal representations, automated data and supervision generation, and empirical model evaluation.">
     <meta name="author" content="Milan Liessens Dujardin">
     <style>
@@ -36,10 +37,9 @@
             padding: 22px 28px; pointer-events: none;
         }
         header > * { pointer-events: auto; }
-        #who { position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; text-align: center; padding: 10px 16px 14px; pointer-events: none; }
-        body.is-catalog #who { background: linear-gradient(transparent, rgba(0, 0, 2, .96) 60%); }
-        .name { font-size: .78rem; font-weight: 600; letter-spacing: .06em; line-height: 1.25; color: #fff; }
-        .tagline { font-size: .68rem; color: var(--muted); margin-top: 2px; letter-spacing: .06em; }
+        #who { position: fixed; top: 22px; left: 50%; width: calc(100% - 280px); max-width: 620px; transform: translateX(-50%); z-index: 30; text-align: center; pointer-events: none; }
+        .name { font-size: .9rem; font-weight: 600; letter-spacing: .06em; line-height: 1.25; color: #fff; }
+        .tagline { position: fixed; bottom: 16px; left: 0; right: 0; z-index: 30; text-align: center; font-size: .68rem; color: var(--muted); letter-spacing: .06em; pointer-events: none; }
         nav { display: flex; gap: 20px; align-items: center; font-size: .85rem; }
         nav a, nav button { color: var(--muted); text-decoration: none; background: none; border: 0; cursor: pointer; font: inherit; transition: color .2s; }
         nav a:hover, nav button:hover { color: #fff; }
@@ -47,11 +47,11 @@
         nav a:hover img { filter: invert(1) brightness(1); }
 
         /* ---------- stage: context above, bar in the middle, answer below ---------- */
-        #stage { position: fixed; inset: 84px 0 56px 0; z-index: 10; overflow: hidden; --bar: 62px; --gap: 92px; }   /* --gap: space between the bar and the text above / the suggestions below */
+        #stage { position: fixed; inset: 84px 0 24px 0; z-index: 10; overflow: hidden; --bar: 52px; --gap: 56px; }   /* --gap: space between the bar and the text above / the suggestions below */
         #stage > * { position: absolute; left: 50%; transform: translateX(-50%); }
 
         #below {
-            top: calc(50% + var(--bar) / 2 + var(--gap)); width: min(1040px, calc(100% - 28px));
+            top: calc(50% + var(--bar) / 2 + var(--gap)); width: min(860px, calc(100% - 28px));
             max-height: calc(50% - var(--bar) / 2 - var(--gap)); overflow-y: auto; scrollbar-width: none;
         }
         #below::-webkit-scrollbar { display: none; }
@@ -82,8 +82,8 @@
         mark { background: none; color: #fff; text-shadow: 0 0 10px rgba(255, 255, 255, .9), 0 0 24px rgba(255, 255, 255, .5); font-weight: 600; }
 
         /* ---------- the bar, held only by light ---------- */
-        #field { top: 50%; width: min(760px, calc(100% - 40px)); transform: translate(-50%, -50%) !important; --charge: 0; }
-        #glow { position: absolute; inset: -40px -70px; pointer-events: none; transition: opacity .5s; opacity: calc(.72 + var(--charge) * .28); }
+        #field { top: 50%; width: min(620px, calc(100% - 40px)); transform: translate(-50%, -50%) !important; --charge: 0; }
+        #glow { position: absolute; inset: -30px -48px; pointer-events: none; transition: opacity .5s; opacity: calc(.72 + var(--charge) * .28); }
         #glow i { position: absolute; border-radius: 50%; mix-blend-mode: screen; filter: blur(34px); transition: opacity .4s; }
         #glow .g1 { left: 6%;  top: 8%;  width: 52%; height: 84%; background: radial-gradient(circle, rgba(255, 246, 238, .95), transparent 70%); animation: sway1 11s ease-in-out infinite; }
         #glow .g2 { right: 2%; top: 4%;  width: 50%; height: 90%; background: radial-gradient(circle, rgba(255, 190, 214, .8), transparent 70%); animation: sway2 13s ease-in-out infinite; }
@@ -95,13 +95,13 @@
         #field.busy #glow i { animation-duration: 3s; }
         #bar {
             position: relative; display: flex; align-items: center; gap: 10px;
-            height: var(--bar); padding: 0 12px 0 28px; border-radius: 999px;
+            height: var(--bar); padding: 0 8px 0 22px; border-radius: 999px;
             background: rgba(1, 2, 8, .9);
         }
-        #q { flex: 1; min-width: 0; background: none; border: 0; outline: 0; color: #fff; font: inherit; font-size: 1.02rem; caret-color: #fff; }
+        #q { flex: 1; min-width: 0; background: none; border: 0; outline: 0; color: #fff; font: inherit; font-size: .94rem; caret-color: #fff; }
         #q::placeholder { color: rgba(255, 255, 255, .7); }
         #send {
-            width: 40px; height: 40px; border-radius: 50%; border: 0; cursor: pointer; color: #fff; font-size: 1.05rem;
+            width: 34px; height: 34px; border-radius: 50%; border: 0; cursor: pointer; color: #fff; font-size: 1.05rem;
             background: rgba(255, 255, 255, .08); transition: background .2s, box-shadow .2s; flex-shrink: 0;
         }
         #send:hover { background: rgba(255, 255, 255, .2); box-shadow: 0 0 22px rgba(255, 255, 255, .35); }
@@ -110,13 +110,13 @@
         #chips button { animation: chipIn .6s ease backwards; animation-delay: calc(var(--n) * 60ms); }
         @keyframes chipIn { from { opacity: 0; transform: translateY(8px); } }
         #chips button {
-            background: rgba(255, 255, 255, .05); border: 0; color: #c3c9de; font: inherit; font-size: .8rem;
-            padding: 7px 14px; border-radius: 999px; cursor: pointer; white-space: nowrap; transition: background .2s, color .2s, box-shadow .2s;
+            background: rgba(255, 255, 255, .05); border: 0; color: #c3c9de; font: inherit; font-size: .75rem;
+            padding: 6px 12px; border-radius: 999px; cursor: pointer; white-space: nowrap; transition: background .2s, color .2s, box-shadow .2s;
         }
         #chips button:hover { background: rgba(255, 255, 255, .13); color: #fff; box-shadow: 0 0 20px rgba(255, 255, 255, .2); }
 
         /* ---------- conversation: newest turn is full, older turns fold into keywords ---------- */
-        #answer { bottom: calc(50% + var(--bar) / 2 + var(--gap)); width: min(760px, calc(100% - 40px)); max-height: calc(50% - var(--bar) / 2 - var(--gap)); overflow-y: auto;
+        #answer { bottom: calc(50% + var(--bar) / 2 + var(--gap)); width: min(620px, calc(100% - 40px)); max-height: calc(50% - var(--bar) / 2 - var(--gap)); overflow-y: auto;
             text-align: center; padding: 8px 8px 0; display: flex; flex-direction: column; align-items: stretch; scrollbar-width: none;
             -webkit-mask-image: linear-gradient(transparent, #000 36px); mask-image: linear-gradient(transparent, #000 36px); }
         #answer::-webkit-scrollbar { display: none; }
@@ -214,7 +214,10 @@
         @media (max-width: 640px) {
             header { padding: 16px; }
             nav { gap: 14px; font-size: .78rem; }
-            #stage { inset: 64px 0 50px 0; --bar: 56px; --gap: 72px; }
+            #who { top: 16px; width: calc(100% - 160px); }
+            .name { font-size: .72rem; letter-spacing: .03em; }
+            .tagline { font-size: .6rem; }
+            #stage { inset: 88px 0 20px 0; --bar: 48px; --gap: 44px; }
             #chips button:nth-child(n+4) { display: none; }
             .card { width: calc(50% - 8px); }
             .card p { -webkit-line-clamp: 4; font-size: .78rem; }
@@ -240,10 +243,10 @@
             <a href="https://www.linkedin.com/in/milan-liessens-dujardin/" target="_blank" rel="noopener" aria-label="LinkedIn"><img src="/public/assets/images/logos/LinkedIn.png" alt="LinkedIn"></a>
         </nav>
     </header>
-    <footer id="who">
+    <div id="who">
         <h1 class="name">Milan Liessens Dujardin</h1>
-        <p class="tagline">AI Researcher · Musician</p>
-    </footer>
+    </div>
+    <p class="tagline">AI Researcher · Musician</p>
 
     <main id="stage">
         <div id="answer" aria-live="polite"></div>
@@ -269,9 +272,9 @@
         <div class="scroll" id="content"></div>
     </div>
 
-    <script src="public/assets/js/projects.js?v=99060710"></script>
+    <script src="public/assets/js/projects.js?v=2919337866"></script>
     <script src="public/assets/js/config.js"></script>
-    <script src="public/assets/js/cached-answers.js?v=99060710"></script>
+    <script src="public/assets/js/cached-answers.js?v=2919337866"></script>
     <script>
     (() => {
         const $ = (s) => document.querySelector(s);
@@ -430,15 +433,19 @@
         };
         /* ---------- answer cache: repeated questions (e.g. the suggestions) never hit the API twice ---------- */
         // version changes whenever the site's text changes, which invalidates every stored answer
-        const kbVersion = (() => { let h = 5381; for (const ch of JSON.stringify([window.PROJECTS, window.EXPLORATIONS || [], window.ADDITIONAL_WORK || [], window.ABOUT, window.POSTS || [], 'resume-prompt-v3'])) h = ((h << 5) + h + ch.charCodeAt(0)) | 0; return String(h >>> 0); })();
+        const kbVersion = (() => { let h = 5381; for (const ch of JSON.stringify([window.PROJECTS, window.EXPLORATIONS || [], window.ADDITIONAL_WORK || [], window.ABOUT, window.POSTS || [], 'answer-quality-v1'])) h = ((h << 5) + h + ch.charCodeAt(0)) | 0; return String(h >>> 0); })();
         const cacheKey = (q) => q.toLowerCase().replace(/[^a-z0-9À-ɏ ]+/g, ' ').replace(/\s+/g, ' ').trim();
-        const LS = 'mld-answers';
+        const LS = 'mld-answers-v2';
         const readLocal = () => { try { const o = JSON.parse(localStorage.getItem(LS) || '{}'); return o.v === kbVersion ? o.a || {} : {}; } catch { return {}; } };
         const asEntry = (e) => (!e ? null : typeof e === 'string' ? { t: e, k: [] } : e);
-        const cacheGet = (k) => {
-            const sta = window.CACHED_ANSWERS;                      // pre-generated answers shipped with the site
-            return asEntry(readLocal()[k]) || asEntry(sta && sta.v === kbVersion && sta.a[k]);
-        };
+        const projectAnswers = {"MuNo-SP":"what is muno sp","MusicTwins":"what is musictwins","PitchBench":"tell me about pitchbench","MuSP-Bench":"tell me about musp bench","InstructFX2FX":"what is instructfx2fx","C-K Git":"tell me about c k git","Automated Satellite Imagery Analysis":"what is automated satellite imagery analysis","High-Performance Computing":"what is high performance computing","Storm":"what is storm","epic-MAIL":"what is epic mail","SUMIRE":"what is sumire","Works":"do you make music"};
+        const projectKey = (title) => projectAnswers[title];
+        const prewritten = (key) => { const c = window.CACHED_ANSWERS; return asEntry(c && c.v === kbVersion && c.a[key]); };
+        const aliases = {};
+        Object.entries(projectAnswers).forEach(([title, key]) => {
+            ['','what is ','tell me about ','describe ','explain '].forEach((prefix) => aliases[cacheKey(prefix + title)] = key);
+        });
+        const cacheGet = (k) => prewritten(aliases[k] || k) || asEntry(readLocal()[k]);
         const cachePut = (k, entry) => {
             try {
                 const a = readLocal(); a[k] = entry;
@@ -666,7 +673,7 @@
             let local;
             if (greet) local = "Hi! I can tell you about my projects, research, studies and music. Try one of the questions below, or ask your own.";
             else if (!picks.length) local = "I don't have anything on that. I can talk about my projects, research, studies, music and how to get in touch.";
-            else local = localAnswer(picks, stems);
+            else local = (r.named.length === 1 && prewritten(projectKey(r.named[0].title)))?.t || localAnswer(picks, stems);
 
             // context cards: one per source, never repeated
             if (picks.length) {
@@ -681,7 +688,7 @@
             }
 
             const useAI = !!window.CHAT_API && picks.length && !greet;
-            const key = cacheKey(q), hit = useAI && !augmented && cacheGet(key);
+            const key = cacheKey(q), hit = !greet && !augmented && cacheGet(key);
             if (hit) finish(t, hit.t, hit.k, false, hit.s);                       // asked before: instant, no API call
             else if (useAI) streamAnswer(t, local, key, !augmented);
             else finish(t, local, null);

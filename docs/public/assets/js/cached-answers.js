@@ -1,10 +1,10 @@
-// Suggested answers, versioned with current content.
+// Reviewed answers grounded in the résumé and existing project descriptions.
 window.CACHED_ANSWERS = {
-  "v": "99060710",
+  "v": "2919337866",
   "a": {
     "what are you working on": {
-      "t": "I work on multimodal representations, automated data and supervision generation, and empirical model evaluation. My projects include MuNo-SP for aligned score–performance representations, MusicTwins for structured personas, PitchBench for synthetic audio evaluation, and MuSP-Bench for human-authored multimodal evaluation. I also developed InstructFX2FX and C-K Git.",
-      "s": "I work on multimodal representations, supervision generation, and model evaluation.",
+      "t": "My research focuses on multimodal representations, supervision generation, and model evaluation. I designed MuNo-SP to represent musical scores and performances together, and MusicTwins to organize persona data. I also built PitchBench and MuSP-Bench to evaluate musical understanding, alongside work on language-guided audio effects and collaborative design.",
+      "s": "I work on multimodal representations, supervision generation, and model evaluation, with projects in music, personas, audio effects, and collaborative design.",
       "k": [
         "multimodal representations",
         "supervision generation",
@@ -12,8 +12,8 @@ window.CACHED_ANSWERS = {
       ]
     },
     "tell me about pitchbench": {
-      "t": "I built PitchBench, a reproducible pipeline producing 17K audio–question–answer examples across 28 experiments and 19 sound sources. It isolates atomic, contextual, and melodic pitch perception using deterministic stimulus generation and ground truth. I evaluated six frontier audio-language models; the strongest achieved 47.7% mean accuracy. PitchBench was accepted to NeurIPS 2026.",
-      "s": "I built PitchBench to evaluate pitch perception with synthetic audio; the strongest model achieved 47.7% mean accuracy.",
+      "t": "I built PitchBench to evaluate pitch perception in audio-language models using 17K audio–question–answer examples across 28 experiments and 19 sound sources. Its reproducible pipeline generates stimuli and ground truth for atomic, contextual, and melodic tasks under varied acoustic conditions. I evaluated six frontier models; the strongest achieved 47.7% mean accuracy. The paper was accepted to NeurIPS 2026.",
+      "s": "I built PitchBench to evaluate pitch perception; across six frontier models, the strongest achieved 47.7% mean accuracy.",
       "k": [
         "PitchBench",
         "pitch perception",
@@ -21,7 +21,7 @@ window.CACHED_ANSWERS = {
       ]
     },
     "what did you study": {
-      "t": "I hold an M.Eng. in Electrical Engineering and Computer Science from UC Berkeley, focused on machine learning, with a GPA of 3.98. I also earned a B.Sc. in Computer Science at the University of Antwerp and degrees in Music at the Royal Conservatory of Antwerp.",
+      "t": "I earned an M.Eng. in Electrical Engineering and Computer Science at UC Berkeley, focused on machine learning, with a GPA of 3.98. I also hold a B.Sc. in Computer Science from the University of Antwerp and a B.A. and M.A. in Music from the Royal Conservatory of Antwerp.",
       "s": "I studied machine learning at UC Berkeley, Computer Science at the University of Antwerp, and Music at the Royal Conservatory.",
       "k": [
         "machine learning",
@@ -31,18 +31,17 @@ window.CACHED_ANSWERS = {
       ]
     },
     "do you make music": {
-      "t": "Yes, I make music: I sometimes improvise or compose, and I've collaborated with talented artists doing cool stuff. One piece I created used sounds from a modular synthesizer and was edited in Logic Pro X, an improvisation in 7/8. I also made 'Stripped' in collaboration with Zita de Aguirre y Otegui, Illa De Preter, and Adrián Henríquez.",
-      "s": "I make music, improvising and composing, using a modular synthesizer and Logic Pro X, and collaborating with artists.",
+      "t": "Yes, I compose and improvise, and I have collaborated with other artists. My work includes a piece made with a modular synthesizer and edited in Logic Pro X, as well as a separate improvisation in 7/8. I created Stripped with Zita de Aguirre y Otegui, Illa De Preter, and Adrián Henríquez.",
+      "s": "I compose and improvise, including work with a modular synthesizer and Logic Pro X, and collaborate with other artists.",
       "k": [
-        "music",
+        "compose",
         "modular synthesizer",
-        "Logic Pro X",
-        "collaborating"
+        "Logic Pro"
       ]
     },
     "how can i contact you": {
-      "t": "You can reach me by email at milanliessensdujardin@gmail.com or on LinkedIn at linkedin.com/in/milan-liessens-dujardin. My code lives on GitHub at milan477.",
-      "s": "You can contact me by email, LinkedIn, or GitHub.",
+      "t": "You can email me at milanliessensdujardin@gmail.com or find me on LinkedIn at linkedin.com/in/milan-liessens-dujardin. My GitHub username is milan477.",
+      "s": "You can contact me by email or LinkedIn, and find my code on GitHub.",
       "k": [
         "email",
         "LinkedIn",
@@ -50,35 +49,36 @@ window.CACHED_ANSWERS = {
       ]
     },
     "what is instructfx2fx": {
-      "t": "InstructFX2FX is my approach to multi-turn, text-guided audio effect refinement. It combines an LLM planner, which selects effects, signal-chain order, and initial parameters, with CLAP-guided optimization that perceptually refines them over successive instructions.",
-      "s": "InstructFX2FX combines an LLM planner and CLAP optimization for multi-turn audio effect refinement.",
+      "t": "I developed InstructFX2FX to refine an audio effect chain through successive natural-language instructions. It combines LLM planning with CLAP-guided optimization and preserves the current processing parameters between turns, so each instruction builds on the previous state. The work was published at DAFx 2026.",
+      "s": "I developed InstructFX2FX for iterative audio refinement using LLM planning and CLAP-guided optimization while preserving processing parameters.",
       "k": [
-        "LLM",
-        "CLAP",
-        "audio effect"
+        "InstructFX2FX",
+        "LLM planning",
+        "processing parameters"
       ]
     },
     "tell me about c k git": {
-      "t": "My C-K Git project is a collaborative design reasoning system inspired by C-K Theory and Git workflows. It gives designers a structured workspace to explore concepts, connect them to validated knowledge, and develop ideas through branching and merging while preserving ownership and reasoning history. It aims to make collaboration transparent and traceable without replacing human creativity.",
-      "s": "I describe C-K Git as collaborative design reasoning that connects concepts to knowledge and supports transparent, traceable collaboration.",
+      "t": "I built C-K Git, a collaborative design tool based on Concept–Knowledge Theory. It uses LLMs and Git-inspired branching and merging to help contributors explore concepts while preserving their reasoning history.",
+      "s": "I built C-K Git to support collaborative design with LLMs, branching and merging, and preserved reasoning history.",
       "k": [
-        "collaborative",
-        "design reasoning",
-        "knowledge"
+        "C-K Git",
+        "collaborative design",
+        "LLMs",
+        "reasoning history"
       ]
     },
     "can ai read music": {
-      "t": "I evaluated five frontier multimodal models with MuSP-Bench and found substantial limitations in score understanding, performance-audio reasoning, and cross-modal integration. MuNo-SP shows that richer score–performance representations can improve music reasoning: GPT-5.6’s performance-inclusive accuracy rose from 54.5% to 80.5%.",
-      "s": "I found limitations in score understanding, while richer representations improved music reasoning and performance-inclusive accuracy.",
+      "t": "The models I evaluated can answer questions about musical scores, but they still show substantial limitations in score understanding and reasoning about performances. In MuNo-SP, richer score–performance representations improved GPT-5.6’s performance-inclusive music-understanding accuracy from 54.5% to 80.5%. That result concerns the evaluated tasks, rather than reliable music understanding in general.",
+      "s": "I found limitations in score understanding, while richer representations improved GPT-5.6’s accuracy on the evaluated music-understanding tasks.",
       "k": [
         "score understanding",
         "representations",
-        "music reasoning"
+        "accuracy"
       ]
     },
     "what did you do at berkeley lab": {
-      "t": "Through UC Berkeley Deep Tech Innovation Lab, I conducted patent, competitive, and techno-economic analyses of neuromorphic hardware developed at Lawrence Berkeley National Laboratory. I identified quantum error correction as a commercialization opportunity through expert interviews and market research. I presented findings at NASA Ames and to 50+ researchers, technologists, and investors, contributing to follow-up engagement and startup formation.",
-      "s": "I analyzed neuromorphic hardware and identified quantum error correction as a commercialization opportunity, presenting findings at NASA Ames.",
+      "t": "Through UC Berkeley Deep Tech Innovation Lab, I analyzed neuromorphic hardware developed at Lawrence Berkeley National Laboratory. I conducted patent, competitive, and techno-economic analyses and identified quantum error correction as a commercialization opportunity through interviews and market research. I presented the findings at NASA Ames and to 50+ researchers, technologists, and investors.",
+      "s": "I analyzed neuromorphic hardware and explored quantum error correction as a commercialization opportunity, presenting findings at NASA Ames.",
       "k": [
         "neuromorphic hardware",
         "commercialization opportunity",
@@ -86,27 +86,27 @@ window.CACHED_ANSWERS = {
       ]
     },
     "what is sumire": {
-      "t": "SUMIRE is a low-friction, intelligent meal and workout tracking app that I vibe-coded as a prototype. I ran extensive customer discovery interviews. The prototype is under construction, so you can try it by uploading a photo of your meal. SUMIRE means violet in Japanese.",
-      "s": "SUMIRE is my low-friction meal and workout tracking app prototype, informed by customer discovery interviews.",
+      "t": "SUMIRE is my prototype for a meal and workout tracking app using AI. I ran extensive customer discovery interviews. The prototype is under construction, and its meal-photo input lets you try the concept.",
+      "s": "I explored meal and workout tracking with SUMIRE and ran extensive customer discovery interviews.",
       "k": [
         "SUMIRE",
-        "meal",
-        "workout",
-        "tracking"
+        "tracking",
+        "customer discovery"
       ]
     },
     "which projects use language models": {
-      "t": "I use language models in several projects. MuNo-SP provides an LLM-readable representation and automated musical supervision; PitchBench and MuSP-Bench support model evaluation. I developed InstructFX2FX using LLM-based planning and CLAP-guided optimization, while C-K Git uses LLMs for collaborative conceptual design.",
-      "s": "I use language models in musical representation and evaluation, audio processing, and collaborative design.",
+      "t": "MuNo-SP provides an LLM-readable musical representation and a pipeline for generating supervision. PitchBench and MuSP-Bench evaluate language models with audio or multimodal inputs. InstructFX2FX uses LLM planning for audio processing, and C-K Git uses LLMs for collaborative design.",
+      "s": "I use language models for musical representation, supervision, evaluation, audio processing, and collaborative design.",
       "k": [
         "language models",
-        "evaluation",
-        "collaborative"
+        "supervision",
+        "audio processing",
+        "collaborative design"
       ]
     },
     "tell me about yourself": {
-      "t": "I'm Milan Liessens Dujardin, an AI researcher and musician specializing in multimodal representations, automated data and supervision generation, and empirical model evaluation. I built reproducible audio benchmarks and demonstrated improved music reasoning through richer score–performance representations. I hold master's degrees in machine learning and music, with papers accepted at NeurIPS, ISMIR, and DAFx.",
-      "s": "I'm an AI researcher and musician working on multimodal representations, supervision generation, and model evaluation.",
+      "t": "I'm Milan Liessens Dujardin, an AI researcher and musician. My work focuses on multimodal representations, supervision generation, and model evaluation, particularly for music and audio. I hold master's degrees in machine learning and music, and have papers accepted at NeurIPS, ISMIR, and DAFx.",
+      "s": "I'm an AI researcher and musician focused on multimodal representations, supervision generation, and model evaluation for music and audio.",
       "k": [
         "AI researcher",
         "multimodal representations",
@@ -115,67 +115,88 @@ window.CACHED_ANSWERS = {
       ]
     },
     "what is epic mail": {
-      "t": "epic-MAIL is an email client with AI-powered features to help people manage and respond to emails more efficiently. I’m developing it to address the inefficiencies and missing features I find in existing email clients.",
-      "s": "epic-MAIL is an AI-powered email client I’m developing to make managing and responding to emails more efficient.",
+      "t": "epic-MAIL is my exploration of an email client with AI-powered features. I am developing it around the inefficiencies and missing features I encounter in existing email clients, with the aim of making email easier to manage and respond to.",
+      "s": "I am exploring an email client with AI-powered features to make email easier to manage and respond to.",
       "k": [
-        "epic-MAIL",
         "email client",
-        "AI-powered"
+        "AI-powered",
+        "email"
       ]
     },
     "what is muno sp": {
-      "t": "I designed MuNo-SP, an LLM-readable representation that unifies score structure with temporally aligned performance information, including timing, dynamics, articulation, velocity, duration, and pedaling. I built an automated supervision pipeline and released MAESTROCaps with 148 long-form analyses and 31,080 time-grounded question–answer pairs. Richer representations improved GPT-5.6’s performance-inclusive music-understanding accuracy from 54.5% to 80.5%; human evaluators preferred MuNo-SP analyses over MIDI-only alternatives.",
-      "s": "I designed representations and an automated supervision pipeline for time-grounded music understanding, improving accuracy from 54.5% to 80.5%.",
+      "t": "I designed MuNo-SP to represent musical score structure together with aligned performance details such as timing, dynamics, articulation, velocity, duration, and pedaling. I built a supervision pipeline and released MAESTROCaps with 148 long-form analyses and 31,080 time-grounded question–answer pairs. In my evaluation, GPT-5.6’s performance-inclusive music-understanding accuracy improved from 54.5% to 80.5%, and human evaluators preferred MuNo-SP analyses over MIDI-only alternatives.",
+      "s": "I designed MuNo-SP and a supervision pipeline for time-grounded musical analyses, with improved performance-inclusive accuracy in my evaluation.",
       "k": [
-        "representations",
+        "MuNo-SP",
         "supervision pipeline",
-        "music understanding"
+        "analyses",
+        "accuracy"
       ]
     },
     "what is musictwins": {
-      "t": "I designed MusicTwins around a structured persona representation that organizes data into a coherent, logically consistent framework. I defined distinct learning objectives and coverage dimensions to guide scalable data creation and complementary, nonredundant supervision.",
-      "s": "I designed MusicTwins with learning objectives and coverage dimensions to guide scalable data creation and complementary supervision.",
+      "t": "MusicTwins is my work on representing a persona as a coherent set of attributes and relationships. I designed the representation and defined separate learning objectives to guide data creation, so the examples provide complementary supervision rather than repeating the same information.",
+      "s": "I designed MusicTwins to organize persona attributes and guide data creation with complementary supervision.",
       "k": [
         "MusicTwins",
-        "learning objectives",
-        "coverage dimensions",
+        "data creation",
         "supervision"
       ]
     },
     "tell me about musp bench": {
-      "t": "I designed MuSP-Bench, a human-authored benchmark of 490 questions across 18 classical piano works and 6 orchestral excerpts. Its multimodal evaluation pipeline integrates score images, ABC notation, audio, MIDI-as-text, and aligned score–performance representations. I evaluated five frontier multimodal models, finding substantial limitations in score understanding, performance-audio reasoning, and cross-modal integration. MuSP-Bench was accepted to ISMIR LBD 2026.",
-      "s": "I designed a human-authored benchmark and multimodal evaluation pipeline that revealed limitations in score understanding and performance-audio reasoning.",
+      "t": "I designed MuSP-Bench, a human-authored benchmark with 490 questions across 18 classical piano works and 6 orchestral excerpts. It evaluates score understanding, performance interpretation, and multimodal musical reasoning using score images, ABC notation, audio, MIDI-as-text, and aligned score–performance representations. I evaluated five frontier multimodal models and found substantial limitations in score understanding, performance-audio reasoning, and cross-modal integration. The work was accepted to ISMIR LBD 2026.",
+      "s": "I designed MuSP-Bench to evaluate score understanding, performance interpretation, and multimodal musical reasoning with a human-authored benchmark.",
       "k": [
-        "human-authored benchmark",
-        "multimodal evaluation",
-        "score understanding"
+        "MuSP-Bench",
+        "score understanding",
+        "performance interpretation",
+        "human-authored benchmark"
       ]
     },
     "how do you generate musical supervision": {
-      "t": "I built an automated pipeline that transforms aligned score–performance data into structured musical analyses and grounded supervision. With MuNo-SP, I released MAESTROCaps containing 148 long-form analyses and 31,080 time-grounded question–answer pairs. The representation captures expressive performance details such as timing, dynamics, articulation, velocity, duration, and pedaling.",
-      "s": "I generate grounded supervision from aligned score–performance data, including musical analyses and time-grounded question–answer pairs.",
+      "t": "I transform aligned score–performance data into structured musical analyses and grounded supervision through an automated pipeline. MuNo-SP provides the representation of score and performance details, while MAESTROCaps contains the generated outputs: 148 long-form analyses and 31,080 time-grounded question–answer pairs.",
+      "s": "I generate grounded supervision from aligned score–performance data, producing musical analyses and time-grounded question–answer pairs.",
       "k": [
         "grounded supervision",
         "musical analyses"
       ]
     },
     "how do you evaluate multimodal models": {
-      "t": "I use MuSP-Bench, a human-authored benchmark of 490 questions covering score understanding, performance interpretation, and multimodal musical reasoning. My evaluation pipeline integrates score images, ABC notation, audio, MIDI-as-text, and aligned score–performance representations. I evaluated five frontier multimodal models and found substantial limitations in score understanding and cross-modal integration.",
-      "s": "I use a human-authored benchmark and evaluation pipeline to assess score understanding, performance interpretation, and multimodal musical reasoning.",
+      "t": "I evaluate multimodal models with MuSP-Bench, a human-authored benchmark of 490 questions about score understanding, performance interpretation, and musical reasoning. The pipeline integrates score images, ABC notation, audio, MIDI-as-text, and aligned score–performance representations. In evaluations of five frontier models, I found substantial limitations in score understanding, performance-audio reasoning, and cross-modal integration.",
+      "s": "I evaluate multimodal models using a human-authored benchmark covering score understanding, performance interpretation, and musical reasoning.",
       "k": [
+        "multimodal models",
         "human-authored benchmark",
-        "evaluation pipeline",
-        "score understanding"
+        "score understanding",
+        "performance interpretation"
       ]
     },
     "what is storm": {
-      "t": "Storm is my exploration of a workspace for capturing thoughts and discovering how they connect. It turns an evolving Markdown document into a spatial board without losing the original text. The goal is to move fluidly between writing, spatial organization, and semantic relationships.",
-      "s": "Storm explores capturing thoughts and connecting writing with spatial organization and semantic relationships.",
+      "t": "Storm is my exploration of a workspace for capturing thoughts and discovering how they connect. It turns an evolving Markdown document into a spatial board while preserving the original text. The goal is to move fluidly between writing, spatial organization, and semantic relationships.",
+      "s": "I am exploring Storm to connect writing, spatial organization, and semantic relationships while preserving the original text.",
       "k": [
         "Storm",
         "writing",
         "spatial organization",
         "semantic relationships"
+      ]
+    },
+    "what is automated satellite imagery analysis": {
+      "t": "I developed an ML pipeline for disaster classification and damage assessment from scarce, imbalanced satellite imagery. The work combines preprocessing, artifact correction, feature engineering, and model selection. I used ML classifiers and transfer learning with DINOv2 embeddings and PyTorch, achieving near-perfect disaster-type classification and robust macro-F1 performance for damage assessment.",
+      "s": "I used satellite imagery, DINOv2 embeddings, and PyTorch for disaster classification and damage assessment under data scarcity and class imbalance.",
+      "k": [
+        "satellite imagery",
+        "DINOv2 embeddings",
+        "PyTorch",
+        "damage assessment"
+      ]
+    },
+    "what is high performance computing": {
+      "t": "Through UC Berkeley Deep Tech Innovation Lab, I analyzed neuromorphic hardware developed at Lawrence Berkeley National Laboratory. I conducted patent, competitive, and techno-economic analyses and identified quantum error correction as a commercialization opportunity through interviews and market research. I presented the findings at NASA Ames and to 50+ researchers, technologists, and investors.",
+      "s": "I analyzed neuromorphic hardware and explored quantum error correction as a commercialization opportunity, presenting findings at NASA Ames.",
+      "k": [
+        "neuromorphic hardware",
+        "commercialization opportunity",
+        "NASA Ames"
       ]
     }
   }
