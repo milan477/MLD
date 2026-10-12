@@ -51,11 +51,11 @@
         #stage > * { position: absolute; left: 50%; transform: translateX(-50%); }
 
         #below {
-            top: calc(50% + var(--bar) / 2 + var(--gap)); width: min(860px, calc(100% - 28px));
+            top: calc(50% + var(--bar) / 2 + var(--gap)); width: min(1120px, calc(100% - 48px));
             max-height: calc(50% - var(--bar) / 2 - var(--gap)); overflow-y: auto; scrollbar-width: none;
         }
         #below::-webkit-scrollbar { display: none; }
-        #context { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; padding: 22px 6px 20px; }
+        #context { display: flex; flex-wrap: wrap; justify-content: center; gap: 24px; padding: 32px 6px 32px; }
         #contextLabel {
             width: 100%; text-align: center; font-size: .68rem; letter-spacing: .22em; text-transform: uppercase;
             color: #8d97b5; margin-bottom: 2px;
@@ -63,7 +63,7 @@
         #answer:empty { display: none; }
 
         .card {
-            position: relative; width: 236px; border-radius: 20px; overflow: hidden; cursor: pointer;
+            position: relative; width: min(360px, 100%); flex: 0 1 360px; border-radius: 20px; overflow: hidden; cursor: pointer;
             background: radial-gradient(ellipse 120% 90% at 50% 100%, rgba(255, 255, 255, .07), rgba(255, 255, 255, .02));
             box-shadow: 0 0 40px rgba(255, 255, 255, .06), 0 12px 40px rgba(0, 0, 0, .35);
             opacity: 0; transform: translateY(-14px) scale(.97);
@@ -74,11 +74,12 @@
         @keyframes cardIn { to { opacity: 1; transform: none; } }
         .card:hover, .card:focus-visible { box-shadow: 0 0 56px rgba(255, 255, 255, .16), 0 12px 40px rgba(0, 0, 0, .4); background: radial-gradient(ellipse 120% 90% at 50% 100%, rgba(255, 255, 255, .12), rgba(255, 255, 255, .04)); }
         .card .thumb { height: 92px; background-size: cover; background-position: center top; mask-image: linear-gradient(to bottom, #000 40%, transparent); -webkit-mask-image: linear-gradient(to bottom, #000 40%, transparent); opacity: .9; }
-        .card .body { padding: 14px 16px 16px; }
+        .card .body { padding: 22px 26px 26px; }
+        .card:only-child { width: min(520px, 100%); flex-basis: 520px; }
         .card.has-thumb .body { margin-top: -26px; position: relative; }
         .card .kind { font-size: .62rem; letter-spacing: .18em; text-transform: uppercase; color: #8d97b5; margin-bottom: 5px; }
-        .card h3 { font-size: .98rem; font-weight: 600; color: #fff; margin-bottom: 7px; text-shadow: 0 0 18px rgba(255, 255, 255, .45); }
-        .card p { font-size: .82rem; line-height: 1.55; color: #c6cce2; display: -webkit-box; -webkit-line-clamp: 5; -webkit-box-orient: vertical; overflow: hidden; }
+        .card h3 { font-size: 1.05rem; font-weight: 600; color: #fff; margin-bottom: 12px; text-shadow: 0 0 18px rgba(255, 255, 255, .45); }
+        .card p { font-size: .9rem; line-height: 1.75; color: #c6cce2; display: -webkit-box; -webkit-line-clamp: 5; -webkit-box-orient: vertical; overflow: hidden; }
         mark { background: none; color: #fff; text-shadow: 0 0 10px rgba(255, 255, 255, .9), 0 0 24px rgba(255, 255, 255, .5); font-weight: 600; }
 
         /* ---------- the bar, held only by light ---------- */
@@ -92,6 +93,8 @@
         @keyframes sway1 { 50% { transform: translate(8%, -8%) scale(1.1); } }
         @keyframes sway2 { 50% { transform: translate(-9%, 7%) scale(.93); } }
         @keyframes sway3 { 50% { transform: translate(6%, 10%) scale(1.07); } }
+        body.asked #field { width: min(820px, calc(100% - 64px)); }
+        body.asked #stage { --gap: 76px; }
         #field.busy #glow i { animation-duration: 3s; }
         #bar {
             position: relative; display: flex; align-items: center; gap: 10px;
@@ -106,7 +109,7 @@
         }
         #send:hover { background: rgba(255, 255, 255, .2); box-shadow: 0 0 22px rgba(255, 255, 255, .35); }
 
-        #chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 9px; }
+        #chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
         #chips button { animation: chipIn .6s ease backwards; animation-delay: calc(var(--n) * 60ms); }
         @keyframes chipIn { from { opacity: 0; transform: translateY(8px); } }
         #chips button {
@@ -116,29 +119,29 @@
         #chips button:hover { background: rgba(255, 255, 255, .13); color: #fff; box-shadow: 0 0 20px rgba(255, 255, 255, .2); }
 
         /* ---------- conversation: newest turn is full, older turns fold into keywords ---------- */
-        #answer { bottom: calc(50% + var(--bar) / 2 + var(--gap)); width: min(620px, calc(100% - 40px)); max-height: calc(50% - var(--bar) / 2 - var(--gap)); overflow-y: auto;
+        #answer { bottom: calc(50% + var(--bar) / 2 + var(--gap)); width: min(920px, calc(100% - 64px)); max-height: calc(50% - var(--bar) / 2 - var(--gap)); overflow-y: auto;
             text-align: center; padding: 8px 8px 0; display: flex; flex-direction: column; align-items: stretch; scrollbar-width: none;
             -webkit-mask-image: linear-gradient(transparent, #000 36px); mask-image: linear-gradient(transparent, #000 36px); }
         #answer::-webkit-scrollbar { display: none; }
         #answer > :first-child { margin-top: auto; }
-        .turn { padding: 4px 0 14px; cursor: default; }
+        .turn { padding: 8px 0 30px; cursor: default; }
         .turn:last-child { padding-bottom: 0; }
         .turn.old { cursor: pointer; }
         .turn .q { --muted: #8d97b5; display: block; width: 100%; background: none; border: 0; font: inherit; cursor: inherit; text-align: center;
-            font-size: .75rem; letter-spacing: .12em; color: var(--muted); padding: 4px 0 8px; transition: color .4s, letter-spacing .6s; }
+            font-size: .75rem; letter-spacing: .12em; color: var(--muted); padding: 4px 0 14px; transition: color .4s, letter-spacing .6s; }
         .turn.old .q { color: #6c7699; letter-spacing: .06em; }
         .turn.old:hover .q { color: #c8cfe6; }
         .turn.hold .fold.a { display: none; }                       /* a new exchange shows its question first; the answer is let in after */
         .turn.old .fold.a { display: none; }                       /* the layout snaps; JS animates the change (FLIP) */
         .turn:not(.old) .fold.k { display: none; }
-        .turn .text { font-size: 1.06rem; line-height: 1.7; color: #fff; text-shadow: 0 0 20px rgba(255, 255, 255, .28), 0 0 50px rgba(255, 255, 255, .12); padding: 2px 4px; }
+        .turn .text { font-size: 1.06rem; line-height: 1.85; color: #fff; text-shadow: 0 0 20px rgba(255, 255, 255, .28), 0 0 50px rgba(255, 255, 255, .12); padding: 2px 4px; }
         .turn .text.wait { color: var(--muted); animation: pulse 1.2s ease-in-out infinite; }
         @keyframes pulse { 50% { opacity: .35; } }
         .turn .text span { display: inline-block; white-space: pre-wrap; }
         .turn .text a { color: #fff; text-decoration: underline; text-decoration-color: rgba(255, 255, 255, .45); text-underline-offset: 3px; text-shadow: 0 0 14px rgba(255, 255, 255, .75); cursor: pointer; }
         .turn .text a:hover { text-decoration-color: #fff; }
         /* the one-sentence summary a folded turn leaves behind */
-        .sum { font-size: .95rem; line-height: 1.6; color: #fff; padding: 2px 10px 4px; }
+        .sum { font-size: .95rem; line-height: 1.8; color: #fff; padding: 2px 10px 4px; }
         .sum span { display: inline-block; white-space: pre-wrap; }
         .sum span.kwd { color: #fff; }
 
@@ -219,8 +222,16 @@
             .tagline { font-size: .6rem; }
             #stage { inset: 88px 0 20px 0; --bar: 48px; --gap: 44px; }
             #chips button:nth-child(n+4) { display: none; }
-            .card { width: calc(50% - 8px); }
-            .card p { -webkit-line-clamp: 4; font-size: .78rem; }
+            #answer { width: calc(100% - 32px); }
+            #below { width: calc(100% - 24px); }
+            body.asked #field { width: calc(100% - 32px); }
+            body.asked #stage { --gap: 44px; }
+            #context { gap: 16px; padding: 24px 4px; }
+            .card, .card:only-child { width: 100%; flex-basis: 100%; }
+            .card .body { padding: 20px; }
+            .card p { -webkit-line-clamp: 5; font-size: .85rem; }
+            .turn { padding-bottom: 24px; }
+            .turn .text { font-size: .98rem; line-height: 1.75; }
             #bar { padding-left: 22px; }
             #glow { inset: -28px -24px; }
             #box .scroll { padding: 28px 22px 32px; }
@@ -399,17 +410,19 @@
 
         /* ---------- UI ---------- */
         const stage = $('#stage'), ctxWrap = $('#contextWrap'), ctx = $('#context'), ans = $('#answer'), input = $('#q'), field = $('#field');
-        // a pool of suggestions; five random ones show at a time, and asked ones drop out
-        const POOL = ['What are you working on?', 'Tell me about PitchBench', 'What did you study?', 'Do you make music?', 'How can I contact you?',
-            'What is MuNo-SP?', 'What is MusicTwins?', 'Tell me about MuSP-Bench', 'What is InstructFX2FX?', 'Tell me about C-K Git', 'Can AI read music?',
-            'What did you do at Berkeley Lab?', 'How do you generate musical supervision?', 'How do you evaluate multimodal models?', 'Which projects use language models?', 'Tell me about yourself', 'What is Storm?', 'What is epic-MAIL?', 'What is SUMIRE?'];
+        // Lead with three fixed suggestions; fill remaining slots from unasked questions.
+        const STARTERS = ['Tell me about yourself', 'How can I contact you?', 'What is MuNo-SP?'];
+        const POOL = [...STARTERS, 'What are you working on?', 'Tell me about PitchBench', 'What did you study?', 'Do you make music?',
+            'What is MusicTwins?', 'Tell me about MuSP-Bench', 'What is InstructFX2FX?', 'Tell me about C-K Git', 'Can AI read music?',
+            'What did you do at Berkeley Lab?', 'How do you generate musical supervision?', 'How do you evaluate multimodal models?', 'Which projects use language models?', 'What is Storm?'];
         window.__mldPool = POOL;
         const chipsEl = $('#chips');
         function renderChips() {
             const asked = new Set(turns.map((t) => cacheKey(t.q)));
-            const pool = POOL.filter((q) => !asked.has(cacheKey(q)));
+            const starters = STARTERS.filter((q) => !asked.has(cacheKey(q)));
+            const pool = POOL.filter((q) => !STARTERS.includes(q) && !asked.has(cacheKey(q)));
             for (let i = pool.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [pool[i], pool[j]] = [pool[j], pool[i]]; }
-            chipsEl.innerHTML = pool.slice(0, 5).map((q, n) => `<button type="button" style="--n:${n}">${esc(q)}</button>`).join('');
+            chipsEl.innerHTML = [...starters, ...pool].slice(0, 5).map((q, n) => `<button type="button" style="--n:${n}">${esc(q)}</button>`).join('');
         }
         chipsEl.addEventListener('click', (e) => { const b = e.target.closest('button'); if (b) ask(b.textContent); });
         input.addEventListener('focus', () => field.style.setProperty('--charge', .5));
@@ -486,7 +499,7 @@
         }
         /* ---------- folding / opening turns: the layout changes at once, then the motion is replayed (FLIP) with the Web Animations API ---------- */
         const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
-        const TIME = { out: 420, glide: 700, in: 520 };   // ms
+        const TIME = { out: 140, glide: 420, in: 180 };   // ms
         let active = [];
         const run = (el, kf, opt) => { const a = el.animate(kf, opt); active.push(a); return a; };
         function cancelActive() {
@@ -500,53 +513,75 @@
         const settleKeep = () => { if (!keep) return; const pad = Math.max(0, keep.S - (contentH() - keep.base)); ans.style.paddingBottom = pad ? pad + 'px' : ''; if (!pad) keep = null; };
         const clearKeep = () => { keep = null; ans.style.paddingBottom = ''; };
 
-        // Changing which exchange is open happens in strict order so text never overlaps:
-        //   1. what is on screen fades away where it stands   2. the layout closes up / opens out   3. the new text fades in
+        let compacting = false;
         async function setFocus(i, add) {
             const my = ++seq;
             cancelActive();
             const before = turns.slice();
-            const none = !add && i === -1;                           // i === -1: just fold everything, show nothing new yet
+            const none = !add && i === -1;
             const target = add || none ? null : before[clamp(i, 0, before.length - 1)];
             const folding = before.filter((t) => !t.el.classList.contains('old') && t !== target);
             const opening = target && target.el.classList.contains('old') ? target : null;
-
-            if (!reduceMotion) {                                     // 1. fade out in place (the layout has not moved yet)
-                const fades = [];
-                folding.forEach((t) => { if (t.done) fades.push(run(t.el.querySelector('.text'), [{ opacity: 1 }, { opacity: 0 }], { duration: TIME.out, easing: 'ease', fill: 'forwards' })); });
-                if (opening && opening.done) fades.push(run(opening.el.querySelector('.sum'), [{ opacity: 1 }, { opacity: 0 }], { duration: TIME.out, easing: 'ease', fill: 'forwards' }));
-                if (fades.length) { await Promise.allSettled(fades.map((a) => a.finished)); if (my !== seq) return; }
+            const reserved = new Map(folding.map((t) => [t, t.el.getBoundingClientRect().height]));
+            const previousPadding = parseFloat(ans.style.paddingBottom) || 0;
+            compacting = true;
+            // Reserve each turn's full height: changing its text cannot move its question.
+            folding.forEach((t) => t.el.style.minHeight = reserved.get(t) + 'px');
+            try {
+                if (!reduceMotion) {
+                    const fades = [];
+                    folding.forEach((t) => { if (t.done) fades.push(run(t.el.querySelector('.text'), [{ opacity: 1 }, { opacity: 0 }], { duration: TIME.out, easing: 'ease-out', fill: 'forwards' })); });
+                    if (opening && opening.done) fades.push(run(opening.el.querySelector('.sum'), [{ opacity: 1 }, { opacity: 0 }], { duration: TIME.out, easing: 'ease-out', fill: 'forwards' }));
+                    await Promise.allSettled(fades.map((a) => a.finished));
+                    if (my !== seq) return;
+                }
+                cancelActive();
+                folding.forEach((t) => t.el.classList.add('old'));
+                if (!reduceMotion) {
+                    const summaries = folding.filter((t) => t.done).map((t) => run(t.el.querySelector('.sum'), [{ opacity: 0 }, { opacity: 1 }], { duration: TIME.in, easing: 'ease-out', fill: 'backwards' }));
+                    await Promise.allSettled(summaries.map((a) => a.finished));
+                    if (my !== seq) return;
+                }
+                cancelActive();
+                // Compaction is complete. Only adding/opening a question may now move the turns.
+                const first = new Map(before.map((t) => [t, t.el.getBoundingClientRect()]));
+                let releasedHeight = 0;
+                folding.forEach((t) => {
+                    t.el.style.minHeight = '';
+                    releasedHeight += Math.max(0, reserved.get(t) - t.el.getBoundingClientRect().height);
+                });
+                if (add) {
+                    before.forEach((t) => t.el.classList.add('old'));
+                    ans.style.paddingBottom = (previousPadding + releasedHeight) + 'px';
+                    add();
+                    // The new question pushes upward; later answer growth consumes the reserved blank space.
+                    startKeep(previousPadding + releasedHeight);
+                }
+                focus = add ? turns.length - 1 : none ? -1 : turns.indexOf(target);
+                turns.forEach((t, j) => t.el.classList.toggle('old', j !== focus));
+                if (!add) {
+                    if (none) startKeep(previousPadding + releasedHeight);
+                    else clearKeep();
+                }
+                const ft = turns[focus];
+                ctx.innerHTML = (ft && ft.cardsHTML) || '';
+                ctxWrap.classList.toggle('show', !!(ft && ft.cardsHTML));
+                ctxWrap.scrollTop = 0;
+                if (!ft || focus === turns.length - 1) ans.scrollTop = ans.scrollHeight;
+                else { const r = ft.el.getBoundingClientRect(), c = ans.getBoundingClientRect(); if (r.top < c.top) ans.scrollTop -= c.top - r.top; else if (r.bottom > c.bottom) ans.scrollTop += r.bottom - c.bottom; }
+                if (reduceMotion) return;
+                turns.forEach((t) => {
+                    const f = first.get(t), l = t.el.getBoundingClientRect();
+                    if (!f) { run(t.el, [{ opacity: 0 }, { opacity: 1 }], { duration: TIME.in, delay: 100, easing: 'ease-out', fill: 'backwards' }); return; }
+                    const dy = f.top - l.top;
+                    if (Math.abs(dy) > 1) run(t.el, [{ transform: 'translateY(' + dy + 'px)' }, { transform: 'none' }], { duration: TIME.glide, easing: 'cubic-bezier(.25, .8, .25, 1)' });
+                });
+                if (opening && opening.done) run(opening.el.querySelector('.text'), [{ opacity: 0 }, { opacity: 1 }], { duration: TIME.in, delay: 120, fill: 'backwards' });
+                await Promise.allSettled(active.map((a) => a.finished));
+            } finally {
+                folding.forEach((t) => t.el.style.minHeight = '');
+                if (my === seq) compacting = false;
             }
-
-            cancelActive();
-            const first = new Map(before.map((t) => [t, t.el.getBoundingClientRect()]));
-            // 2. the layout jumps to its final state ...
-            if (add) add();
-            focus = add ? turns.length - 1 : none ? -1 : turns.indexOf(target);
-            turns.forEach((t, j) => t.el.classList.toggle('old', j !== focus));
-            if (none) { const last = before[before.length - 1], f0 = last && first.get(last); if (f0 && folding.includes(last)) startKeep(last.el.getBoundingClientRect().top - f0.top); else clearKeep(); }
-            else if (add) settleKeep();
-            else clearKeep();
-            const ft = turns[focus];
-            ctx.innerHTML = (ft && ft.cardsHTML) || '';              // the context behind this exchange
-            ctxWrap.classList.toggle('show', !!(ft && ft.cardsHTML));
-            ctxWrap.scrollTop = 0;
-            if (!ft || focus === turns.length - 1) ans.scrollTop = ans.scrollHeight;
-            else { const r = ft.el.getBoundingClientRect(), c = ans.getBoundingClientRect(); if (r.top < c.top) ans.scrollTop -= c.top - r.top; else if (r.bottom > c.bottom) ans.scrollTop += r.bottom - c.bottom; }
-            if (reduceMotion) return;
-
-            // ... and everything glides from where it was to where it is
-            turns.forEach((t) => {
-                const f = first.get(t), l = t.el.getBoundingClientRect();
-                if (!f) { run(t.el, [{ opacity: 0, transform: 'translateY(16px)' }, { opacity: 1, transform: 'none' }], { duration: TIME.in + 200, easing: 'cubic-bezier(.2, .8, .2, 1)' }); return; }
-                const dy = f.top - l.top;
-                if (Math.abs(dy) > 1) run(t.el, [{ transform: `translateY(${dy}px)` }, { transform: 'none' }], { duration: TIME.glide, easing: 'cubic-bezier(.25, .8, .25, 1)' });
-            });
-            // 3. only once the space has closed up does the new text fade in
-            const fadeIn = (el) => run(el, [{ opacity: 0 }, { opacity: 1 }], { duration: TIME.in, delay: TIME.glide - 150, easing: 'ease-in-out', fill: 'backwards' });
-            folding.forEach((t) => { if (t.done) fadeIn(t.el.querySelector('.sum')); });
-            if (opening && opening.done) fadeIn(opening.el.querySelector('.text'));
-            await Promise.allSettled(active.map((a) => a.finished));
         }
 
         // find where each keyword sits in a text (whole phrase first, then its most distinctive word)
@@ -593,10 +628,31 @@
             });
             if (t.done && !t.streamed) reveal(t);
         }
-        const reveal = (t) => { t.reveal = false; [...t.el.querySelectorAll('.text > span')].forEach((w, n) => w.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 800, delay: n * 26, fill: 'backwards' })); };
+        function revealDelays(words) {
+            let elapsed = 0;
+            const delays = words.map((word) => {
+                const delay = elapsed;
+                elapsed += 16 + Math.min(word.length * .8, 12);
+                if (/[.!?][”"']?$/.test(word)) elapsed += 70;
+                else if (/[,;:][”"']?$/.test(word)) elapsed += 30;
+                return delay;
+            });
+            const scale = Math.min(1, 2200 / Math.max(1, elapsed));
+            return delays.map((delay) => 80 + Math.round(delay * scale));
+        }
+        const reveal = (t) => {
+            t.reveal = false;
+            if (reduceMotion) return;
+            const words = [...t.el.querySelectorAll('.text > span')];
+            const delays = revealDelays(words.map((word) => word.textContent));
+            // Reserve the full answer layout, revealing words without moving earlier questions.
+            words.forEach((word, i) => word.animate([{ opacity: 0 }, { opacity: 1 }], {
+                duration: 160, delay: delays[i], easing: 'ease-out', fill: 'backwards'
+            }));
+        };
         let chain = Promise.resolve();
         // keep the newest exchange in view while it grows
-        const pinBottom = (t) => { settleKeep(); if (turns[focus] === t && focus === turns.length - 1) ans.scrollTop = ans.scrollHeight; };
+        const pinBottom = (t) => { if (compacting || !t.el.isConnected || t.el.classList.contains('hold')) return; settleKeep(); if (turns[focus] === t && focus === turns.length - 1) ans.scrollTop = ans.scrollHeight; };
 
         function ask(question) {
             question = question.trim(); if (!question) return;
@@ -607,12 +663,11 @@
             const t = { q: question, text: '', keys: [], picks: [], cardsHTML: '', done: false, el: makeTurn(question) };
             // first the open answer folds away, and only then does the new exchange appear
             chain = chain.then(async () => {
-                if (turns.some((x) => !x.el.classList.contains('old'))) await setFocus(-1);
-                await setFocus(null, () => { turns.push(t); ans.appendChild(t.el); while (turns.length > MAXTURNS) { turns.shift().el.remove(); } });   // the question line arrives
-                release(t);                                                                                                                       // then the answer
+                await setFocus(null, () => { turns.push(t); ans.appendChild(t.el); while (turns.length > MAXTURNS) { turns.shift().el.remove(); } renderChips(); });
+                release(t); // open the answer space after the question movement finishes
             });
             renderChips();
-            setTimeout(() => { field.classList.remove('busy'); field.style.setProperty('--charge', 0); respond(t); }, 450);
+            setTimeout(() => { field.classList.remove('busy'); field.style.setProperty('--charge', 0); respond(t); }, 180);
         }
 
         // choose which pieces of the site answer this question
@@ -689,7 +744,7 @@
 
             const useAI = !!window.CHAT_API && picks.length && !greet;
             const key = cacheKey(q), hit = !greet && !augmented && cacheGet(key);
-            if (hit) finish(t, hit.t, hit.k, false, hit.s);                       // asked before: instant, no API call
+            if (hit) finish(t, hit.t, hit.k, false, hit.s);                       // reviewed reply: paced presentation, no API call
             else if (useAI) streamAnswer(t, local, key, !augmented);
             else finish(t, local, null);
         }
