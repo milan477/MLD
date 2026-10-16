@@ -1,0 +1,35 @@
+/* Shared header for Chat, Projects, Questions, About, and Gallery. */
+body:not(.chat-page) { padding-top: 62px; }
+header.site-header { position: fixed; inset: 0 0 auto; z-index: 30; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 24px; padding: 22px 28px; min-height: 62px; background: rgba(0,0,2,.96); pointer-events: auto; }
+.site-header nav { display: flex; align-items: center; gap: 20px; font-size: .85rem; line-height: 18px; }
+.site-header a { color: #8d97b5; text-decoration: none; }
+.site-header a:hover, .site-header a[aria-current="page"] { color: #c8cfe6; }
+.site-header a:focus-visible { outline: 2px solid #8d97b5; outline-offset: 5px; }
+.site-header .identity { color: #fff; font-size: .9rem; font-weight: 600; letter-spacing: .06em; line-height: 18px; text-align: center; white-space: nowrap; }
+.site-header .contact-nav { justify-self: end; gap: 20px; }
+.site-header .contact-nav a { display: flex; align-items: center; justify-content: center; width: 18px; height: 18px; }
+.site-header .contact-nav img { display: block; width: 18px; height: 18px; object-fit: contain; filter: invert(1) brightness(.7); }
+.site-header .contact-nav a:hover img { filter: invert(1) brightness(1); }
+@media (max-width: 1100px) {
+ body:not(.chat-page) { padding-top: 94px; }
+ header.site-header { grid-template-columns: 1fr auto; padding: 18px 20px; gap: 18px 16px; }
+ .site-header .identity { grid-row: 2; grid-column: 1 / -1; font-size: .78rem; }
+ .site-header .contact-nav { grid-row: 1; grid-column: 2; }
+ .site-header nav { gap: 16px; font-size: .8rem; }
+ .chat-page #stage { top: 104px; }
+ .chat-page #catalog { padding-top: 116px; }
+}
+@media (max-width: 380px) {
+ header.site-header { padding-inline: 14px; gap: 18px 12px; }
+ .site-header nav { gap: 12px; font-size: .76rem; }
+ .site-header .contact-nav { gap: 12px; }
+}
+
+@media (max-width: 600px) {
+ .site-header .main-nav { grid-row: 1; grid-column: 1 / -1; justify-content: space-between; }
+ .site-header .identity { grid-row: 2; grid-column: 1; justify-self: start; font-size: .72rem; }
+ .site-header .contact-nav { grid-row: 2; grid-column: 2; }
+}
+
+.site-header .contact-nav svg { display: block; width: 18px; height: 18px; flex-shrink: 0; }
+body.is-catalog header.site-header { background: rgba(0,0,2,.96); }

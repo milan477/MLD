@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="color-scheme" content="dark">
+    <meta name="theme-color" content="#000002">
+    <style id="initial-page-background">
+        html { color-scheme: dark; background-color: #000002; }
+        body { background-color: #000002; }
+    </style>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Can state-of-the-art audio language models dissect my composition? · Milan Liessens Dujardin</title>
+    <meta name="description" content="Can state-of-the-art audio language models dissect my composition?">
+    <link rel="icon" href="/public/assets/images/logos/mld-logo.svg?v=glow-colors-2" type="image/svg+xml">
+    <link rel="stylesheet" href="/public/assets/css/explorations.css">
+    <style>
+        .sound-analysis { width: 100%; border-collapse: collapse; margin: 0 0 28px; color: #d6dae5; font-size: .95rem; line-height: 1.75; }
+        .sound-analysis th, .sound-analysis td { padding: 16px 0; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+        .sound-analysis thead th { color: var(--text); font-weight: 500; }
+        .sound-analysis th:first-child { padding-right: 24px; white-space: nowrap; }
+        .sound-analysis tbody th { font-weight: 400; color: var(--muted); }
+        .sound-analysis caption { text-align: left; color: var(--muted); margin-bottom: 12px; }
+        .sound-analysis th, .sound-analysis td { padding-right: 16px; }
+        .sound-analysis th:first-child { white-space: normal; }
+        .results-scroll { overflow-x: auto; }
+        .source-scores { min-width: 650px; }
+        .source-scores td { text-align: center; }
+        .prose details { margin: 20px 0; }
+        .prose summary { cursor: pointer; color: var(--text); margin-bottom: 12px; }
+        .prose .experiment-note { font-size: .9rem; color: var(--muted); }
+        @media (max-width: 480px) {
+            .sound-analysis { font-size: .85rem; }
+            .sound-analysis th:first-child { padding-right: 14px; }
+        }
+    </style>
+    <link rel="stylesheet" href="/public/assets/css/site-header.css?v=20261016-2">
+</head>
+<body>
+    <header class="site-header">
+        <nav class="main-nav" aria-label="Main navigation">
+            <a data-nav="chat" href="/">Chat</a>
+            <a data-nav="projects" href="/?view=projects">Projects</a>
+            <a data-nav="questions" href="/explorations/" aria-current="page">Questions</a>
+            <a data-nav="about" href="/about/">About</a>
+            <a data-nav="gallery" href="/gallery/">Gallery</a>
+        </nav>
+        <a class="identity" href="/">Milan Liessens Dujardin</a>
+        <nav class="contact-nav" aria-label="Contact links">
+            <a href="mailto:milanliessensdujardin@gmail.com" aria-label="Email"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><rect width="24" height="24" rx="2" fill="currentColor"/><rect x="4" y="6" width="16" height="12" rx="1" fill="none" stroke="#030612" stroke-width="1.7"/><path d="m4 7 8 6 8-6" fill="none" stroke="#030612" stroke-width="1.7"/></svg></a>
+            <a href="https://www.linkedin.com/in/milan-liessens-dujardin/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><rect width="24" height="24" rx="2" fill="currentColor"/><path fill="#030612" d="M5 9h3v10H5zm1.5-5a1.7 1.7 0 1 0 0 3.4 1.7 1.7 0 0 0 0-3.4zM10 9h3v1.4c.6-1 1.6-1.7 3-1.7 3 0 3.5 1.9 3.5 4.4V19h-3v-5.2c0-1.2 0-2.6-1.6-2.6s-1.9 1.2-1.9 2.5V19h-3z"/></svg></a>
+        </nav>
+    </header>
+    <main>
+        <article>
+            <a class="back" href="/explorations/">← All questions</a>
+            <h1>Can state-of-the-art audio language models dissect my composition?</h1>
+            <div class="prose" style="margin-top: 32px;">
+                <p>I asked five audio language models to “identify all audible sound sources in each section, including background and overlapping sources” in a piece I composed. The best score was 5.5 out of 16.</p>
+                <audio controls preload="metadata" aria-label="My composition" style="width: 100%; margin-bottom: 28px;">
+                    <source src="/public/assets/audio/MilanLiessensDujardin_carte_blanche.mp3" type="audio/mpeg">
+                    <a href="/public/assets/audio/MilanLiessensDujardin_carte_blanche.mp3">Listen to the piece</a>.
+                </audio>
+                <table class="sound-analysis">
+                    <caption>Source-identification results for this recording</caption>
+                    <thead><tr><th scope="col">Model</th><th scope="col">Score / 16</th><th scope="col">Percentage</th></tr></thead>
+                    <tbody>
+                        <tr><th scope="row">Gemini 4 Argon</th><td>5.5</td><td>34.4%</td></tr>
+                        <tr><th scope="row">Meta Muse Wonder</th><td>4.5</td><td>28.1%</td></tr>
+                        <tr><th scope="row">Qwen3.8 Omni Flash</th><td>3.5</td><td>21.9%</td></tr>
+                        <tr><th scope="row">Xiaomi MiMo-V2.6-Pro</th><td>3</td><td>18.8%</td></tr>
+                        <tr><th scope="row">Perceptron Mk1.5</th><td>3</td><td>18.8%</td></tr>
+                    </tbody>
+                </table>
+                <details>
+                    <summary>Results for each sound</summary>
+                <div class="results-scroll" role="region" aria-label="Scores for each sound" tabindex="0">
+                    <table class="sound-analysis source-scores">
+                        <thead><tr><th scope="col">Sound</th><th scope="col">Qwen3.8 Omni Flash</th><th scope="col">Xiaomi MiMo-V2.6-Pro</th><th scope="col">Meta Muse Wonder</th><th scope="col">Perceptron Mk1.5</th><th scope="col">Gemini 4 Argon</th></tr></thead>
+                        <tbody>
+                            <tr><th scope="row">Swiss cowbells</th><td>½</td><td>1</td><td>1</td><td>0</td><td>½</td></tr>
+                            <tr><th scope="row">Rocket engine roar</th><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+                            <tr><th scope="row">Explosion</th><td>0</td><td>0</td><td>½</td><td>0</td><td>½</td></tr>
+                            <tr><th scope="row">Airy, magical musical flourish</th><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+                            <tr><th scope="row">Rhythmic bubbling made with the mouth</th><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+                            <tr><th scope="row">Playing cards being shuffled</th><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+                            <tr><th scope="row">Toy laser gun</th><td>0</td><td>0</td><td>0</td><td>0</td><td>½</td></tr>
+                            <tr><th scope="row">Kitchen knife being polished</th><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+                            <tr><th scope="row">TV switching on</th><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+                            <tr><th scope="row">Baby sounds</th><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+                            <tr><th scope="row">Frogs and toads calling</th><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+                            <tr><th scope="row">Human voice saying “I am God”</th><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+                            <tr><th scope="row">Toy accordion</th><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td></tr>
+                            <tr><th scope="row">Splash</th><td>1</td><td>0</td><td>1</td><td>1</td><td>1</td></tr>
+                            <tr><th scope="row">Donkey Balthazar braying</th><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+                            <tr><th scope="row">My piano waltz</th><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                </details>
+                <p>None of them heard the piano waltz I composed in F minor/major. All that work, only for audio language models to completely not hear it!</p>
+                <p>They also missed the frogs, the donkey Balthazar, the rocket engine, the playing cards being shuffled, and the magical musical flourish. All, except Gemini 4 Argon, also missed the accordion.</p>
+                <p>Balthazar was variously described as human screaming, a siren, or other animals. He too, he told me, felt let down by the technology. Imagine he had been calling 911 and an audio-language model picked up the phone!</p>
+
+                <p><a href="/public/assets/contents/audio-model-responses.pdf" target="_blank" rel="noopener">Read all model responses (PDF)</a></p>
+
+                <p>The results made me wonder whether my composition style was maybe out of distribution for the models. I therefore decided to ask a simpler question: "What time signature is my improvisation in?"</p>
+                <audio controls preload="metadata" aria-label="My improvisation" style="display: block; width: 100%; margin-bottom: 40px;">
+                    <source src="/public/assets/audio/MilanLiessensDujardin_expressionistic_prelude.m4a" type="audio/mp4">
+                    Your browser does not support the audio element.
+                </audio>
+                <p>I conclude that no model was able to guess feel the beat of my music fully correctly: Meta Muse Wonder was close: 7/8 indeed, but grouped 3+2+2.</p>
+                <details id="time-signature-responses">
+                    <summary>Read all model responses: time signature</summary>
+                    <h3>Gemini 4 Argon</h3>
+                    <p>The time signature of this piece changes at 01:07 from 4/4 to 3/4, and again at 01:36 from 3/4 to 4/4.</p>
+                    <h3>Meta Muse Wonder</h3>
+                    <p><strong>7/8</strong></p>
+                    <p>The piece is driven throughout by a relentless quaver ostinato grouped 2+2+3, giving seven quaver beats to the bar.</p>
+                    <h3>Qwen3.8 Omni Flash</h3>
+                    <p>The piece is in <strong>3/4 time</strong> – a triple meter. Throughout the work the figuration (the opening motor rhythm, the chordal &quot;ta‑ta‑TA&quot; patterns, the octave ostinato, and the final fast section) consistently groups in threes, giving the piece its driving 3/4 pulse, even in the slower, more rubato middle passage.</p>
+                    <h3>Xiaomi MiMo-V2.6-Pro</h3>
+                    <p>Based on the rhythmic structure and the grouping of beats heard throughout the piece, the time signature is <strong>4/4</strong> (common time). This can be heard clearly in both the fast, driving sections (where the beats group into four distinct pulses per measure) and the slower, lyrical middle section.</p>
+                    <h3>Perceptron Mk1.5</h3>
+                    <p>4/4</p>
+                </details>
+            </div>
+        </article>
+    </main>
+</body>
+</html>
