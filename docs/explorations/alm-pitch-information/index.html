@@ -48,8 +48,8 @@
             <h1>Do encoders used in ALMs retain pitch information?</h1>
             <div class="prose">
                 <p>When an audio-language model struggles to identify a note, where does the limitation arise? Is pitch information accessible in the audio encoder, and does it remain accessible after projection into the language model?</p>
-                <p>I investigated this at CNMAT using linear probes on frozen representations from Audio Flamingo Next (AFN), SALMONN-2, and Qwen2-Audio, measuring pitch-class, octave, and MIDI-pitch decoding across different processing stages.</p>
-                <p>In the piano experiment, I evaluated linear probes on <strong>88 held-out notes—one per piano key</strong>:</p>
+                <p>I investigated this using linear probes on frozen representations from Audio Flamingo Next (AFN), SALMONN-2, and Qwen2-Audio, measuring pitch-class, octave, and MIDI-pitch decoding across different processing stages.</p>
+                <p>In this experiment, I evaluated linear probes on <strong>88 held-out notes—one per piano key</strong>:</p>
                 <div class="results-scroll" role="region" aria-label="Piano linear-probe results" tabindex="0">
                     <table class="probe-results">
                         <caption>Held-out balanced accuracy; layers selected on validation data</caption>
