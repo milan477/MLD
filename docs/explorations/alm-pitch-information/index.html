@@ -64,7 +64,7 @@
                 </div>
                 <p>The full dataset contained <strong>440 clips</strong>: 420 recorded MAESTRO excerpts and 20 sampled-piano fills. All three models used the same fixed split: <strong>264 training clips (60%), 88 validation clips (20%), and 88 test clips (20%)</strong>. Each piano key contributed three training clips, one validation clip, and one test clip, with source groups kept disjoint across splits.</p>
                 <p>Layers were selected using validation data. The final probes were then refitted on the combined training and validation sets (352 clips) and evaluated on the 88 held-out test clips, with matched shuffled-label controls.</p>
-                <p>These results show that pitch information is linearly accessible in the encoders. The next question is how effectively that information reaches—and is used by—the language model.</p>
+                <p>These scores measure how well linear probes predict pitch class and octave from selected frozen representations on this dataset. The table alone does not establish whether pitch information is preserved in the encoder’s final output or used by the language model.</p>
             </div>
         </article>
     </main>
