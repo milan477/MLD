@@ -1,6 +1,6 @@
 // Reviewed answers grounded in the résumé and existing project descriptions.
 window.CACHED_ANSWERS = {
-  "v": "2919337866",
+  "v": "3602691386",
   "a": {
     "what are you working on": {
       "t": "My research focuses on multimodal representations, supervision generation, and model evaluation. I designed MuNo-SP to represent musical scores and performances together, and MusicTwins to organize persona data. I also built PitchBench and MuSP-Bench to evaluate musical understanding, alongside work on language-guided audio effects and collaborative design.",
@@ -12,7 +12,7 @@ window.CACHED_ANSWERS = {
       ]
     },
     "tell me about pitchbench": {
-      "t": "I built PitchBench to evaluate pitch perception in audio-language models using 17K audio–question–answer examples across 28 experiments and 19 sound sources. Its reproducible pipeline generates stimuli and ground truth for atomic, contextual, and melodic tasks under varied acoustic conditions. I evaluated six frontier models; the strongest achieved 47.7% mean accuracy. The paper was accepted to NeurIPS 2026.",
+      "t": "I built PitchBench to evaluate pitch perception in audio-language models using 17K audio–question–answer examples across 28 experiments and 19 sound sources. Its reproducible pipeline generates stimuli and ground truth for atomic, contextual, and melodic tasks under varied acoustic conditions. I evaluated six frontier models; the strongest achieved 47.7% mean accuracy. The paper was accepted to NeurIPS 2026. In follow-up CNMAT experiments, I used linear probes to study pitch information in frozen ALM representations. On 88 held-out real-note clips from a 653-clip corpus, pitch-class balanced accuracy was 83.83% for Audio Flamingo Next and 97.29% for SALMONN-2. These are probe-decoding results, not generated-answer accuracy. The test split held out source-recording/piece groups, not instrument types.",
       "s": "I built PitchBench to evaluate pitch perception; across six frontier models, the strongest achieved 47.7% mean accuracy.",
       "k": [
         "PitchBench",
