@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="dark">
+    <meta name="theme-color" content="#000002">
+    <title>Do encoders used in ALMs retain pitch information? · Milan Liessens Dujardin</title>
+    <meta name="description" content="Linear probing of frozen audio-language model representations, with pitch-class and octave results on 88 held-out piano notes.">
+    <link rel="icon" href="/public/assets/images/logos/mld-logo.svg?v=glow-colors-2" type="image/svg+xml">
+    <link rel="stylesheet" href="/public/assets/css/explorations.css">
+    <link rel="stylesheet" href="/public/assets/css/site-header.css?v=20261016-2">
+    <style>
+        .prose { margin-top: 32px; }
+        .results-scroll { overflow-x: auto; margin-bottom: 28px; }
+        .probe-results { width: 100%; border-collapse: collapse; color: #d6dae5; font-size: .95rem; line-height: 1.6; font-variant-numeric: tabular-nums; }
+        .probe-results caption { text-align: left; color: var(--muted); font-size: .85rem; margin-bottom: 12px; }
+        .probe-results th, .probe-results td { padding: 16px 12px; border-bottom: 1px solid var(--line); text-align: right; }
+        .probe-results th:first-child { text-align: left; padding-left: 0; }
+        .probe-results th:last-child, .probe-results td:last-child { padding-right: 0; }
+        .probe-results thead th { color: var(--text); font-weight: 500; }
+        .probe-results tbody th { font-weight: 400; }
+        .probe-results strong { color: var(--text); }
+        @media (max-width: 480px) {
+            .probe-results { font-size: .82rem; }
+            .probe-results th, .probe-results td { padding: 12px 7px; }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <nav class="main-nav" aria-label="Main navigation">
+            <a data-nav="chat" href="/">Chat</a>
+            <a data-nav="projects" href="/?view=projects">Projects</a>
+            <a data-nav="questions" href="/explorations/" aria-current="page">Questions</a>
+            <a data-nav="about" href="/about/">About</a>
+            <a data-nav="gallery" href="/gallery/">Gallery</a>
+        </nav>
+        <a class="identity" href="/">Milan Liessens Dujardin</a>
+        <nav class="contact-nav" aria-label="Contact links">
+            <a href="mailto:milanliessensdujardin@gmail.com" aria-label="Email"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><rect width="24" height="24" rx="2" fill="currentColor"/><rect x="4" y="6" width="16" height="12" rx="1" fill="none" stroke="#030612" stroke-width="1.7"/><path d="m4 7 8 6 8-6" fill="none" stroke="#030612" stroke-width="1.7"/></svg></a>
+            <a href="https://www.linkedin.com/in/milan-liessens-dujardin/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><rect width="24" height="24" rx="2" fill="currentColor"/><path fill="#030612" d="M5 9h3v10H5zm1.5-5a1.7 1.7 0 1 0 0 3.4 1.7 1.7 0 0 0 0-3.4zM10 9h3v1.4c.6-1 1.6-1.7 3-1.7 3 0 3.5 1.9 3.5 4.4V19h-3v-5.2c0-1.2 0-2.6-1.6-2.6s-1.9 1.2-1.9 2.5V19h-3z"/></svg></a>
+        </nav>
+    </header>
+    <main>
+        <article>
+            <a class="back" href="/explorations/">← All questions</a>
+            <h1>Do encoders used in ALMs retain pitch information?</h1>
+            <div class="prose">
+                <p>When an audio-language model struggles to identify a note, where does the limitation arise? Is pitch information accessible in the audio encoder, and does it remain accessible after projection into the language model?</p>
+                <p>I investigated this at CNMAT using linear probes on frozen representations from Audio Flamingo Next (AFN), SALMONN-2, and Qwen2-Audio, measuring pitch-class, octave, and MIDI-pitch decoding across different processing stages.</p>
+                <p>In the piano experiment, I evaluated linear probes on <strong>88 held-out notes—one per piano key</strong>:</p>
+                <div class="results-scroll" role="region" aria-label="Piano linear-probe results" tabindex="0">
+                    <table class="probe-results">
+                        <caption>Held-out balanced accuracy; layers selected on validation data</caption>
+                        <thead>
+                            <tr><th scope="col">Metric</th><th scope="col">AFN</th><th scope="col">SALMONN-2</th><th scope="col">Qwen2-Audio</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><th scope="row">Pitch class</th><td>77.38%</td><td><strong>83.93%</strong></td><td>73.51%</td></tr>
+                            <tr><th scope="row">Octave</th><td>89.81%</td><td><strong>90.74%</strong></td><td>87.96%</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p>The full dataset contained <strong>440 clips</strong>: 420 recorded MAESTRO excerpts and 20 sampled-piano fills. Source groups were separated across training, validation, and test sets; layers were selected using validation data, with shuffled-label controls.</p>
+                <p>These results show that pitch information is linearly accessible in the encoders. The next question is how effectively that information reaches—and is used by—the language model.</p>
+            </div>
+        </article>
+    </main>
+</body>
+</html>
