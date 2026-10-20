@@ -24,6 +24,7 @@ h1 { margin: 0; font-size: clamp(2rem, 5vw, 3.4rem); line-height: 1.17; font-wei
 article { max-width: 720px; margin: 0 auto; }
 .back { display: inline-block; font-size: .8rem; text-decoration: none; color: var(--muted); margin-bottom: 44px; }
 article h1 { font-size: clamp(2rem, 5vw, 3.2rem); }
+article > h1 + .prose { margin-top: clamp(32px, 5vw, 48px); }
 .article-meta { margin: 24px 0 44px; font-size: .75rem; color: var(--muted); }
 .prose p { font-size: 1.06rem; line-height: 1.9; color: #d6daE5; margin: 0 0 24px; }
 .research-note { border-top: 1px solid var(--line); margin-top: 52px; padding-top: 28px; }
