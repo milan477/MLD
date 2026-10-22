@@ -33,3 +33,5 @@ header.site-header { position: fixed; inset: 0 0 auto; z-index: 30; display: gri
 
 .site-header .contact-nav svg { display: block; width: 18px; height: 18px; flex-shrink: 0; }
 body.is-catalog header.site-header { background: rgba(0,0,2,.96); }
+
+@media (max-width: 600px) { .site-header .main-nav { gap: 8px; flex-wrap: wrap; } }
