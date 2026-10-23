@@ -365,7 +365,7 @@
                 tags: 'education study studied degree university school graduate' });
         });
         sources.contact = { id: 'contact', kind: 'Contact', title: 'Get in touch', image: null, tags: [], contact: true };
-        chunks.push({ src: 'contact', text: 'You can reach me by email at milanliessensdujardin@gmail.com or on LinkedIn at linkedin.com/in/milan-liessens-dujardin. My code lives on GitHub (milan477).', tags: 'contact email mail reach linkedin github hire message' });
+        chunks.push({ src: 'contact', text: 'You can reach me by email at milanliessensdujardin@gmail.com or on LinkedIn at linkedin.com/in/milan-liessens-dujardin.', tags: 'contact email mail reach linkedin hire message' });
 
         /* ---------- tokenising / BM25 ---------- */
         const STOP = new Set('milan liessens dujardin a an and are as at be been but by can could did do does for from had has have how i if in into is it its me my of on or our so tell than that the their them then there these they this to us was we were what when where which who whom why will with would you your about know please also any some more most very just like get got give gave'.split(' '));
@@ -384,7 +384,7 @@
             education: 'study degree university school graduate student bachelor master berkeley antwerp conservatory',
             study: 'education degree university school', studied: 'education degree university', school: 'education university degree', degree: 'education university',
             college: 'education university', university: 'education degree', graduate: 'education degree',
-            contact: 'email linkedin github mail reach', email: 'contact mail', reach: 'contact email linkedin', hire: 'contact email', linkedin: 'contact',
+            contact: 'email linkedin mail reach', email: 'contact mail', reach: 'contact email linkedin', hire: 'contact email', linkedin: 'contact',
             post: 'blog article thoughts wrote', blog: 'post article', wrote: 'post blog article', write: 'post blog article', article: 'post blog', thought: 'post reflection', opinion: 'post reflection thoughts', read: 'post article',
             music: 'musician audio composition improvise synthesizer works classical', musician: 'music piano', song: 'music works listen', listen: 'music works audio', play: 'music improvise',
             hobby: 'music works improvise compose', compose: 'music works', piano: 'music classical',
@@ -490,7 +490,6 @@
             if (/^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i.test(core)) href = 'mailto:' + core;
             else if (/^https?:\/\/\S+$/i.test(core)) href = core;
             else if (/^(?:www\.)?[a-z0-9-]+(?:\.[a-z0-9-]+)*\.(?:com|io|org|net|be|edu|github\.io)(?:\/\S*)?$/i.test(core)) href = 'https://' + core;
-            else if (/^milan477$/i.test(core)) href = 'https://github.com/milan477';
             return href ? `<a href="${esc(href)}"${href.startsWith('mailto:') ? '' : ' target="_blank" rel="noopener"'}>${esc(core)}</a>${esc(tail)}` : esc(w);
         };
         const wordsHTML = (text, animate = true) => {
@@ -842,7 +841,7 @@
                 const p = s.project;
                 content.innerHTML = `<h2>${esc(p.title)}</h2><p class="lede">${esc(p.desc)}</p><div class="tags">${p.tags.map((t) => `<span class="tag">${esc(t)}</span>`).join('')}</div>${p.body.join('')}`;
             } else if (s.contact) {
-                content.innerHTML = `<h2>Get in touch</h2><p><a href="mailto:milanliessensdujardin@gmail.com">milanliessensdujardin@gmail.com</a></p><p><a href="https://www.linkedin.com/in/milan-liessens-dujardin/">LinkedIn</a> · <a href="https://github.com/milan477">GitHub</a></p>`;
+                content.innerHTML = `<h2>Get in touch</h2><p><a href="mailto:milanliessensdujardin@gmail.com">milanliessensdujardin@gmail.com</a></p><p><a href="https://www.linkedin.com/in/milan-liessens-dujardin/">LinkedIn</a></p>`;
             } else {
                 content.innerHTML = `<h2>About me</h2><div>${window.ABOUT.bio}</div><h3>Education</h3>${window.ABOUT.edu}`;
             }
